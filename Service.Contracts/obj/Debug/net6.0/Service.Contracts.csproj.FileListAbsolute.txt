@@ -1,0 +1,17 @@
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\Service.Contracts.deps.json
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\Service.Contracts.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\Service.Contracts.pdb
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\obj\Debug\net6.0\Service.Contracts.csproj.AssemblyReference.cache
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\obj\Debug\net6.0\Service.Contracts.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\obj\Debug\net6.0\Service.Contracts.AssemblyInfoInputs.cache
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\obj\Debug\net6.0\Service.Contracts.AssemblyInfo.cs
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\obj\Debug\net6.0\Service.Contracts.csproj.CoreCompileInputs.cache
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\obj\Debug\net6.0\Service.Contracts.csproj.CopyComplete
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\obj\Debug\net6.0\Service.Contracts.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\obj\Debug\net6.0\refint\Service.Contracts.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\obj\Debug\net6.0\Service.Contracts.pdb
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\obj\Debug\net6.0\ref\Service.Contracts.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\Shared.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\Shared.pdb
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\Entities.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\Entities.pdb
