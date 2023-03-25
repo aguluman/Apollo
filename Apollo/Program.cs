@@ -2,11 +2,21 @@ using Apollo.Extensions;
 using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.Extensions.Options;
 using NLog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
+
+NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter() =>
+    new ServiceCollection()
+        .AddLogging().AddMvc().AddNewtonsoftJson()
+        .Services.BuildServiceProvider()
+        .GetRequiredService<IOptions<MvcOptions>>().Value.InputFormatters
+        .OfType<NewtonsoftJsonPatchInputFormatter>()
+        .First();
 
 //Adding support for CORS and IIS Integration and others in ServiceExtension.cs
 builder.Services.ConfigureCors();
@@ -22,6 +32,7 @@ builder.Services.AddControllers(config =>
 {
     config.RespectBrowserAcceptHeader = true;
     config.ReturnHttpNotAcceptable = true;
+    config.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
 }).AddXmlDataContractSerializerFormatters()
     .AddCustomCsvFormatter()
     .AddApplicationPart(typeof(Apollo.Presentation.AssemblyReference).Assembly);

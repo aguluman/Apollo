@@ -66,7 +66,7 @@ internal sealed class EmployeeService : IEmployeeService
         return employeeToReturn;
     }
 
-    public void DeleteEmployerForCompany(Guid companyId, Guid id, bool trackChanges)
+    public void DeleteEmployeeForCompany(Guid companyId, Guid id, bool trackChanges)
     {
         var company = _repository.Company.GetCompany(companyId, trackChanges);
         if (company is null)
@@ -81,6 +81,43 @@ internal sealed class EmployeeService : IEmployeeService
         }
         
         _repository.Employee.DeleteEmployee(employeeForCompany);
+        _repository.Save();
+    }
+
+    public void UpdateEmployeeForCompany(Guid companyId, Guid id, EmployeeForUpdateDto employeeForUpdate, bool compTrackChanges,
+        bool empTrackChanges)
+    {
+        var company = _repository.Company.GetCompany(companyId, compTrackChanges);
+        if (company is null)
+            throw new CompanyNotFoundException(companyId);
+
+        var employeeEntity = _repository.Employee.GetEmployee(companyId, id, empTrackChanges);
+        if (employeeEntity is null)
+            throw new EmployeeNotFoundException(id);
+
+        _mapper.Map(employeeForUpdate, employeeEntity);
+        _repository.Save();
+    }
+
+    public (EmployeeForUpdateDto emloyeeToPatch, Employee employeeEntity) GetEmployeeForPatch(
+        Guid companyId, Guid id, bool compTrackChanges, bool empTrackChanges)
+    {
+        var company = _repository.Company.GetCompany(companyId, compTrackChanges);
+        if (company is null)
+            throw new CompanyNotFoundException(companyId);
+
+        var employeeEntity = _repository.Employee.GetEmployee(companyId, id, empTrackChanges);
+        if (employeeEntity is null)
+            throw new EmployeeNotFoundException(companyId);
+
+        var employeeToPatch = _mapper.Map<EmployeeForUpdateDto>(employeeEntity);
+
+        return (employeeToPatch, employeeEntity);
+    }
+
+    public void SaveChangesForPatch(EmployeeForUpdateDto employeeToPatch, Employee employeeEntity)
+    {
+        _mapper.Map(employeeToPatch, employeeEntity);
         _repository.Save();
     }
 }
