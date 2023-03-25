@@ -1,0 +1,19 @@
+﻿POST https://localhost:7229/api/companies
+
+{
+    "name" : "Electronics Solutions Ltd",
+    "address" : "312 Deliver Street, F-234",
+    "country" : "UK",
+    "employees" : [
+        {
+            "name" : "Joan Dane",
+            "age" : 29,
+            "position" : "Manager"
+        },
+        {
+            "name" : "Martin Geil",
+            "age" : 29,
+            "position" : "Adminstrative"
+        }
+    ]
+}

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Apollo.Presentation.ModelBinders;
+using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 
@@ -39,5 +40,23 @@ public class CompaniesController : ControllerBase
                 "CompanyById", 
                 new { id = createdCompany.Id }, 
                 createdCompany);
+    }
+
+    [HttpGet("collection/({ids})", Name = "CompanyCollection")]
+    public IActionResult GetCompanyCollection([ModelBinder(BinderType = typeof(ArrayModelBinder))]IEnumerable<Guid> ids)
+    {
+        var companies = _service.CompanyService.GetByIds(ids, false);
+        return Ok(companies);
+    }
+    
+    [HttpPost("collection")]
+    public IActionResult CreateCompanyCollection([FromBody] IEnumerable<CompanyForCreationDto> companyCollection)
+    {
+        var result = _service.CompanyService.CreateCompanyCollection(companyCollection);
+        
+        return CreatedAtRoute(
+            "CompanyCollection",
+            new { result.ids }, 
+            result.companies);
     }
 }
