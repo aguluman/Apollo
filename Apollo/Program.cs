@@ -1,10 +1,12 @@
 using Apollo.Extensions;
 using Contracts;
+using Apollo.Presentation.ActionFilters;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.Extensions.Options;
 using NLog;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -25,6 +27,7 @@ builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlClient(builder.Configuration);
+builder.Services.AddScoped<ValidationFilterAttribute>();
 
 // Add services to the container.
 //--We are trying to convert our endpoint response to a xml format--

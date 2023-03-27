@@ -1,7 +1,0 @@
-﻿POST https://localhost:7229/api/companies/3D490A70-94CE-4D15-9494-5248280C2CE3/employees
-
-{
-"name" : "Martin Geil",
-"age" : 29,
-"position" : "Marketing expert"
-}
