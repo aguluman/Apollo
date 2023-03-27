@@ -15,3 +15,5 @@ C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\LoggerService\obj\Debug\net6.0\
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\LoggerService\obj\Debug\net6.0\ref\LoggerService.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\LoggerService\bin\Debug\net6.0\Entities.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\LoggerService\bin\Debug\net6.0\Entities.pdb
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\LoggerService\bin\Debug\net6.0\Shared.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\LoggerService\bin\Debug\net6.0\Shared.pdb

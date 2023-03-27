@@ -17,3 +17,5 @@ C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Repository\obj\Debug\net6.0\Rep
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Repository\obj\Debug\net6.0\ref\Repository.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Repository\bin\Debug\net6.0\Contracts.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Repository\bin\Debug\net6.0\Contracts.pdb
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Repository\bin\Debug\net6.0\Shared.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Repository\bin\Debug\net6.0\Shared.pdb

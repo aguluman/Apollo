@@ -30,6 +30,9 @@
             "projectReferences": {
               "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Entities\\Entities.csproj": {
                 "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Entities\\Entities.csproj"
+              },
+              "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Shared\\Shared.csproj": {
+                "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Shared\\Shared.csproj"
               }
             }
           }
