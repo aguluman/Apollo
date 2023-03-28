@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Repository.Extensions.Utilities;
 
 namespace Repository.Extensions;
 
@@ -15,5 +16,16 @@ public static class RepositoryEmployeeExtensions
         var lowerCaseTerm = searchTerm.Trim().ToLower();
 
         return employees.Where(e => e.Name.ToLower().Contains(lowerCaseTerm));
+    }
+
+    public static IQueryable<Employee> Sort(this IQueryable<Employee> employees, string orderByQueryString)
+    {
+        if (string.IsNullOrWhiteSpace(orderByQueryString))
+            return employees.OrderBy(e => e.Name);
+
+        var orderQuery = OrderQueryBuilder.CreateOrderQuery<Employee>(orderByQueryString);
+        
+        return string.IsNullOrWhiteSpace(orderQuery) ? employees.OrderBy(e => e.Name) 
+            : employees.OrderBy(e => e.Name).ThenByDescending(o => o.Age);
     }
 }
