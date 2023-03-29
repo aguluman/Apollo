@@ -19,3 +19,5 @@ C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service\obj\Debug\net6.0\Servic
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service\obj\Debug\net6.0\ref\Service.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service\bin\Debug\net6.0\Shared.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service\bin\Debug\net6.0\Shared.pdb
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service\bin\Debug\net6.0\Apollo.Presentation.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service\bin\Debug\net6.0\Apollo.Presentation.pdb

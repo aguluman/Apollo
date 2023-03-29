@@ -251,7 +251,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Shared\\Shared.csproj": {
+                "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Shared\\Shared.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -526,6 +530,9 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo.Presentation\\Apollo.Presentation.csproj": {
+                "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo.Presentation\\Apollo.Presentation.csproj"
+              },
               "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Contracts\\Contracts.csproj": {
                 "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Contracts\\Contracts.csproj"
               },

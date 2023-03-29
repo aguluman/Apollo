@@ -15,3 +15,9 @@ C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\Shared.pdb
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\Entities.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\Entities.pdb
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\Microsoft.AspNetCore.Http.Abstractions.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\Microsoft.Extensions.Features.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\Microsoft.AspNetCore.Http.Features.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\System.IO.Pipelines.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service.Contracts\bin\Debug\net6.0\Microsoft.Net.Http.Headers.dll

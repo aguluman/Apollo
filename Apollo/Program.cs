@@ -1,6 +1,7 @@
 using Apollo.Extensions;
 using Contracts;
 using Apollo.Presentation.ActionFilters;
+using Apollo.Utility;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -31,7 +32,7 @@ builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlClient(builder.Configuration);
 builder.Services.AddScoped<ValidationFilterAttribute>();
 builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
-
+builder.Services.AddScoped<IEmployeeLinks, EmployeeLinks>();
 // Add services to the container.
 //--We are trying to convert our endpoint response to a xml format--
 builder.Services.AddControllers(config =>
@@ -51,6 +52,9 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Apollo.Presentation.AssemblyReference).Assembly);
 builder.Services.AddAutoMapper(typeof(Program));
+
+builder.Services.AddCustomMediaTypes();
+builder.Services.AddScoped<ValidateMediaTypeAttributes>();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

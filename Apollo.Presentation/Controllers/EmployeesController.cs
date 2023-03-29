@@ -1,4 +1,5 @@
 ﻿using Apollo.Presentation.ActionFilters;
+using Entities.LinkModels;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
@@ -17,14 +18,19 @@ public class EmployeesController : ControllerBase
     public EmployeesController(IServiceManager service) => _service = service;
 
     [HttpGet]
+    [ServiceFilter(typeof(ValidateMediaTypeAttributes))]
     public async Task<IActionResult> GetEmployeesForCompany(Guid companyId, [FromQuery] EmployeeParameters employeeParameters)
     {
-        var pagedResult = await _service.EmployeeService.GetEmployeesAsync(
-            companyId, employeeParameters, false);
+        var linkParams = new LinkParameters(employeeParameters, HttpContext);
         
-        Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));
+        var result = await _service.EmployeeService.GetEmployeesAsync(
+            companyId, linkParams, false);
+        
+        Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(result.metaData));
 
-        return Ok(pagedResult.employees);
+        return result.linkResponse.HasLinks
+            ? Ok(result.linkResponse.LinkedEntities)
+            : Ok(result.linkResponse.ShapedEntities);
     }
 
     [HttpGet("{id:guid}", Name = "GetEmployeeForCompany")]  

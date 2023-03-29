@@ -4,6 +4,79 @@
     "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Service\\Service.csproj": {}
   },
   "projects": {
+    "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo.Presentation\\Apollo.Presentation.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo.Presentation\\Apollo.Presentation.csproj",
+        "projectName": "Apollo.Presentation",
+        "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo.Presentation\\Apollo.Presentation.csproj",
+        "packagesPath": "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo.Presentation\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Chikosolu Akunyili\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Service.Contracts\\Service.Contracts.csproj": {
+                "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Service.Contracts\\Service.Contracts.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.JsonPatch": {
+              "target": "Package",
+              "version": "[6.0.15, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Core": {
+              "target": "Package",
+              "version": "[2.2.5, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[6.0.15, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.407\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Contracts\\Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -89,7 +162,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Shared\\Shared.csproj": {
+                "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Shared\\Shared.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -207,6 +284,9 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
+              "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo.Presentation\\Apollo.Presentation.csproj": {
+                "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo.Presentation\\Apollo.Presentation.csproj"
+              },
               "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Contracts\\Contracts.csproj": {
                 "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Contracts\\Contracts.csproj"
               },

@@ -27,7 +27,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Shared\\Shared.csproj": {
+                "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Shared\\Shared.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
