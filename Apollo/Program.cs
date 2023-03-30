@@ -30,9 +30,14 @@ builder.Services.ConfigureLoggerService();
 builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlClient(builder.Configuration);
+builder.Services.ConfigureVersioning();
+
 builder.Services.AddScoped<ValidationFilterAttribute>();
 builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
 builder.Services.AddScoped<IEmployeeLinks, EmployeeLinks>();
+
+
+
 // Add services to the container.
 //--We are trying to convert our endpoint response to a xml format--
 builder.Services.AddControllers(config =>
@@ -44,17 +49,19 @@ builder.Services.AddControllers(config =>
     .AddCustomCsvFormatter()
     .AddApplicationPart(typeof(Apollo.Presentation.AssemblyReference).Assembly);
 
-builder.Services.Configure<ApiBehaviorOptions>(options =>
-{
-    options.SuppressModelStateInvalidFilter = true;
-});
-
 builder.Services.AddControllers()
     .AddApplicationPart(typeof(Apollo.Presentation.AssemblyReference).Assembly);
 builder.Services.AddAutoMapper(typeof(Program));
 
 builder.Services.AddCustomMediaTypes();
 builder.Services.AddScoped<ValidateMediaTypeAttributes>();
+
+
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
+
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

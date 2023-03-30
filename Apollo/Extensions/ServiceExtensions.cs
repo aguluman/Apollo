@@ -1,8 +1,10 @@
 ﻿using Apollo.CustomFormatter;
+using Apollo.Presentation.Controllers;
 using Contracts;
 using LoggerService;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
 using Repository;
 using Service;
@@ -63,6 +65,23 @@ public static class ServiceExtensions
                 .Add("application/vnd.codemaze.hateoas+xml");
             xmlOutputFormatter?.SupportedMediaTypes
                 .Add("application/vnd.codemaze.apiroot+xml");
+        });
+    }
+
+    public static void ConfigureVersioning(this IServiceCollection services)
+    {
+        services.AddApiVersioning(options =>
+        {
+            options.ReportApiVersions = true;
+            options.AssumeDefaultVersionWhenUnspecified = true;
+            options.DefaultApiVersion = new ApiVersion(1, 0);
+            //options.ApiVersionReader = new HeaderApiVersionReader("api-version");
+            options.ApiVersionReader = new QueryStringApiVersionReader("api-version");
+            
+            options.Conventions.Controller<CompaniesController>()
+                .HasApiVersion(new ApiVersion(1 ,0));
+            options.Conventions.Controller<CompaniesV2Controller>()
+                .HasDeprecatedApiVersion(new ApiVersion(2 ,0));
         });
     }
 }
