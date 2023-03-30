@@ -18,8 +18,10 @@ public class EmployeesController : ControllerBase
     public EmployeesController(IServiceManager service) => _service = service;
 
     [HttpGet]
+    [HttpHead]
     [ServiceFilter(typeof(ValidateMediaTypeAttributes))]
-    public async Task<IActionResult> GetEmployeesForCompany(Guid companyId, [FromQuery] EmployeeParameters employeeParameters)
+    public async Task<IActionResult> GetEmployeesForCompany(Guid companyId, 
+        [FromQuery] EmployeeParameters employeeParameters)
     {
         var linkParams = new LinkParameters(employeeParameters, HttpContext);
         

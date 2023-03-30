@@ -15,7 +15,7 @@ public class CompaniesController : ControllerBase
     public CompaniesController(IServiceManager service) =>
         _service = service;
 
-    [HttpGet]
+    [HttpGet(Name = "GetCompanies")]
     public async Task<IActionResult> GetCompanies()
     {
         //throw new Exception("Exception");
@@ -30,7 +30,7 @@ public class CompaniesController : ControllerBase
         return Ok(company);
     }
 
-    [HttpPost]
+    [HttpPost(Name = "CreateCompany")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
     public async Task<IActionResult> CreateCompany([FromBody] CompanyForCreationDto company)
     {
@@ -78,5 +78,12 @@ public class CompaniesController : ControllerBase
         await _service.CompanyService.UpdateCompanyAsync(id, company, true);
         
         return NoContent();
+    }
+
+    [HttpOptions]
+    public IActionResult GetCompaniesOptions()
+    {
+        Response.Headers.Add("Allow", "GET, OPTIONS, POST");
+        return Ok();
     }
 }
