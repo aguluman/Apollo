@@ -44,6 +44,18 @@
           }
         }
       },
+      "Marvin.Cache.Headers/7.0.0-beta": {
+        "type": "package",
+        "compile": {
+          "lib/net6.0/Marvin.Cache.Headers.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/Marvin.Cache.Headers.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
+      },
       "Microsoft.AspNetCore.Authentication.Abstractions/2.2.0": {
         "type": "package",
         "dependencies": {
@@ -1913,6 +1925,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v6.0",
         "dependencies": {
+          "Marvin.Cache.Headers": "7.0.0-beta",
           "Microsoft.AspNetCore.JsonPatch": "6.0.15",
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.15",
@@ -2071,6 +2084,22 @@
         "lib/netstandard2.0/Humanizer.dll",
         "lib/netstandard2.0/Humanizer.xml",
         "logo.png"
+      ]
+    },
+    "Marvin.Cache.Headers/7.0.0-beta": {
+      "sha512": "LvDV6v0ZR3j72TiCrd2Ce/HicecmTBN+obcNAmzR1sZU0wnjkn7Bs3Hkc3KmkYyaKFTuoWv9rZAoh3dOWPSlew==",
+      "type": "package",
+      "path": "marvin.cache.headers/7.0.0-beta",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "lib/net5.0/Marvin.Cache.Headers.dll",
+        "lib/net6.0/Marvin.Cache.Headers.dll",
+        "lib/net7.0/Marvin.Cache.Headers.dll",
+        "lib/netcoreapp3.1/Marvin.Cache.Headers.dll",
+        "marvin.cache.headers.7.0.0-beta.nupkg.sha512",
+        "marvin.cache.headers.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Authentication.Abstractions/2.2.0": {

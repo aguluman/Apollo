@@ -31,6 +31,8 @@ builder.Services.ConfigureRepositoryManager();
 builder.Services.ConfigureServiceManager();
 builder.Services.ConfigureSqlClient(builder.Configuration);
 builder.Services.ConfigureVersioning();
+builder.Services.ConfigureResponseCaching(); //for expiration
+builder.Services.ConfigureHttpCacheHeaders();  //for validation
 
 builder.Services.AddScoped<ValidationFilterAttribute>();
 builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
@@ -45,6 +47,10 @@ builder.Services.AddControllers(config =>
     config.RespectBrowserAcceptHeader = true;
     config.ReturnHttpNotAcceptable = true;
     config.InputFormatters.Insert(0, GetJsonPatchInputFormatter());
+    config.CacheProfiles.Add("120SecondsDuration", new CacheProfile
+    {
+        Duration = 120
+    });
 }).AddXmlDataContractSerializerFormatters()
     .AddCustomCsvFormatter()
     .AddApplicationPart(typeof(Apollo.Presentation.AssemblyReference).Assembly);
@@ -87,6 +93,8 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 });
 
 app.UseCors("CorsPolicy");
+app.UseResponseCaching(); //for expiration
+app.UseHttpCacheHeaders();
 app.UseRouting();
 app.UseAuthorization();
 app.MapControllers();
