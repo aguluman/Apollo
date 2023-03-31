@@ -2,6 +2,7 @@ using Apollo.Extensions;
 using Contracts;
 using Apollo.Presentation.ActionFilters;
 using Apollo.Utility;
+using AspNetCoreRateLimit;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
@@ -33,6 +34,9 @@ builder.Services.ConfigureSqlClient(builder.Configuration);
 builder.Services.ConfigureVersioning();
 builder.Services.ConfigureResponseCaching(); //for expiration
 builder.Services.ConfigureHttpCacheHeaders();  //for validation
+builder.Services.AddMemoryCache(); //for rate limiting
+builder.Services.ConfigureRateLimitingOptions();
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddScoped<ValidationFilterAttribute>();
 builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
@@ -92,6 +96,8 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
     ForwardedHeaders = ForwardedHeaders.All
 });
 
+
+app.UseIpRateLimiting();
 app.UseCors("CorsPolicy");
 app.UseResponseCaching(); //for expiration
 app.UseHttpCacheHeaders();
