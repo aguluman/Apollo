@@ -37,6 +37,9 @@ builder.Services.ConfigureHttpCacheHeaders();  //for validation
 builder.Services.AddMemoryCache(); //for rate limiting
 builder.Services.ConfigureRateLimitingOptions();
 builder.Services.AddHttpContextAccessor();
+builder.Services.AddAuthentication();//for user authentication
+builder.Services.ConfigureIdentity();
+builder.Services.ConfigureJWT(builder.Configuration);
 
 builder.Services.AddScoped<ValidationFilterAttribute>();
 builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
@@ -102,6 +105,7 @@ app.UseCors("CorsPolicy");
 app.UseResponseCaching(); //for expiration
 app.UseHttpCacheHeaders();
 app.UseRouting();
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

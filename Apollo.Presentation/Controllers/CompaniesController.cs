@@ -4,12 +4,14 @@ using Service.Contracts;
 using Shared.DataTransferObjects;
 using Apollo.Presentation.ActionFilters;
 using Marvin.Cache.Headers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Apollo.Presentation.Controllers;
 
 //[ApiVersion("1.0")]
 [Route("api/companies")]
 [ApiController]
+[Authorize]
 //[ResponseCache(CacheProfileName = "120SecondsDuration")]
 public class CompaniesController : ControllerBase
 {
@@ -19,6 +21,7 @@ public class CompaniesController : ControllerBase
         _service = service;
 
     [HttpGet(Name = "GetCompanies")]
+    [Authorize(Roles = "Manager")]
     public async Task<IActionResult> GetCompanies()
     {
         //throw new Exception("Exception");
