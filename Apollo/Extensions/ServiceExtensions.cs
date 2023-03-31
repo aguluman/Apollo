@@ -99,7 +99,7 @@ public static class ServiceExtensions
         services.AddHttpCacheHeaders(
              (expirationOptions) =>
              {
-                 expirationOptions.MaxAge = 65;
+                 expirationOptions.MaxAge = 500;
                  expirationOptions.CacheLocation = CacheLocation.Private;
              },
              (validationOptions) =>

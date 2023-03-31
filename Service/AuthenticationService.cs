@@ -1,8 +1,10 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using AutoMapper;
 using Contracts;
+using Entities.Exceptions;
 using Entities.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
@@ -54,16 +56,37 @@ internal sealed  class AuthenticationService : IAuthenticationService
         return result;
     }
 
-    public async Task<string> CreatToken()
+    public async Task<TokenDto> CreateToken(bool populateExpiry)
     {
         var signingCredentials = GetSignInCredentials();
         var claims = await GetClaims();
         var tokenOptions = GenerateTokenOptions(signingCredentials, claims);
 
-        return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+        var refreshToken = GenerateRefreshToken();
+        _user.RefreshToken = refreshToken;
+        
+        if(populateExpiry)
+            _user.RefreshTokenExpiryTime = DateTime.Now.AddDays(7);
+
+        await _userManager.UpdateAsync(_user);
+        var accessToken = new JwtSecurityTokenHandler().WriteToken(tokenOptions);
+        
+        return new TokenDto(accessToken, refreshToken);
     }
 
-    private SigningCredentials GetSignInCredentials()
+    public async Task<TokenDto> RefreshToken(TokenDto tokenDto)
+    {
+        var principal = GetPrincipalFromExpiredTokens(tokenDto.AccessToken);
+
+        var user = await _userManager.FindByNameAsync(principal.Identity.Name);
+        if (user == null || user.RefreshToken != tokenDto.RefreshToken || user.RefreshTokenExpiryTime <= DateTime.Now)
+            throw new RefreshTokenBadRequest();
+
+        _user = user;
+        return await CreateToken(false);
+    }
+
+    private static SigningCredentials GetSignInCredentials()
     {
         var key = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("SECRETKEY"));
 
@@ -98,5 +121,42 @@ internal sealed  class AuthenticationService : IAuthenticationService
             signingCredentials : signingCredentials
         );
         return tokenOptions;
+    }
+
+    private static string GenerateRefreshToken()
+    {
+        var randomNumber = new byte[32];
+        using var rng = RandomNumberGenerator.Create();
+        rng.GetBytes(randomNumber);
+        return Convert.ToBase64String(randomNumber);
+    }
+
+    private ClaimsPrincipal GetPrincipalFromExpiredTokens(string token)
+    {
+        var jwtSettings = _configuration.GetSection("JwtSettings");
+
+        var tokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateAudience = true,
+            ValidateIssuer = true,
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(
+                Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("SECRETKEY"))),
+            ValidateLifetime = true,
+            ValidIssuer = jwtSettings["validIssuer"],
+            ValidAudience = jwtSettings["validAudience"]
+        };
+
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out var securityToken);
+
+        if (securityToken is not JwtSecurityToken jwtSecurityToken ||
+            !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, 
+                StringComparison.InvariantCultureIgnoreCase))
+        {
+            throw new SecurityTokenException("Invalid Token");
+        }
+
+        return principal;
     }
 }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,10 @@ using Repository;
 namespace Apollo.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20230331193428_AdditionalUserFiledsForRefreshToken")]
+    partial class AdditionalUserFiledsForRefreshToken
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,14 +229,14 @@ namespace Apollo.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "2dddae75-7e5e-4a6a-80cb-151034732f2e",
+                            Id = "ff95b463-d3f1-4514-95d9-4c3e5651723f",
                             ConcurrencyStamp = "8e232e91-dc1c-4f94-97b3-02e264ee6251",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "ac0124cc-b7ec-48ea-8aa6-357aca4a8f99",
+                            Id = "288ec429-0e0e-488c-ae06-e07b626a1143",
                             ConcurrencyStamp = "ecd87719-868c-442b-93ac-b93500b3bd40",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
