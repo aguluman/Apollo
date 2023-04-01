@@ -40,6 +40,9 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddAuthentication();//for user authentication
 builder.Services.ConfigureIdentity();
 builder.Services.ConfigureJWT(builder.Configuration);
+builder.Services.AddJwtConfiguration(builder.Configuration);
+builder.Services.ConfigureSwagger();
+
 
 builder.Services.AddScoped<ValidationFilterAttribute>();
 builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
@@ -108,4 +111,10 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
+app.UseSwagger();
+app.UseSwaggerUI(s =>
+{
+    s.SwaggerEndpoint("/swagger/v1/swagger.json", "Apollo API v1");
+    s.SwaggerEndpoint("/swagger/v2/swagger.json", "Apollo API v2");
+});
 app.Run();

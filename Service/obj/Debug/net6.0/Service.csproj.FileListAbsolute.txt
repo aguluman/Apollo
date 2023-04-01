@@ -21,3 +21,4 @@ C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service\bin\Debug\net6.0\Shared
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service\bin\Debug\net6.0\Shared.pdb
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service\bin\Debug\net6.0\Apollo.Presentation.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service\bin\Debug\net6.0\Apollo.Presentation.pdb
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Service\bin\Debug\net6.0\Apollo.Presentation.xml
