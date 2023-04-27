@@ -5,7 +5,7 @@ namespace Entities.Models;
 
 public class Company
 {
-    [Column("CompanyId")]
+    [Column("CompanyId")] 
     public Guid Id { get; set; }
     
     [Required(ErrorMessage = "Company name is required")]

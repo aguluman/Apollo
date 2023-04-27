@@ -79,8 +79,8 @@ internal sealed class EmployeeService : IEmployeeService
         await _repository.SaveAsync();
     }
 
-    public async Task UpdateEmployeeForCompanyAsync(Guid companyId, Guid id, EmployeeForUpdateDto employeeForUpdate, bool compTrackChanges,
-        bool empTrackChanges)
+    public async Task UpdateEmployeeForCompanyAsync(Guid companyId, Guid id, EmployeeForUpdateDto employeeForUpdate,
+        bool compTrackChanges, bool empTrackChanges)
     {
         await CheckIfCompanyExists(companyId, compTrackChanges);
 

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2I/okcIepiL+zfDU1NjBoiAEMUEApW4HJ+ZH5Z2X+K+aWzdHQP3Vsm8XR2B/z6hIhwszTGMhUMBeg7ZILM4prw==",
+  "dgSpecHash": "qc1lcaNkWY8Mhf9u6QN5M4wbN2vjxNBgt3MALkUcuxnzJaxPGvLI+De8EGpnDSxoG2Cb0vXbfqHZK9mpekbAww==",
   "success": true,
   "projectFilePath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Service\\Service.csproj",
   "expectedPackageFiles": [
@@ -15,7 +15,7 @@
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.15\\microsoft.aspnetcore.cryptography.keyderivation.6.0.15.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.hosting.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.hosting.server.abstractions\\2.2.0\\microsoft.aspnetcore.hosting.server.abstractions.2.2.0.nupkg.sha512",
-    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.http\\2.2.0\\microsoft.aspnetcore.http.2.2.0.nupkg.sha512",
+    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.http\\2.2.2\\microsoft.aspnetcore.http.2.2.2.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.http.extensions\\2.2.0\\microsoft.aspnetcore.http.extensions.2.2.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
