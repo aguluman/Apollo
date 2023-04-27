@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,10 @@ using Repository;
 namespace Apollo.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20230427141403_AddedTaskEntities")]
+    partial class AddedTaskEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -139,13 +141,11 @@ namespace Apollo.Migrations
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Priority")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Priority")
+                        .HasColumnType("int");
 
-                    b.Property<string>("State")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("State")
+                        .HasColumnType("int");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -162,23 +162,23 @@ namespace Apollo.Migrations
                         new
                         {
                             Id = new Guid("69d59c4d-4c77-4d77-b52e-51b69118dbcc"),
-                            CreatedAt = new DateTime(2023, 4, 27, 15, 43, 45, 28, DateTimeKind.Local).AddTicks(1198),
+                            CreatedAt = new DateTime(2023, 4, 27, 15, 14, 3, 118, DateTimeKind.Local).AddTicks(4634),
                             Description = "Complete all the remaining tasks for project A",
-                            DueAt = new DateTime(2023, 5, 11, 15, 43, 45, 28, DateTimeKind.Local).AddTicks(1214),
+                            DueAt = new DateTime(2023, 5, 11, 15, 14, 3, 118, DateTimeKind.Local).AddTicks(4660),
                             EmployeeId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
-                            Priority = "High",
-                            State = "InProgress",
+                            Priority = 2,
+                            State = 1,
                             Title = "Finish project A"
                         },
                         new
                         {
                             Id = new Guid("e7e86390-dcf5-4d63-af31-f6187fc7646e"),
-                            CreatedAt = new DateTime(2023, 4, 27, 15, 43, 45, 28, DateTimeKind.Local).AddTicks(1225),
+                            CreatedAt = new DateTime(2023, 4, 27, 15, 14, 3, 118, DateTimeKind.Local).AddTicks(4671),
                             Description = "Design and develop a new company website",
-                            DueAt = new DateTime(2023, 5, 27, 15, 43, 45, 28, DateTimeKind.Local).AddTicks(1228),
+                            DueAt = new DateTime(2023, 5, 27, 15, 14, 3, 118, DateTimeKind.Local).AddTicks(4673),
                             EmployeeId = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"),
-                            Priority = "Normal",
-                            State = "NotStarted",
+                            Priority = 1,
+                            State = 0,
                             Title = "Create new website"
                         });
                 });
@@ -291,15 +291,15 @@ namespace Apollo.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "3570a6a0-803e-490f-aede-974133ab0db4",
-                            ConcurrencyStamp = "94e0aabb-1b0f-4af7-8c68-a312e56c994b",
+                            Id = "e1530321-d252-40eb-b687-488fba0055eb",
+                            ConcurrencyStamp = "318293f3-779a-4769-b701-872d11ab7037",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "50667ea1-835e-4677-9f36-759cb4708b7f",
-                            ConcurrencyStamp = "86bd35df-cfa7-4742-bd5f-3bb6963efbba",
+                            Id = "afa2cd66-d5ff-4d65-8845-fcfc967e9f59",
+                            ConcurrencyStamp = "b15d6152-3762-44ab-88b3-cbc2d4c84dae",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
