@@ -1,7 +1,7 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\apollo\\Apollo.csproj": {}
+    "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo\\Apollo.csproj": {}
   },
   "projects": {
     "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo.Presentation\\Apollo.Presentation.csproj": {
@@ -85,14 +85,14 @@
         }
       }
     },
-    "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\apollo\\Apollo.csproj": {
+    "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo\\Apollo.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\apollo\\Apollo.csproj",
+        "projectUniqueName": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo\\Apollo.csproj",
         "projectName": "Apollo",
-        "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\apollo\\Apollo.csproj",
+        "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo\\Apollo.csproj",
         "packagesPath": "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\apollo\\obj\\",
+        "outputPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Chikosolu Akunyili\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -9,6 +9,18 @@ public class TasksConfiguration : IEntityTypeConfiguration<Tasks>
 {
     public void Configure(EntityTypeBuilder<Tasks> builder)
     {
+        builder.Property(t => t.State)
+            .HasConversion(
+                s => s.ToString(), // convert enum to string
+                s => (State)Enum.Parse(typeof(State), s) // convert string back to enum
+            );
+
+        builder.Property(t => t.Priority)
+            .HasConversion(
+                p => p.ToString(),
+                p => (Priority)Enum.Parse(typeof(Priority), p)
+                );
+       
         builder.HasData(
             new Tasks
             {

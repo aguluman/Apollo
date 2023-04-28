@@ -35,5 +35,7 @@ public class MappingProfile : Profile
 
       CreateMap<TasksForUpdateDto, Tasks>().ReverseMap();
 
+      //Todo i need an attendance entity relationship in this diagram mapped to employees
+      //Todo and everything relating to it.
    }
 }
