@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects;
+using Swashbuckle.AspNetCore.Annotations;
 using Shared.RequestFeatures;
 
 namespace Apollo.Presentation.Controllers;
@@ -69,12 +70,19 @@ public class TasksController : ControllerBase
         [FromBody] TasksForUpdateDto task)
     {
         await _serviceManager.TaskService.UpdateTaskForEmployeeAsync(
-            employeeId, taskId, task, false,
-            false);
+            employeeId, taskId, task, true);
         return NoContent();
     }
     
     [HttpPatch("{taskId:guid}")]
+    [SwaggerOperation(
+        Summary = "Partially updates a task for an employee.",
+        Description = "Applies a JSON Patch document to partially update a task for an employee. Like this:" +
+                      "[{ op: 'replace', path: '/property name', value: 'new value' }]" +
+                      "The 'op', 'path' and 'value' properties are required are declared as strings. " +
+                      "Also the 'operation', '/property name' and 'value' to apply are required and are declared as strings too.",
+        OperationId = "PartiallyUpdateTaskForEmployee",
+        Tags = new[] { "Tasks" })]
     public async Task<IActionResult> PartiallyUpdateTaskForEmployee(Guid employeeId, Guid taskId,
         [FromBody] JsonPatchDocument<TasksForUpdateDto> patchDoc)
     {
@@ -82,7 +90,7 @@ public class TasksController : ControllerBase
            return BadRequest("patch Document object sent from client is null");
        
        var result = await _serviceManager.TaskService.GetTaskForPatchAsync(
-           employeeId, taskId, false, false);
+           employeeId, taskId, true);
 
        patchDoc.ApplyTo(result.taskToPatch, ModelState);
 

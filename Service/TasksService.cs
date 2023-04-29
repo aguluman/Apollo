@@ -69,9 +69,8 @@ internal sealed class TasksService : ITaskService
         await _repositoryManager.SaveAsync();
     }
 
-    public async Task UpdateTaskForEmployeeAsync(Guid employeeId,
-        Guid id, TasksForUpdateDto taskForUpdate, bool empTrackChanges,
-        bool taskTrackChanges)
+    public async Task UpdateTaskForEmployeeAsync(Guid employeeId, Guid id, 
+        TasksForUpdateDto taskForUpdate, bool taskTrackChanges)
     {
         var taskForEmployeeDb = await GetTasksFromEmployeesAndCheckIfItExists(employeeId, id, taskTrackChanges);
         _mapper.Map(taskForUpdate, taskForEmployeeDb);
@@ -79,7 +78,7 @@ internal sealed class TasksService : ITaskService
     }
 
     public async Task<(TasksForUpdateDto taskToPatch, Tasks taskEntity)> GetTaskForPatchAsync(
-        Guid employeeId, Guid id, bool empTrackChanges, bool taskTrackChanges)
+        Guid employeeId, Guid id, bool taskTrackChanges)
     {
         var taskForEmployeeDb = await GetTasksFromEmployeesAndCheckIfItExists(employeeId, id, taskTrackChanges);
         var taskToPatch = _mapper.Map<TasksForUpdateDto>(taskForEmployeeDb);

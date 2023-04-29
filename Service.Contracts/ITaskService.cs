@@ -18,10 +18,10 @@ public interface ITaskService
     Task DeleteTaskForEmployeeAsync(Guid employeeId, Guid id, bool trackChanges);
     
     Task UpdateTaskForEmployeeAsync(Guid employeeId, Guid id, TasksForUpdateDto taskForUpdate,
-        bool empTrackChanges, bool taskTrackChanges);
+        bool taskTrackChanges);
     
     Task<(TasksForUpdateDto taskToPatch, Tasks taskEntity)> GetTaskForPatchAsync(
-        Guid employeeId, Guid id, bool empTrackChanges, bool taskTrackChanges);
+        Guid employeeId, Guid id, bool taskTrackChanges);
     
     Task SaveChangesForPatchAsync(TasksForUpdateDto taskToPatch, Tasks taskEntity);
 }

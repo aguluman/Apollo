@@ -1,4 +1,4 @@
 ﻿namespace Shared.DataTransferObjects;
 
 public record TasksDto(Guid Id, string Title, string Description,
-    DateTime CreatedAt, DateTime DueAt);
+    DateTime CreatedAt, DateTime DueAt, string State, string Priority);

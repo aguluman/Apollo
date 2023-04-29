@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "Dgs/kf2A53xXEtPf/m6iKQzwd2t3MLsuX/apKyUUwWIw4WkkdJlNdMzMgk9y/Kh2inBZC1tXM7OZH4ytsvqYBw==",
+  "dgSpecHash": "xnidQGRQWfotsMlWgXmAFuB8qhY5yOneECGgBw+718uKzJVoi3RyNWgAIMQCoVD2N4wg5GBNFAbFDFkXV2viEg==",
   "success": true,
   "projectFilePath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo\\Apollo.csproj",
   "expectedPackageFiles": [
@@ -79,8 +79,9 @@
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\nlog.extensions.logging\\5.2.2\\nlog.extensions.logging.5.2.2.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\runtime.native.system\\4.0.0\\runtime.native.system.4.0.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\swashbuckle.aspnetcore\\6.2.3\\swashbuckle.aspnetcore.6.2.3.nupkg.sha512",
-    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.2.3\\swashbuckle.aspnetcore.swagger.6.2.3.nupkg.sha512",
-    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.2.3\\swashbuckle.aspnetcore.swaggergen.6.2.3.nupkg.sha512",
+    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\swashbuckle.aspnetcore.annotations\\6.5.0\\swashbuckle.aspnetcore.annotations.6.5.0.nupkg.sha512",
+    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.5.0\\swashbuckle.aspnetcore.swagger.6.5.0.nupkg.sha512",
+    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.5.0\\swashbuckle.aspnetcore.swaggergen.6.5.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.2.3\\swashbuckle.aspnetcore.swaggerui.6.2.3.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\system.appcontext\\4.1.0\\system.appcontext.4.1.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",

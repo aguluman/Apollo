@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 using Shared.RequestFeatures;
+using Swashbuckle.AspNetCore.Annotations;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace Apollo.Presentation.Controllers;
@@ -74,6 +75,12 @@ public class EmployeesController : ControllerBase
     }
 
     [HttpPatch("{id:guid}")]
+    [SwaggerOperation(
+        Summary = "Partially updates a task for an employee.",
+        Description = "Applies a JSON Patch document to partially update a task for an employee. Like this:" +
+                      "[{ op: 'replace', path: '/property name', value: 'new value' }]" +
+                      "The 'op', 'path' and 'value' properties are required are declared as strings. " +
+                      "Also the 'operation', '/property name' and 'value' to apply are required and are declared as strings too.")]
     public async Task<IActionResult> PartiallyUpdateEmployeeForCompany(Guid companyId, Guid id,
         [FromBody] JsonPatchDocument<EmployeeForUpdateDto> patchDocument)
     {

@@ -101,3 +101,4 @@ C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\apollo\bin\Debug\net6.0\Microso
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Apollo.Presentation.xml
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Swashbuckle.AspNetCore.Annotations.dll
