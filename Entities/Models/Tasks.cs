@@ -16,8 +16,12 @@ public class Tasks
     [Required(ErrorMessage = "Description is required")]
     public string Description { get; set; } = "";
     
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
     public DateTime CreatedAt { get; set; } = DateTime.Now;
     
+    [DataType(DataType.Date)]
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
     [Required(ErrorMessage = "Expected Date of Completion is required")]
     public DateTime DueAt { get; set; }
     

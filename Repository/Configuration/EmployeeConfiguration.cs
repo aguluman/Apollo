@@ -8,6 +8,26 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
 {
     public void Configure(EntityTypeBuilder<Employee> builder)
     {
+        builder.HasKey(e => e.Id);
+
+        builder.Property(e => e.Name)
+            .IsRequired()
+            .HasMaxLength(30);
+
+        builder.Property(e => e.Age)
+            .IsRequired();
+
+        builder.Property(e => e.Position)
+            .IsRequired()
+            .HasMaxLength(20);
+
+        builder.Property(e => e.BreakTime)
+            .IsRequired();
+
+        builder.HasOne(e => e.Company)
+            .WithMany(c => c.Employees)
+            .HasForeignKey(e => e.CompanyId)
+            .OnDelete(DeleteBehavior.Cascade);
         builder.HasData
         (
             new Employee
@@ -16,7 +36,8 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
                 Name = "Sam Raiden",
                 Age = 26,
                 Position = "Software developer",
-                CompanyId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870")
+                BreakTime = TimeSpan.FromMinutes(45),
+                CompanyId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
             },
             new Employee
             {
@@ -24,6 +45,7 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
                 Name = "Jana McLeaf",
                 Age = 30,
                 Position = "Sales Employee",
+                BreakTime = TimeSpan.FromMinutes(40),
                 CompanyId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870")
             },
             new Employee
@@ -32,6 +54,7 @@ public class EmployeeConfiguration : IEntityTypeConfiguration<Employee>
                 Name = "Kane Miller",
                 Age = 35,
                 Position = "Administrator",
+                BreakTime = TimeSpan.FromMinutes(60),
                 CompanyId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3")
             }
         );

@@ -19,4 +19,10 @@ public class Company
     public string? Country { get; set; }
     
     public ICollection<Employee>? Employees { get; set; }
+    public ICollection<Attendance> Attendance { get; set; }
+    
+    public Company()
+    {
+        Attendance = new List<Attendance>();
+    }
 }
