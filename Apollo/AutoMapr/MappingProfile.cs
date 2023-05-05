@@ -18,6 +18,7 @@ public class MappingProfile : Profile
       
       CreateMap<CompanyForUpdateDto, Company>();
       
+      
       CreateMap<Employee, EmployeeDto>();
 
       CreateMap<EmployeeForCreationDto, Employee>();
@@ -26,7 +27,9 @@ public class MappingProfile : Profile
 
       CreateMap<EmployeeForUpdateDto, Employee>().ReverseMap();
 
+      
       CreateMap<UserForRegistrationDto, User>();
+      
       
       CreateMap<Tasks, TasksDto>()
          .ForMember(dest => dest.State, opt => opt.MapFrom(src => src.State.ToString()))
@@ -46,13 +49,11 @@ public class MappingProfile : Profile
 
       CreateMap<TasksForUpdateDto, Tasks>().ReverseMap();
 
-      //Todo i need an attendance entity relationship in this diagram mapped to employees
-      //Todo and everything relating to it.
+
       CreateMap<Attendance, AttendanceDto>()
          .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.EmployeeId))
          .ForMember(dest => dest.CompanyId, opt => opt.MapFrom(src => src.CompanyId));
 
-      
       CreateMap<AttendanceForCreationDto, Attendance>();
       
       CreateMap<AttendanceForUpdateDto, Attendance>();

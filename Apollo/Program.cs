@@ -47,8 +47,10 @@ builder.Services.ConfigureSwagger();
 builder.Services.AddScoped<ValidationFilterAttribute>();
 builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
 builder.Services.AddScoped<IDataShaper<TasksDto>, DataShaper<TasksDto>>();
+builder.Services.AddScoped<IDataShaper<AttendanceDto>, DataShaper<AttendanceDto>>();
 builder.Services.AddScoped<IEmployeeLinks, EmployeeLinks>();
 builder.Services.AddScoped<ITaskLinks, TaskLinks>();
+builder.Services.AddScoped<IAttendanceLinks, AttendanceLinks>();
 
 
 

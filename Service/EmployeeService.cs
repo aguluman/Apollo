@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Diagnostics;
+using AutoMapper;
 using Contracts;
 using Entities.Exceptions;
 using Entities.LinkModels;
@@ -28,6 +29,7 @@ internal sealed class EmployeeService : IEmployeeService
     public async Task<(LinkResponse linkResponse, MetaData metaData)> GetEmployeesAsync(
         Guid companyId, LinkParameters linkParameters, bool trackChanges)
     {
+        Debug.Assert(linkParameters.EmployeeParameters != null, "linkParameters.EmployeeParameters != null");
         if (!linkParameters.EmployeeParameters.ValidAgeRange)
             throw new MaxAgeRangeBadRequestException();
         

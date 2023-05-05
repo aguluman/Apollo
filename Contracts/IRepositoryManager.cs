@@ -5,6 +5,6 @@ public interface IRepositoryManager
     ICompanyRepository Company { get; }
     IEmployeeRepository Employee { get; }
     ITasksRepository Tasks { get; }
-    //Todo: Add IAttendanceRepository Here.
+    IAttendanceRepository Attendance { get; }
     Task SaveAsync();
 }

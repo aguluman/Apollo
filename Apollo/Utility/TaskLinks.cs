@@ -38,7 +38,7 @@ public class TaskLinks : ITaskLinks
     }
     
     private static LinkResponse ReturnShapedTasks(List<Entity> shapedTasks) =>
-        new LinkResponse { ShapedEntities = shapedTasks };
+        new() { ShapedEntities = shapedTasks };
 
     private LinkResponse ReturnLinkedTasks(IEnumerable<TasksDto> tasksDtos, string fields, Guid employeeId,
         HttpContext httpContext, List<Entity> shapedTasks)

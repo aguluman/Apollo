@@ -2,7 +2,7 @@
 
 namespace Shared.DataTransferObjects;
 
-public abstract record AttendanceManipulationDto
+public record AttendanceManipulationDto
 {
     [Required(ErrorMessage = "Clock in is required")]
     public DateTime ClockIn { get; init; }

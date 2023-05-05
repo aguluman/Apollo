@@ -37,6 +37,6 @@ public class Entity
     
     public void TryAdd(string propertyName, object? objectPropertyValue)
     {
-        _properties.TryAdd(propertyName, objectPropertyValue);
+        if (objectPropertyValue != null) _properties.TryAdd(propertyName, objectPropertyValue);
     }
 }

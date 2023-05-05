@@ -6,7 +6,7 @@ namespace Service.DataShaping;
 
 public class DataShaper<T> : IDataShaper<T> where T : class
 {
-    public PropertyInfo[] Properties { get; set; }
+    private PropertyInfo[] Properties { get; set; }
 
     public DataShaper()
     {
@@ -36,7 +36,7 @@ public class DataShaper<T> : IDataShaper<T> where T : class
                 fields.Select(field => Properties
                         .FirstOrDefault(pi => pi.Name.Equals(
                         field.Trim(), StringComparison.InvariantCultureIgnoreCase))!)
-                    .Where(property => property != null));
+                    .Where(property => true));
            
         }
         else
@@ -52,7 +52,7 @@ public class DataShaper<T> : IDataShaper<T> where T : class
         return entities.Select(entity => FetchDataForEntity(entity, requiredProperties)).ToList();
     }
 
-    private ShapedEntity FetchDataForEntity(T entity, IEnumerable<PropertyInfo> requiredProperties)
+    private static ShapedEntity FetchDataForEntity(T entity, IEnumerable<PropertyInfo> requiredProperties)
     {
         var shapedObject = new ShapedEntity();
 

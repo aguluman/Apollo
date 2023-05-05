@@ -5,14 +5,14 @@ namespace Contracts;
 
 public interface IAttendanceRepository
 {
-    Task<PagedList<Attendance>> GetEmployeesAttendanceByCompanyId(Guid companyId,
+    Task<PagedList<Attendance>> GetEmployeesAttendancesByCompanyIdAsync(Guid companyId,
         AttendanceParameters attendanceParameters, bool trackChanges);
 
-    Task<PagedList<Attendance>> GetEmployeesAttendanceByPosition(string position, 
+    Task<PagedList<Attendance>> GetEmployeeAttendancesAsync(Guid employeeId,
         AttendanceParameters attendanceParameters, bool trackChanges);
     
-    Task<Attendance> GetAttendanceByEmployeeIdAndAttendanceId(Guid employeeId,
-        Guid id, bool trackChanges);
+    Task<Attendance> GetAttendanceAsync(Guid employeeId,
+        Guid attendanceId, bool trackChanges);
 
-    void CreateAttendanceForEmployees(Guid employeeId, Attendance attendance);
+    void CreateAttendanceForEmployeesAsync(Guid employeeId, Attendance attendance);
 }

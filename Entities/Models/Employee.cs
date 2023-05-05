@@ -22,12 +22,12 @@ public class Employee
     [DataType(DataType.Time)]
     [DisplayFormat(DataFormatString = @"{0:hh\:mm}", ApplyFormatInEditMode = true)]
     [Range(typeof(TimeSpan), "0:00", "1:30")]
-    public TimeSpan BreakTime { get; set; } // Todo apply this change in EmployeeConfiguration
+    public TimeSpan BreakTime { get; set; } 
     
     [ForeignKey(nameof(Company))]
     public Guid CompanyId { get; set; }
     public Company? Company { get; set; }
-    public ICollection<Attendance> Attendance { get; set; }
+    public ICollection<Attendance> Attendance { get; }
     
     public Employee()
     {

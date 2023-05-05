@@ -1,3 +1,6 @@
 ﻿namespace Shared.DataTransferObjects;
 
-public abstract record AttendanceForCreationDto : AttendanceManipulationDto;
+public record AttendanceForCreationDto : AttendanceManipulationDto
+{
+    public AttendanceForCreationDto() { }
+}

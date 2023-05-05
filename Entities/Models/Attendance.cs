@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
+
 namespace Entities.Models;
 
 public class Attendance
@@ -30,7 +31,7 @@ public class Attendance
     
     public Company Company { get; set; }
 
-    [DataType(DataType.Time)]
+    /*[DataType(DataType.Time)]
     [DisplayFormat(DataFormatString = @"{0:hh\:mm}", ApplyFormatInEditMode = true)]
     public TimeSpan? ActiveWorkTime
     {
@@ -45,5 +46,5 @@ public class Attendance
 
             return timeWorked - actualWorkTime;
         }
-    }
+    }*/
 }

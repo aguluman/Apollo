@@ -25,7 +25,7 @@ public class TasksController : ControllerBase
     public async Task<IActionResult> GetTasksForEmployee(Guid employeeId, Guid taskId,
         [FromQuery] TasksParameters taskParameters)
     {
-        var linkParams = new LinkParameters(null, taskParameters, HttpContext);
+        var linkParams = new LinkParameters(null, taskParameters, null,  HttpContext);
         
         var result = await _serviceManager.TaskService.GetEmployeesTasksAsync(
            employeeId, linkParams, false);
@@ -84,7 +84,7 @@ public class TasksController : ControllerBase
         OperationId = "PartiallyUpdateTaskForEmployee",
         Tags = new[] { "Tasks" })]
     public async Task<IActionResult> PartiallyUpdateTaskForEmployee(Guid employeeId, Guid taskId,
-        [FromBody] JsonPatchDocument<TasksForUpdateDto> patchDoc)
+        [FromBody] JsonPatchDocument<TasksForUpdateDto>? patchDoc)
     {
        if (patchDoc is null)
            return BadRequest("patch Document object sent from client is null");

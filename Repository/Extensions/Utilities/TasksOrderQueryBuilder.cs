@@ -4,9 +4,9 @@ using Entities.Models;
 
 namespace Repository.Extensions.Utilities;
 
-public class TasksOrderQueryBuilder
+public static class TasksOrderQueryBuilder
 {
-    public static string CreateTasksOrderQuery<T>(string? orderTasksByQueryString)
+    public static string CreateTasksOrderQuery<T>(string orderTasksByQueryString)
     {
         {
             var orderTasksParams = orderTasksByQueryString.Trim().Split(',');

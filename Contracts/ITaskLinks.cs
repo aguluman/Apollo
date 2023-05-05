@@ -6,6 +6,6 @@ namespace Contracts;
 
 public interface ITaskLinks
 {
-    LinkResponse TryGenerateLinks(IEnumerable<TasksDto> tasksDto, string fields, Guid employeeId, 
-        HttpContext httpContext);
+    LinkResponse TryGenerateLinks(IEnumerable<TasksDto> tasksDto, string fields, 
+        Guid employeeId, HttpContext httpContext);
 }

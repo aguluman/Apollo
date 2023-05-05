@@ -22,12 +22,13 @@ public class AttendanceConfiguration : IEntityTypeConfiguration<Attendance>
         builder.HasOne(a => a.Employee)
             .WithMany(e => e.Attendance)
             .HasForeignKey(a => a.EmployeeId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Restrict);
+
 
         builder.HasOne(a => a.Company)
             .WithMany(c => c.Attendance)
             .HasForeignKey(a => a.CompanyId)
-            .OnDelete(DeleteBehavior.Cascade);
+            .OnDelete(DeleteBehavior.Restrict);
 
         builder.HasData(
             new Attendance

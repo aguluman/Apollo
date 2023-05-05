@@ -4,7 +4,10 @@ namespace Shared.RequestFeatures;
 
 public class AttendanceParameters : RequestParameters
 {
-    public AttendanceParameters() => OrderBy = "position";
+    public AttendanceParameters() 
+    {
+        OrderBy = "position";
+    }    
     
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
