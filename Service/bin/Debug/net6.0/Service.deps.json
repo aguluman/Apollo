@@ -772,6 +772,7 @@
       },
       "Entities/1.0.0": {
         "dependencies": {
+          "Microsoft.AspNetCore.Http.Extensions": "2.2.0",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.15",
           "Shared": "1.0.0"
         },

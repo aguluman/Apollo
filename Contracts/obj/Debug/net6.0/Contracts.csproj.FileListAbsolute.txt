@@ -15,9 +15,3 @@ C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Contracts\bin\Debug\net6.0\Enti
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Contracts\obj\Debug\net6.0\Contracts.csproj.CopyComplete
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Contracts\bin\Debug\net6.0\Shared.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Contracts\bin\Debug\net6.0\Shared.pdb
-C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Contracts\bin\Debug\net6.0\Microsoft.AspNetCore.Http.Abstractions.dll
-C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Contracts\bin\Debug\net6.0\Microsoft.AspNetCore.Routing.Abstractions.dll
-C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Contracts\bin\Debug\net6.0\Microsoft.Net.Http.Headers.dll
-C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Contracts\bin\Debug\net6.0\Microsoft.Extensions.Features.dll
-C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Contracts\bin\Debug\net6.0\Microsoft.AspNetCore.Http.Features.dll
-C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Contracts\bin\Debug\net6.0\System.IO.Pipelines.dll

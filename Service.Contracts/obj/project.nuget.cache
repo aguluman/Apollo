@@ -1,11 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "xT/qHWsXRbsxZ39xsTtZUXQ1V0AO4OcK2L4mfucscOHGpHimvV6Ta7IjKwDh/vuxQFjdiAqdrz+NB6wOzuDEhw==",
+  "dgSpecHash": "n6mCOo4/vyziPvaM/5G4ugQhdlj9K5KHS2yoqEYH46tvXLwPH6mW08nPsDXuJB4lvNin0QSbxcsrgeJf4Whm2Q==",
   "success": true,
   "projectFilePath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Service.Contracts\\Service.Contracts.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\6.0.15\\microsoft.aspnetcore.cryptography.internal.6.0.15.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\6.0.15\\microsoft.aspnetcore.cryptography.keyderivation.6.0.15.nupkg.sha512",
+    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.http.abstractions\\2.2.0\\microsoft.aspnetcore.http.abstractions.2.2.0.nupkg.sha512",
+    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.http.extensions\\2.2.0\\microsoft.aspnetcore.http.extensions.2.2.0.nupkg.sha512",
+    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.http.features\\2.2.0\\microsoft.aspnetcore.http.features.2.2.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.identity.entityframeworkcore\\6.0.15\\microsoft.aspnetcore.identity.entityframeworkcore.6.0.15.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.entityframeworkcore\\6.0.15\\microsoft.entityframeworkcore.6.0.15.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.entityframeworkcore.abstractions\\6.0.15\\microsoft.entityframeworkcore.abstractions.6.0.15.nupkg.sha512",
@@ -16,15 +19,19 @@
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.extensions.configuration.abstractions\\6.0.0\\microsoft.extensions.configuration.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\6.0.1\\microsoft.extensions.dependencyinjection.6.0.1.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\6.0.0\\microsoft.extensions.dependencyinjection.abstractions.6.0.0.nupkg.sha512",
+    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.extensions.fileproviders.abstractions\\2.2.0\\microsoft.extensions.fileproviders.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.extensions.identity.core\\6.0.15\\microsoft.extensions.identity.core.6.0.15.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.extensions.identity.stores\\6.0.15\\microsoft.extensions.identity.stores.6.0.15.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.extensions.logging\\6.0.0\\microsoft.extensions.logging.6.0.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\6.0.0\\microsoft.extensions.logging.abstractions.6.0.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.extensions.options\\6.0.0\\microsoft.extensions.options.6.0.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.extensions.primitives\\6.0.0\\microsoft.extensions.primitives.6.0.0.nupkg.sha512",
+    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.net.http.headers\\2.2.0\\microsoft.net.http.headers.2.2.0.nupkg.sha512",
+    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\system.buffers\\4.5.0\\system.buffers.4.5.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.1\\system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512",
-    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512"
+    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
+    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\system.text.encodings.web\\4.5.0\\system.text.encodings.web.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }
