@@ -25,7 +25,7 @@ public class TasksController : ControllerBase
     public async Task<IActionResult> GetTasksForEmployee(Guid employeeId, Guid taskId,
         [FromQuery] TasksParameters taskParameters)
     {
-        var linkParams = new LinkParameters(null, taskParameters, HttpContext);
+        var linkParams = new TasksLinkParameters(taskParameters, HttpContext);
         
         var result = await _serviceManager.TaskService.GetEmployeesTasksAsync(
            employeeId, linkParams, false);

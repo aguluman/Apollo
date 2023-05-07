@@ -4,7 +4,7 @@ public class PagedList<T> : List<T>
 {
     public MetaData MetaData { get; set; }
 
-    public PagedList(List<T> items, int count, int pageNumber, int pageSize)
+    private PagedList(IEnumerable<T> items, int count, int pageNumber, int pageSize)
     {
         MetaData = new MetaData
         {
@@ -19,8 +19,9 @@ public class PagedList<T> : List<T>
 
     public static PagedList<T> ToPagedList(IEnumerable<T> source, int pageNumber, int pageSize)
     {
-        var count = source.Count();
-        var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+        var enumerable = source as T[] ?? source.ToArray();
+        var count = enumerable.Length;
+        var items = enumerable.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
 
         return new PagedList<T>(items, count, pageNumber, pageSize);
     }

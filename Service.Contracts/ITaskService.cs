@@ -8,7 +8,7 @@ namespace Service.Contracts;
 public interface ITaskService
 {
     Task<(LinkResponse linkResponse ,MetaData metaData)> GetEmployeesTasksAsync(
-        Guid employeeId, LinkParameters linkParameters, bool trackChanges);
+        Guid employeeId, TasksLinkParameters linkParameters, bool trackChanges);
     
     Task<TasksDto> GetEmployeeTaskAsync(Guid employeeId, Guid id, bool trackChanges);
     

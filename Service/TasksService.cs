@@ -26,7 +26,7 @@ internal sealed class TasksService : ITaskService
     }
     
     public async Task<(LinkResponse linkResponse, MetaData metaData)> GetEmployeesTasksAsync
-        (Guid employeeId, LinkParameters linkParameters, bool trackChanges)
+        (Guid employeeId, TasksLinkParameters linkParameters, bool trackChanges)
     {
         Debug.Assert(linkParameters.TasksParameters != null, "linkParameters.TasksParameters != null");
         if (!linkParameters.TasksParameters.ValidTimeRange)
