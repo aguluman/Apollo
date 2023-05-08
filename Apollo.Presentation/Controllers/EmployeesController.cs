@@ -67,9 +67,9 @@ public class EmployeesController : ControllerBase
 
     [HttpPatch("{id:guid}")]
     public async Task<IActionResult> PartiallyUpdateEmployeeForCompany(Guid companyId, Guid id,
-        [FromBody] JsonPatchDocument<EmployeeForUpdateDto> patchDocument)
+        [FromBody] JsonPatchDocument<EmployeeForUpdateDto>? patchDocument)
     {
-        if (false)
+        if (patchDocument is null)
             return BadRequest("patchDocument object sent from client is null.");
 
         var result = await _service.EmployeeService.GetEmployeeForPatchAsync(

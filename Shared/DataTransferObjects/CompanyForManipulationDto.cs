@@ -15,5 +15,5 @@ public abstract record CompanyForManipulationDto
     [Required(ErrorMessage = "Country is required")]
     public string? Country { get; init; }
     
-    public IEnumerable<EmployeeForCreationDto> Employees;
+    public IEnumerable<EmployeeForCreationDto> Employees = Array.Empty<EmployeeForCreationDto>();
 }

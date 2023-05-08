@@ -13,9 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 LogManager.LoadConfiguration(string.Concat(Directory.GetCurrentDirectory(), "/nlog.config"));
 
 NewtonsoftJsonPatchInputFormatter GetJsonPatchInputFormatter() =>
+#pragma warning disable ASP0000
     new ServiceCollection()
         .AddLogging().AddMvc().AddNewtonsoftJson()
         .Services.BuildServiceProvider()
+#pragma warning restore ASP0000
         .GetRequiredService<IOptions<MvcOptions>>().Value.InputFormatters
         .OfType<NewtonsoftJsonPatchInputFormatter>()
         .First();

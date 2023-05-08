@@ -16,7 +16,9 @@ public class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepository
         Guid companyId, EmployeeParameters employeeParameters, bool trackChanges)
     {
         var employees = await FindByCondition(
-                e => e.CompanyId.Equals(companyId), trackChanges)
+                e => e.CompanyId.Equals(companyId) && 
+                     e.Age >= employeeParameters.MinAge && e.Age <= employeeParameters.MaxAge,
+                trackChanges)
             .OrderBy(e => e.Name)
             .Skip((employeeParameters.PageNumber - 1) * employeeParameters.PageSize)
             .Take(employeeParameters.PageSize)
@@ -24,6 +26,7 @@ public class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepository
 
         var count = await FindByCondition(
             e => e.CompanyId.Equals(companyId), trackChanges).CountAsync();
+        
         return new PagedList<Employee>
             (employees, count, employeeParameters.PageNumber, employeeParameters.PageSize);
     }
