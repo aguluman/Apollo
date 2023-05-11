@@ -53,13 +53,19 @@ public static class ServiceExtensions
 
             systemTextJsonOutputFormatter?.SupportedMediaTypes
                 .Add("application/vnd.apollo.hateoas+json");
-
+            
+            systemTextJsonOutputFormatter?.SupportedMediaTypes
+                .Add("application/vnd.apollo.apiroot+json");
+            
             var xmlOutputFormatter = config.OutputFormatters
                 .OfType<XmlDataContractSerializerOutputFormatter>()?
                 .FirstOrDefault();
 
             xmlOutputFormatter?.SupportedMediaTypes
                 .Add("application/vnd.apollo.hateoas+xml");
+            
+            xmlOutputFormatter?.SupportedMediaTypes
+                .Add("application/vnd.apollo.apiroot+xml");
         });
     }
 }

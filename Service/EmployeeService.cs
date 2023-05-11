@@ -15,7 +15,7 @@ internal sealed class EmployeeService : IEmployeeService
     private readonly IRepositoryManager _repository;
     private readonly ILoggerManager _logger;
     private readonly IMapper _mapper;
-    public readonly IEmployeeLinks _employeeLinks;
+    private readonly IEmployeeLinks _employeeLinks;
     public EmployeeService(IRepositoryManager repository, ILoggerManager logger, IMapper mapper, 
         IEmployeeLinks employeeLinks)
     {
