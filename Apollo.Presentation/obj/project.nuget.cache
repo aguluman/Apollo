@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "WcmK4WlTlYdiZ/F4JXxZVJtOlPqzWiwkAktDBF+xsPc0zPysZlYwHc02ej45y70lgnV6bvdR5uARf728qJ6k3A==",
+  "dgSpecHash": "Ym70ioMqcbDjzVLmzMdUhmyr6EFPrKQ1ibFOHhsz9WrUxopDe5d9UO711+lVXkZ2iSATYlCGoueikPyHYxt2/A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo.Presentation\\Apollo.Presentation.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\marvin.cache.headers\\6.1.0\\marvin.cache.headers.6.1.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.2.0\\microsoft.aspnetcore.authorization.2.2.0.nupkg.sha512",

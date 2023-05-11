@@ -1,12 +1,13 @@
 {
   "version": 2,
-  "dgSpecHash": "OOXcf4YewWDlbHShp98WNEikj9JQBnGRBVZOnVBaooNMdJwTkYVIraOksnPJiGWAlA6/1Gh76xljLTi/sTrMow==",
+  "dgSpecHash": "WcyPdJXg93ZhOmDaDAW86ze3z5xV+SeUOnSW1+/xgpl86AolEddf2hy3HaEIhU8KjhJP1pm1nJ2yapGK/IGisw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo\\Apollo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
+    "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\marvin.cache.headers\\6.1.0\\marvin.cache.headers.6.1.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.2.0\\microsoft.aspnetcore.authentication.core.2.2.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.2.0\\microsoft.aspnetcore.authorization.2.2.0.nupkg.sha512",
