@@ -1,6 +1,7 @@
 using Apollo.Extensions;
 using Apollo.Presentation.ActionFilters;
 using Apollo.Utility;
+using AspNetCoreRateLimit;
 using Contracts;
 using Microsoft.AspNetCore.HttpOverrides;
 using Microsoft.AspNetCore.Mvc;
@@ -37,6 +38,10 @@ builder.Services.ConfigureVersioning();
 builder.Services.ConfigureResponseCaching();
 builder.Services.ConfigureHttpCacheHeaders();
 
+builder.Services.AddMemoryCache();
+builder.Services.ConfigureRateLimitingOptions();
+builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddControllers(config =>
 {
 	config.RespectBrowserAcceptHeader = true;
@@ -65,6 +70,7 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 	ForwardedHeaders = ForwardedHeaders.All
 });
 
+app.UseIpRateLimiting();
 app.UseCors("CorsPolicy");
 app.UseResponseCaching();
 app.UseHttpCacheHeaders();
