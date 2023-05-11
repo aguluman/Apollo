@@ -1,4 +1,5 @@
 ﻿using Apollo.Presentation.ActionFilters;
+using Entities.LinkModels;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
@@ -17,33 +18,40 @@ public class EmployeesController : ControllerBase
     public EmployeesController(IServiceManager service) => _service = service;
 
     [HttpGet]
-    public async Task<IActionResult> GetEmployeesForCompany(Guid companyId, [FromQuery] EmployeeParameters employeeParameters)
+    [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
+    public async Task<IActionResult> GetEmployeesForCompany(Guid companyId,
+        [FromQuery] EmployeeParameters employeeParameters)
     {
-        var pagedResult = await _service.EmployeeService.GetEmployeesAsync(
-            companyId, employeeParameters, false);
-        
-        Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));
+        var linkParams = new LinkParameters(employeeParameters, HttpContext);
 
-        return Ok(pagedResult.employees);
+        var result = await _service.EmployeeService.GetEmployeesAsync(companyId,
+            linkParams, trackChanges: false);
+
+        Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(result.metaData));
+
+        return result.linkResponse.HasLinks
+            ? Ok(result.linkResponse.LinkedEntities)
+            : Ok(result.linkResponse.ShapedEntities);
     }
 
-    [HttpGet("{id:guid}", Name = "GetEmployeeForCompany")]  
+    [HttpGet("{id:guid}", Name = "GetEmployeeForCompany")]
     public async Task<IActionResult> GetEmployeeForCompany(Guid companyId, Guid id)
     {
         var employee = await _service.EmployeeService.GetEmployeeAsync(companyId, id, false);
         return Ok(employee);
     }
-    
+
     [HttpPost]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
-    public async Task<IActionResult> CreateEmployeeForCompany(Guid companyId, [FromBody] EmployeeForCreationDto employee)
+    public async Task<IActionResult> CreateEmployeeForCompany(Guid companyId,
+        [FromBody] EmployeeForCreationDto employee)
     {
         var employeeToReturn = await _service.EmployeeService.CreateEmployeeForCompanyAsync(
             companyId, employee, false);
 
         return CreatedAtRoute(
-            "GetEmployeeForCompany", 
-            new { companyId, id = employeeToReturn.Id }, 
+            "GetEmployeeForCompany",
+            new { companyId, id = employeeToReturn.Id },
             employeeToReturn);
     }
 
@@ -60,8 +68,8 @@ public class EmployeesController : ControllerBase
         Guid companyId, Guid id, [FromBody] EmployeeForUpdateDto employee)
     {
         await _service.EmployeeService.UpdateEmployeeForCompanyAsync(
-            companyId, id,employee, false, true);
-        
+            companyId, id, employee, false, true);
+
         return NoContent();
     }
 
@@ -74,14 +82,14 @@ public class EmployeesController : ControllerBase
 
         var result = await _service.EmployeeService.GetEmployeeForPatchAsync(
             companyId, id, false, true);
-        
+
         patchDocument.ApplyTo(result.employeeToPatch, ModelState);
 
         TryValidateModel(result.employeeToPatch);
-        
+
         if (!ModelState.IsValid)
             return UnprocessableEntity(ModelState);
-        
+
         await _service.EmployeeService.SaveChangesForPatchAsync(result.employeeToPatch, result.employeeEntity);
 
         return NoContent();

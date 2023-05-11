@@ -89,7 +89,11 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Shared\\Shared.csproj": {
+                "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Shared\\Shared.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -101,6 +105,12 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Mvc.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

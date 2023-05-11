@@ -2,7 +2,7 @@
 
 public class LinkCollectionWrapper<T> : LinkResourceBase
 {
-    public List<T> Value { get; set; } = new List<T>();
+    public List<T> Value { get; set; } = new();
     
     public LinkCollectionWrapper()
     { }
