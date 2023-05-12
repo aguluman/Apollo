@@ -4,6 +4,7 @@ using Service.Contracts;
 using Shared.DataTransferObjects;
 using Apollo.Presentation.ActionFilters;
 using Marvin.Cache.Headers;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Apollo.Presentation.Controllers;
 
@@ -24,6 +25,7 @@ public class CompaniesController : ControllerBase
     }
 
     [HttpGet(Name = "GetCompanies")]
+    [Authorize]
     public async Task<IActionResult> GetCompanies()
     {
         var companies = await _service.CompanyService.GetAllCompaniesAsync(false);
