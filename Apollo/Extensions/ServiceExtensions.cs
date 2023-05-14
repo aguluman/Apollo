@@ -100,7 +100,10 @@ public static class ServiceExtensions
                 expirationOpt.CacheLocation = CacheLocation.Private;
             },
             (validationOpt)
-                => { validationOpt.MustRevalidate = true; });
+                =>
+            {
+                validationOpt.MustRevalidate = true;
+            });
 
     public static void ConfigureRateLimitingOptions(this IServiceCollection services)
     {
@@ -135,12 +138,12 @@ public static class ServiceExtensions
             .AddEntityFrameworkStores<RepositoryContext>()
             .AddDefaultTokenProviders();
     }
-    
+
     public static void ConfigureJwt(this IServiceCollection services, IConfiguration configuration)
     {
         var jwtConfiguration = new JwtConfiguration();
         configuration.Bind(jwtConfiguration.Section, jwtConfiguration);
-        
+
         var secretKey = Environment.GetEnvironmentVariable("SECRETKEY");
 
         services.AddAuthentication(opt =>
@@ -163,5 +166,7 @@ public static class ServiceExtensions
                 };
             });
     }
-    
+
+    public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
+        => services.Configure<JwtConfiguration>(configuration.GetSection("JwtSetting"));
 }
