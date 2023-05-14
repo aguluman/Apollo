@@ -10,6 +10,7 @@ namespace Apollo.Presentation.Controllers;
 
 [Route("api/companies")]
 [ApiController]
+[ApiExplorerSettings(GroupName = "v1")]
 public class CompaniesController : ControllerBase
 {
     private readonly IServiceManager _service;
@@ -24,6 +25,10 @@ public class CompaniesController : ControllerBase
         return Ok();
     }
 
+    /// <summary>
+    /// Gets the list of all companies
+    /// </summary>
+    /// <returns>The companies list</returns>
     [HttpGet(Name = "GetCompanies")]
     [Authorize(Roles = "Manager")]
     public async Task<IActionResult> GetCompanies()
@@ -40,7 +45,15 @@ public class CompaniesController : ControllerBase
         var company = await _service.CompanyService.GetCompanyAsync(id, false);
         return Ok(company);
     }
-
+    
+    /// <summary>
+    /// Creates a newly created company
+    /// </summary>
+    /// <param name="company"></param>
+    /// <returns>A newly created company</returns>
+    /// <response code="201">Returns the newly created item</response>
+    /// <response code="400">If the item is null</response>
+    /// <response code="422">If the model is invalid</response>
     [HttpPost(Name = "CreateCompany")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
     public async Task<IActionResult> CreateCompany([FromBody] CompanyForCreationDto company)
