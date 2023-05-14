@@ -3,6 +3,7 @@ using Apollo.CustomFormatter;
 using Apollo.Presentation.Controllers;
 using AspNetCoreRateLimit;
 using Contracts;
+using Entities.ConfigurationModels;
 using Entities.Models;
 using LoggerService;
 using Marvin.Cache.Headers;
@@ -137,7 +138,9 @@ public static class ServiceExtensions
     
     public static void ConfigureJwt(this IServiceCollection services, IConfiguration configuration)
     {
-        var jwtSetting = configuration.GetSection("JwtSetting");
+        var jwtConfiguration = new JwtConfiguration();
+        configuration.Bind(jwtConfiguration.Section, jwtConfiguration);
+        
         var secretKey = Environment.GetEnvironmentVariable("SECRETKEY");
 
         services.AddAuthentication(opt =>
@@ -154,8 +157,8 @@ public static class ServiceExtensions
                     ValidateLifetime = true,
                     ValidateIssuerSigningKey = true,
 
-                    ValidIssuer = jwtSetting["validIssuer"],
-                    ValidAudience = jwtSetting["validAudience"],
+                    ValidIssuer = jwtConfiguration.ValidIssuer,
+                    ValidAudience = jwtConfiguration.ValidAudience,
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey))
                 };
             });

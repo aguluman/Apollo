@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Repository;
 
@@ -11,9 +12,10 @@ using Repository;
 namespace Apollo.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20230514040753_refreshTokenAndExpiry")]
+    partial class refreshTokenAndExpiry
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -227,15 +229,15 @@ namespace Apollo.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "03ecd858-4da6-4f5e-b67e-07089c928db2",
-                            ConcurrencyStamp = "87009c4b-f51b-4c8f-a1b8-d64388a141fc",
+                            Id = "50e9fb1b-db70-427a-bc58-d547953e658e",
+                            ConcurrencyStamp = "8dd77e07-24c4-4707-a605-46446ae7fcf6",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "065cfd47-7e30-44c2-b225-de3425fbb6b3",
-                            ConcurrencyStamp = "3153c8e3-fb13-4630-b25e-cc6700817a7f",
+                            Id = "66397643-f392-4a3f-a0de-a7a4c11759a0",
+                            ConcurrencyStamp = "5fc3dc15-80b0-4761-b7f4-8be6a3d957f1",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
