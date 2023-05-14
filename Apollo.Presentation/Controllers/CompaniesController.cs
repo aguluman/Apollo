@@ -25,7 +25,7 @@ public class CompaniesController : ControllerBase
     }
 
     [HttpGet(Name = "GetCompanies")]
-    [Authorize]
+    [Authorize(Roles = "Manager")]
     public async Task<IActionResult> GetCompanies()
     {
         var companies = await _service.CompanyService.GetAllCompaniesAsync(false);

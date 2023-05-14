@@ -20,23 +20,21 @@ public class AuthenticationController : ControllerBase
     {
         var result = await _service.AuthenticationService.RegisterUser(userForRegistration);
 
-        if (!result.Succeeded)
+        if (result.Succeeded) return StatusCode(201);
+        foreach (var error in result.Errors)
         {
-            foreach (var error in result.Errors)
-            {
-                ModelState.TryAddModelError(error.Code, error.Description);
-            }
-
-            return BadRequest(ModelState);
+            ModelState.TryAddModelError(error.Code, error.Description);
         }
-        return StatusCode(201);
+
+        return BadRequest(ModelState);
+
     }
-    
+
     [HttpPost("Login")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
     public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto userForAuthentication)
     {
-        if(!await _service.AuthenticationService.ValidateUser(userForAuthentication))
+        if (!await _service.AuthenticationService.ValidateUser(userForAuthentication))
             return Unauthorized();
 
         return Ok(new

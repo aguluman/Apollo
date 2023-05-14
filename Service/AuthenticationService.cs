@@ -62,9 +62,9 @@ internal sealed class AuthenticationService : IAuthenticationService
 		return new JwtSecurityTokenHandler().WriteToken(tokenOptions);
 	}
 
-	private SigningCredentials GetSigningCredentials()
+	private static SigningCredentials GetSigningCredentials()
 	{
-		var key = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("SECRET"));
+		var key = Encoding.UTF8.GetBytes(Environment.GetEnvironmentVariable("SECRETKEY"));
 		var secret = new SymmetricSecurityKey(key);
 
 		return new SigningCredentials(secret, SecurityAlgorithms.HmacSha256);
@@ -74,7 +74,7 @@ internal sealed class AuthenticationService : IAuthenticationService
 	{
 		var claims = new List<Claim>
 			{
-				new Claim(ClaimTypes.Name, _user.UserName)
+				new(ClaimTypes.Name, _user.UserName)
 			};
 
 		var roles = await _userManager.GetRolesAsync(_user);
@@ -86,14 +86,14 @@ internal sealed class AuthenticationService : IAuthenticationService
 
 	private JwtSecurityToken GenerateTokenOptions(SigningCredentials signingCredentials, IEnumerable<Claim> claims)
 	{
-		var jwtSettings = _configuration.GetSection("JwtSettings");
+		var jwtSetting = _configuration.GetSection("JwtSetting");
 
 		var tokenOptions = new JwtSecurityToken
 		(
-			issuer: jwtSettings["validIssuer"],
-			audience: jwtSettings["validAudience"],
+			issuer: jwtSetting["validIssuer"],
+			audience: jwtSetting["validAudience"],
 			claims: claims,
-			expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSettings["expires"])),
+			expires: DateTime.Now.AddMinutes(Convert.ToDouble(jwtSetting["expires"])),
 			signingCredentials: signingCredentials
 		);
 
