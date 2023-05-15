@@ -8,7 +8,6 @@ namespace Apollo.Utility;
 
 public class TasksLinks : ITasksLinks
 {
-    //TODO: Done
     private readonly LinkGenerator _linkGenerator;
     private readonly IDataShaper<TasksDto> _dataShaper;
     

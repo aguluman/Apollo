@@ -7,7 +7,6 @@ namespace Service.Contracts;
 
 public interface ITasksService
 {
-    //Todo: Done
     Task<(LinkResponse linkResponse ,MetaData metaData)> GetEmployeeTasksAsync(//This gets the lists of tasks for a specific employee
         Guid employeeId, TasksLinkParameters tasksLinkParameters, bool trackChanges);
     

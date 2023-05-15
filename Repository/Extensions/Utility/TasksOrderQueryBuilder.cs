@@ -6,7 +6,6 @@ namespace Repository.Extensions.Utility;
 
 public static class TasksOrderQueryBuilder
 {
-    //TODO: Done
     public static string CreateTasksOrderQuery<T>(string orderTasksByQueryString)
     {
         {

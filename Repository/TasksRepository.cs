@@ -8,7 +8,6 @@ namespace Repository;
 
 public class TasksRepository : RepositoryBase<Tasks>, ITasksRepository
 {
-    //TODO: Implement
     public TasksRepository(RepositoryContext repositoryContext) : base(repositoryContext)
     {
     }

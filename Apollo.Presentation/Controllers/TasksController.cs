@@ -14,8 +14,6 @@ namespace Apollo.Presentation.Controllers;
 [ApiController]
 public class TasksController : ControllerBase
 {
-    //TODO: Done
-
     private readonly IServiceManager _serviceManager;
 
     public TasksController(IServiceManager serviceManager) =>

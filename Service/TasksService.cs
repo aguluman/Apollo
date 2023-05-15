@@ -11,7 +11,6 @@ namespace Service;
 
 internal sealed class TasksService : ITasksService
 {
-    //TODO: Done
     private readonly IRepositoryManager _repositoryManager;
     private readonly ILoggerManager _loggerManager;
     private readonly IMapper _mapper;

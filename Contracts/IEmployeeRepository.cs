@@ -5,7 +5,6 @@ namespace Contracts;
 
 public interface IEmployeeRepository
 {
-    //Todo : Done
     Task<PagedList<Employee>> GetEmployeesAsync(Guid companyId, EmployeeParameters employeeParameters, bool trackChanges);
     
     Task<Employee> GetEmployeeAsync(Guid companyId, Guid id, bool trackChanges);

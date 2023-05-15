@@ -5,8 +5,6 @@ namespace Repository.Extensions;
 
 public static class RepositoryTasksExtensions
 {
-    //TODO: Done
-    
     public static IQueryable<Tasks> FilterByDate(this IQueryable<Tasks> tasks, DateTime minTime, DateTime maxAge) =>
         tasks.Where(t => t.CreatedAt >= minTime && t.CreatedAt <= maxAge);
 
