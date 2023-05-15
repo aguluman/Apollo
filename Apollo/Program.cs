@@ -32,7 +32,9 @@ builder.Services.AddScoped<ValidationFilterAttribute>();
 builder.Services.AddScoped<ValidateMediaTypeAttribute>();
 
 builder.Services.AddScoped<IDataShaper<EmployeeDto>, DataShaper<EmployeeDto>>();
+builder.Services.AddScoped<IDataShaper<TasksDto>, DataShaper<TasksDto>>();
 builder.Services.AddScoped<IEmployeeLinks, EmployeeLinks>();
+builder.Services.AddScoped<ITasksLinks, TasksLinks>();
 
 builder.Services.ConfigureVersioning();
 builder.Services.ConfigureResponseCaching();

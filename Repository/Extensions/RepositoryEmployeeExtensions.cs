@@ -28,6 +28,8 @@ public static class RepositoryEmployeeExtensions
 
         var orderQuery = OrderQueryBuilder.CreateOrderQuery<Employee>(orderByQueryString);
 
-        return string.IsNullOrWhiteSpace(orderQuery) ? employees.OrderBy(e => e.Name) : employees.OrderBy(orderQuery);
+        return string.IsNullOrWhiteSpace(orderQuery) 
+            ? employees.OrderBy(e => e.Name)
+            : employees.OrderBy(orderQuery);
     }
 }

@@ -43,7 +43,7 @@ public class EmployeeLinks : IEmployeeLinks
     }
 
     private static LinkResponse ReturnShapedEmployees(List<Entity> shapedEmployees) =>
-        new LinkResponse { ShapedEntities = shapedEmployees };
+        new() { ShapedEntities = shapedEmployees };
 
     private LinkResponse ReturnLinkedEmployees(IEnumerable<EmployeeDto> employeesDto,
         string fields, Guid companyId, HttpContext httpContext, List<Entity> shapedEmployees)
