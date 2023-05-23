@@ -8,6 +8,7 @@ public class RepositoryManager : IRepositoryManager
     private readonly Lazy<ICompanyRepository> _companyRepository;
     private readonly Lazy<IEmployeeRepository> _employeeRepository;
     private readonly Lazy<ITasksRepository> _tasksRepository;
+    private readonly Lazy<IAttendanceRepository> _attendanceRepository;
 
     public RepositoryManager(RepositoryContext repositoryContext)
     {
@@ -15,12 +16,13 @@ public class RepositoryManager : IRepositoryManager
         _companyRepository = new Lazy<ICompanyRepository>(() => new CompanyRepository(repositoryContext));
         _employeeRepository = new Lazy<IEmployeeRepository>(() => new EmployeeRepository(repositoryContext));
         _tasksRepository = new Lazy<ITasksRepository>(() => new TasksRepository(repositoryContext));
-
+        _attendanceRepository = new Lazy<IAttendanceRepository>(() => new AttendanceRepository(repositoryContext));
     }
 
     public ICompanyRepository Company => _companyRepository.Value;
     public IEmployeeRepository Employee => _employeeRepository.Value;
     public ITasksRepository Tasks => _tasksRepository.Value;
+    public IAttendanceRepository Attendance => _attendanceRepository.Value;
 
 
     public async Task SaveAsync() => await _repositoryContext.SaveChangesAsync();

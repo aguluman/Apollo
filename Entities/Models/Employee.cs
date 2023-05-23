@@ -19,7 +19,18 @@ public class Employee
     [MaxLength(20, ErrorMessage = "Maximum length for the Position is 20 characters")]
     public string? Position { get; set; }
     
+    [DataType(DataType.Time)]
+    [DisplayFormat(DataFormatString = @"{0:hh\:mm}", ApplyFormatInEditMode = true)]
+    [Range(typeof(TimeSpan), "0:00", "1:30")]
+    public TimeSpan BreakTime { get; set; } 
+    
     [ForeignKey(nameof(Company))]
     public Guid CompanyId { get; set; }
     public Company? Company { get; set; }
+    public ICollection<Attendance> Attendance { get; }
+    
+    public Employee()
+    {
+        Attendance = new List<Attendance>();
+    }
 }

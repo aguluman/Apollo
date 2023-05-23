@@ -19,9 +19,11 @@ public class RepositoryContext : IdentityDbContext<User>
         modelBuilder.ApplyConfiguration(new EmployeeConfiguration());
         modelBuilder.ApplyConfiguration(new RoleConfiguration());
         modelBuilder.ApplyConfiguration(new TasksConfiguration());
+        modelBuilder.ApplyConfiguration(new AttendanceConfiguration());
     }
     
     public DbSet<Company>? Companies { get; set; }
     public DbSet<Employee>? Employees { get; set; }
     public DbSet<Tasks>? Tasks { get; set; }
+    public DbSet<Attendance>? Attendance { get; set; }
 }

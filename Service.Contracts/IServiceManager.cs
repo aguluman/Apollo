@@ -5,5 +5,6 @@ public interface IServiceManager
     ICompanyService CompanyService { get; }
     IEmployeeService EmployeeService { get; }
     ITasksService TasksService { get; }
+    IAttendanceService AttendanceService { get; }
     IAuthenticationService AuthenticationService { get; }
 }
