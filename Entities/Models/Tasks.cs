@@ -6,7 +6,8 @@ namespace Entities.Models;
 
 public class Tasks
 {
-    [Column("TaskId")] public Guid Id { get; set; }
+    [Column("TaskId")] 
+    public Guid Id { get; set; }
 
     [Required(ErrorMessage = "Title Of the task is required")]
     [MaxLength(90, ErrorMessage = "Maximum length for the Task is 90 characters")]
@@ -24,7 +25,9 @@ public class Tasks
     [Required(ErrorMessage = "Expected Date of Completion is required")]
     public DateTime DueAt { get; set; }
 
-    [ForeignKey(nameof(Employee))] public Guid EmployeeId { get; set; }
+    [ForeignKey(nameof(Employee))] 
+    public Guid EmployeeId { get; set; }
+    
     public Employee? Employee { get; set; }
 
     [Required(ErrorMessage = "If no State is selected, default selection is NotStarted")]

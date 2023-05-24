@@ -33,6 +33,10 @@ public class AttendanceParameters : RequestParameters
 
     
     
-    
     public string? SearchTerm { get; set; }
+    
+    //Todo: i am adding a filter by employee-name and by company-name
+    public string EmployeeName { get; set; }
+    
+    public string CompanyName { get; set; }
 }

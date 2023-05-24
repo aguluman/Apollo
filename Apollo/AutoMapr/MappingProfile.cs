@@ -39,6 +39,8 @@ public class MappingProfile : Profile
          .ForMember(dest => dest.Priority, opt => opt.MapFrom(src => Enum.Parse<Priority>(src.Priority)));
       CreateMap<TasksForUpdateDto, Tasks>().ReverseMap();
       
-      //Add Attendance Mapping here
+      CreateMap<Attendance, AttendanceDto>();
+      CreateMap<AttendanceForCreationDto, Attendance>();
+      //Todo: Add Comeback here, in case any mapping logic breaks
    }
 }
