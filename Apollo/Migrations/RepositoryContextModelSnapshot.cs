@@ -57,22 +57,22 @@ namespace Apollo.Migrations
                         new
                         {
                             Id = new Guid("1c15d6a9-6e63-4a2e-9b28-af2c6f18b6a5"),
-                            ActiveWorkTime = new TimeSpan(0, 0, 45, 0, 0),
+                            ActiveWorkTime = new TimeSpan(352800000008),
                             BreakTime = new TimeSpan(0, 0, 45, 0, 0),
-                            ClockIn = new DateTimeOffset(new DateTime(2023, 5, 25, 0, 35, 37, 976, DateTimeKind.Unspecified).AddTicks(637), new TimeSpan(0, 1, 0, 0, 0)),
-                            ClockOut = new DateTimeOffset(new DateTime(2023, 5, 25, 8, 8, 37, 976, DateTimeKind.Unspecified).AddTicks(646), new TimeSpan(0, 1, 0, 0, 0)),
+                            ClockIn = new DateTimeOffset(new DateTime(2023, 5, 24, 22, 1, 3, 787, DateTimeKind.Unspecified).AddTicks(7491), new TimeSpan(0, 1, 0, 0, 0)),
+                            ClockOut = new DateTimeOffset(new DateTime(2023, 5, 25, 8, 34, 3, 787, DateTimeKind.Unspecified).AddTicks(7499), new TimeSpan(0, 1, 0, 0, 0)),
                             EmployeeId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
-                            TimeOffWork = new TimeSpan(271800000009)
+                            TimeOffWork = new TimeSpan(379800000008)
                         },
                         new
                         {
                             Id = new Guid("3a55d1d3-97f8-497a-8bf7-878c5910e378"),
-                            ActiveWorkTime = new TimeSpan(0, 1, 0, 0, 0),
+                            ActiveWorkTime = new TimeSpan(324000000001),
                             BreakTime = new TimeSpan(0, 1, 0, 0, 0),
-                            ClockIn = new DateTimeOffset(new DateTime(2023, 5, 24, 23, 35, 37, 976, DateTimeKind.Unspecified).AddTicks(656), new TimeSpan(0, 1, 0, 0, 0)),
-                            ClockOut = new DateTimeOffset(new DateTime(2023, 5, 25, 7, 35, 37, 976, DateTimeKind.Unspecified).AddTicks(657), new TimeSpan(0, 1, 0, 0, 0)),
+                            ClockIn = new DateTimeOffset(new DateTime(2023, 5, 24, 22, 1, 3, 787, DateTimeKind.Unspecified).AddTicks(7511), new TimeSpan(0, 1, 0, 0, 0)),
+                            ClockOut = new DateTimeOffset(new DateTime(2023, 5, 25, 8, 1, 3, 787, DateTimeKind.Unspecified).AddTicks(7512), new TimeSpan(0, 1, 0, 0, 0)),
                             EmployeeId = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"),
-                            TimeOffWork = new TimeSpan(288000000001)
+                            TimeOffWork = new TimeSpan(360000000001)
                         });
                 });
 
@@ -216,9 +216,9 @@ namespace Apollo.Migrations
                         new
                         {
                             Id = new Guid("69d59c4d-4c77-4d77-b52e-51b69118dbcc"),
-                            CreatedAt = new DateTimeOffset(new DateTime(2023, 5, 25, 8, 35, 37, 975, DateTimeKind.Unspecified).AddTicks(9219), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2023, 5, 25, 9, 1, 3, 787, DateTimeKind.Unspecified).AddTicks(5589), new TimeSpan(0, 1, 0, 0, 0)),
                             Description = "Complete all the remaining tasks for project A",
-                            DueAt = new DateTimeOffset(new DateTime(2023, 6, 8, 8, 35, 37, 975, DateTimeKind.Unspecified).AddTicks(9243), new TimeSpan(0, 1, 0, 0, 0)),
+                            DueAt = new DateTimeOffset(new DateTime(2023, 6, 8, 9, 1, 3, 787, DateTimeKind.Unspecified).AddTicks(5613), new TimeSpan(0, 1, 0, 0, 0)),
                             EmployeeId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
                             Priority = "High",
                             State = "InProgress",
@@ -227,9 +227,9 @@ namespace Apollo.Migrations
                         new
                         {
                             Id = new Guid("e7e86390-dcf5-4d63-af31-f6187fc7646e"),
-                            CreatedAt = new DateTimeOffset(new DateTime(2023, 5, 25, 8, 35, 37, 975, DateTimeKind.Unspecified).AddTicks(9259), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2023, 5, 25, 9, 1, 3, 787, DateTimeKind.Unspecified).AddTicks(5624), new TimeSpan(0, 1, 0, 0, 0)),
                             Description = "Design and develop a new company website",
-                            DueAt = new DateTimeOffset(new DateTime(2023, 6, 24, 8, 35, 37, 975, DateTimeKind.Unspecified).AddTicks(9262), new TimeSpan(0, 1, 0, 0, 0)),
+                            DueAt = new DateTimeOffset(new DateTime(2023, 6, 24, 9, 1, 3, 787, DateTimeKind.Unspecified).AddTicks(5627), new TimeSpan(0, 1, 0, 0, 0)),
                             EmployeeId = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"),
                             Priority = "Normal",
                             State = "NotStarted",
@@ -345,15 +345,15 @@ namespace Apollo.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f2869e93-60a9-4a6f-bfbf-020f1995f7a6",
-                            ConcurrencyStamp = "52323716-a8ed-4468-87cb-c9a6937ad2c3",
+                            Id = "c68efd0f-b81c-4967-8c37-20a6af2ced0f",
+                            ConcurrencyStamp = "ae5997d4-4b2d-4b3b-a4d1-b173749ec254",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "160c2984-f3c3-4e6d-bc73-db969b04577a",
-                            ConcurrencyStamp = "8ea171e2-84a7-4c3f-88ee-299b24f665d4",
+                            Id = "ff26672c-d38e-48fb-9f04-b397bdde911e",
+                            ConcurrencyStamp = "51a3a822-e4c4-4240-a55a-7c442465602b",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

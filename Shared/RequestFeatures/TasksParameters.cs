@@ -8,11 +8,11 @@ public class TasksParameters : RequestParameters
     
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-    public DateTime MinTime { get; set; }
+    public DateTimeOffset MinTime { get; set; }
     
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-    public DateTime MaxTime { get; set; } = DateTime.MaxValue;
+    public DateTimeOffset MaxTime { get; set; } = DateTimeOffset.MaxValue;
     
     public bool ValidTimeRange => MaxTime > MinTime;
 

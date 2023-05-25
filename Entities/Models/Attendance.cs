@@ -93,7 +93,7 @@ public class Attendance
             var timeWorked = ClockOut.Value - ClockIn;
             var actualWorkTime = timeWorked - totalBreakTime;
 
-            return timeWorked - actualWorkTime;
+            return actualWorkTime;
         }
     }
 }

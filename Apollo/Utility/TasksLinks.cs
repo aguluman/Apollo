@@ -23,10 +23,11 @@ public class TasksLinks : ITasksLinks
     public LinkResponse TryGenerateLinks(IEnumerable<TasksDto> tasksDto, 
         string fields, Guid employeeId, HttpContext httpContext)
     {
-        var shapedTasks = ShapeData(tasksDto, fields);
+        var tasksDtos = tasksDto as TasksDto[] ?? tasksDto.ToArray();
+        var shapedTasks = ShapeData(tasksDtos, fields);
 
         return ShouldGenerateLinks(httpContext)
-            ? ReturnLinkedTasks(tasksDto, fields, employeeId, httpContext, shapedTasks)
+            ? ReturnLinkedTasks(tasksDtos, fields, employeeId, httpContext, shapedTasks)
             : ReturnShapedTasks(shapedTasks);
     }
     
@@ -60,7 +61,7 @@ public class TasksLinks : ITasksLinks
         
         var linkedTasks = CreateLinksForTasks(httpContext, taskCollection);
         
-        return new LinkResponse(){ HasLinks = true, LinkedEntities = linkedTasks };
+        return new LinkResponse { HasLinks = true, LinkedEntities = linkedTasks };
     }
     
     private List<Link> CreateLinksForTask(HttpContext httpContext, Guid employeeId, Guid taskId, string fields = "")
