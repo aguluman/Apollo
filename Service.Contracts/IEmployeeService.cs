@@ -8,7 +8,7 @@ namespace Service.Contracts;
 public interface IEmployeeService
 {
     Task<(LinkResponse linkResponse, MetaData metaData)> GetEmployeesAsync(Guid companyId,
-        LinkParameters linkParameters, bool trackChanges);
+        EmployeeLinkParameters employeeLinkParameters, bool trackChanges);
 
     Task<EmployeeDto> GetEmployeeAsync(Guid companyId, Guid id, bool trackChanges);
     

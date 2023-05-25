@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "81Xu3ZL+4QYf06gD/lQbDLdfPqlBqQh4USIIzF146iSKc1xiGo0CYcGvvn/LtbeWYGvto3owouD2y24n9ogpaw==",
+  "dgSpecHash": "GrvKg2mo1S+AMGrubK+dHw7gsgDFWMnZb/JC+owTPoOALGgHLAhtxyJ7WvXT3k5Lq9Y32+8UKDarxBMZ40+3jA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo\\Apollo.csproj",
+  "projectFilePath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\apollo\\Apollo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\aspnetcoreratelimit\\5.0.0\\aspnetcoreratelimit.5.0.0.nupkg.sha512",
     "C:\\Users\\Chikosolu Akunyili\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",

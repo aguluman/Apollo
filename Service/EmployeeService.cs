@@ -26,20 +26,20 @@ internal sealed class EmployeeService : IEmployeeService
     }
 
     public async Task<(LinkResponse linkResponse, MetaData metaData)> GetEmployeesAsync
-        (Guid companyId, LinkParameters linkParameters, bool trackChanges)
+        (Guid companyId, EmployeeLinkParameters employeeLinkParameters, bool trackChanges)
     {
-        if (!linkParameters.EmployeeParameters.ValidAgeRange)
+        if (!employeeLinkParameters.EmployeeParameters.ValidAgeRange)
             throw new MaxAgeRangeBadRequestException();
 
         await CheckIfCompanyExists(companyId, trackChanges);
 
         var employeesWithMetaData = await _repository.Employee
-            .GetEmployeesAsync(companyId, linkParameters.EmployeeParameters, trackChanges);
+            .GetEmployeesAsync(companyId, employeeLinkParameters.EmployeeParameters, trackChanges);
 
         var employeesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employeesWithMetaData);
         
         var links = _employeeLinks.TryGenerateLinks(employeesDto,
-            linkParameters.EmployeeParameters.Fields, companyId, linkParameters.Context);
+            employeeLinkParameters.EmployeeParameters.Fields, companyId, employeeLinkParameters.Context);
 
         return (linkResponse: links, metaData: employeesWithMetaData.MetaData);
     }

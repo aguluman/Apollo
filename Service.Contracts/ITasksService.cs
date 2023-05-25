@@ -13,7 +13,7 @@ public interface ITasksService
     Task<TasksDto> GetEmployeeTaskAsync(Guid employeeId, Guid id, bool trackChanges);
     
     Task<TasksDto> CreateTaskForEmployeeAsync(
-        Guid employeeId, TasksForCreationDto taskForCreation, bool trackChanges);
+        Guid employeeId, TasksForCreationDto taskForCreation);
     
     Task DeleteTaskForEmployeeAsync(Guid employeeId, Guid id, bool trackChanges);
     

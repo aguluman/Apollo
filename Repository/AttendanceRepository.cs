@@ -14,7 +14,7 @@ public class AttendanceRepository : RepositoryBase<Attendance>, IAttendanceRepos
     {
     }
 
-    public async Task<PagedList<Attendance>> GetAttendancesAsync(Guid employeeId, AttendanceParameters attendanceParameters, bool trackChanges)
+    public async Task<PagedList<Attendance>> GetEmployeeAttendancesAsync(Guid employeeId, AttendanceParameters attendanceParameters, bool trackChanges)
     {
         var attendances = await FindByCondition(a => a.EmployeeId.Equals(employeeId), trackChanges)
             .FilterByClockIn(attendanceParameters.MinClockIn, attendanceParameters.MaxClockIn)
@@ -38,7 +38,7 @@ public class AttendanceRepository : RepositoryBase<Attendance>, IAttendanceRepos
             .SingleOrDefaultAsync() ?? throw new EmployeeAttendanceNotFoundException();
     }
 
-    public void CreateAttendance(Guid employeeId, Attendance attendance)
+    public void CreateAttendanceForEmployee(Guid employeeId, Attendance attendance)
     {
         attendance.EmployeeId = employeeId;
         Create(attendance);

@@ -4,4 +4,4 @@ using Shared.RequestFeatures;
 
 namespace Entities.LinkModels;
 
-public record LinkParameters(EmployeeParameters EmployeeParameters, HttpContext Context);
+public record EmployeeLinkParameters(EmployeeParameters EmployeeParameters, HttpContext Context);

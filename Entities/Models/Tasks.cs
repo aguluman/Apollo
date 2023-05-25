@@ -18,12 +18,12 @@ public class Tasks
 
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-    public DateTime CreatedAt { get; set; } = DateTime.Now;
+    public DateTimeOffset CreatedAt { get; set; } = DateTimeOffset.Now;
 
     [DataType(DataType.Date)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
     [Required(ErrorMessage = "Expected Date of Completion is required")]
-    public DateTime DueAt { get; set; }
+    public DateTimeOffset DueAt { get; set; }
 
     [ForeignKey(nameof(Employee))] 
     public Guid EmployeeId { get; set; }

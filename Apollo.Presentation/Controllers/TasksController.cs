@@ -50,7 +50,7 @@ public class TasksController : ControllerBase
         [FromBody] TasksForCreationDto task)
     {
         var taskToReturn = await _serviceManager.TasksService.CreateTaskForEmployeeAsync(
-            employeeId, task, false);
+            employeeId, task);
 
         return CreatedAtRoute(
             "GetTaskForEmployee",

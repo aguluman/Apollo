@@ -11,4 +11,11 @@ public abstract record AttendanceForCreationDto
     [DataType(DataType.Time)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
     public DateTimeOffset ClockIn { get; init; }
+    
+    [Required(ErrorMessage = "Break Time is required")]
+    [DataType(DataType.Time)]
+    [DisplayFormat(DataFormatString = @"{0:hh\:mm}", ApplyFormatInEditMode = true)]
+    [Range(typeof(TimeSpan), "0:00", "1:30")]
+    public TimeSpan BreakTime { get; init; } 
+
 }

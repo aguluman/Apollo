@@ -46,13 +46,13 @@ internal sealed class TasksService : ITasksService
     public async Task<TasksDto> GetEmployeeTaskAsync(Guid employeeId, Guid id, bool trackChanges)
     {
         //This gets a specific task for a specific employee
-        var taskDb = await GetTasksFromEmployeeAndCheckIfItExists(employeeId, id, trackChanges);
+        var taskDb = await GetTasksByEmployeeAndCheckIfItExists(employeeId, id, trackChanges);
         
         var task = _mapper.Map<TasksDto>(taskDb);
         return task;
     }
 
-    public async Task<TasksDto> CreateTaskForEmployeeAsync(Guid employeeId, TasksForCreationDto taskForCreation, bool trackChanges)
+    public async Task<TasksDto> CreateTaskForEmployeeAsync(Guid employeeId, TasksForCreationDto taskForCreation)
     {
         var taskEntity = _mapper.Map<Tasks>(taskForCreation);
         _repositoryManager.Tasks.CreateTaskForEmployee(employeeId, taskEntity);
@@ -64,21 +64,21 @@ internal sealed class TasksService : ITasksService
 
     public async Task DeleteTaskForEmployeeAsync(Guid employeeId, Guid id, bool trackChanges)
     {
-        var taskDb = await GetTasksFromEmployeeAndCheckIfItExists(employeeId, id, trackChanges);
+        var taskDb = await GetTasksByEmployeeAndCheckIfItExists(employeeId, id, trackChanges);
         _repositoryManager.Tasks.DeleteTask(taskDb);
         await _repositoryManager.SaveAsync();
     }
 
     public async Task UpdateTaskForEmployeeAsync(Guid employeeId, Guid id, TasksForUpdateDto taskForUpdate, bool taskTrackChanges)
     {
-        var taskDb = await GetTasksFromEmployeeAndCheckIfItExists(employeeId, id, taskTrackChanges);
+        var taskDb = await GetTasksByEmployeeAndCheckIfItExists(employeeId, id, taskTrackChanges);
         _mapper.Map(taskForUpdate, taskDb);
         await _repositoryManager.SaveAsync();
     }
 
     public async Task<(TasksForUpdateDto taskToPatch, Tasks taskEntity)> GetTaskForPatchAsync(Guid employeeId, Guid id, bool taskTrackChanges)
     {
-        var taskDb = await GetTasksFromEmployeeAndCheckIfItExists(employeeId, id, taskTrackChanges);
+        var taskDb = await GetTasksByEmployeeAndCheckIfItExists(employeeId, id, taskTrackChanges);
         var taskToPatch = _mapper.Map<TasksForUpdateDto>(taskDb);
         return (taskToPatch, taskDb);
     }
@@ -89,7 +89,7 @@ internal sealed class TasksService : ITasksService
         await _repositoryManager.SaveAsync();
     }
 
-    private async Task<Tasks> GetTasksFromEmployeeAndCheckIfItExists(Guid employeeId, Guid taskId, bool trackChanges)
+    private async Task<Tasks> GetTasksByEmployeeAndCheckIfItExists(Guid employeeId, Guid taskId, bool trackChanges)
     {
         var tasks = await _repositoryManager.Tasks.GetEmployeeTaskAsync(employeeId, taskId, trackChanges);
         if (tasks is null) 

@@ -23,7 +23,7 @@ public class EmployeesController : ControllerBase
     public async Task<IActionResult> GetEmployeesForCompany(Guid companyId,
         [FromQuery] EmployeeParameters employeeParameters)
     {
-        var linkParams = new LinkParameters(employeeParameters, HttpContext);
+        var linkParams = new EmployeeLinkParameters(employeeParameters, HttpContext);
 
         var result = await _service.EmployeeService.GetEmployeesAsync(companyId,
             linkParams, trackChanges: false);

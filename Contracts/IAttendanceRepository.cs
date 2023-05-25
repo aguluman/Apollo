@@ -6,12 +6,12 @@ namespace Contracts;
 public interface IAttendanceRepository
 {
     //Todo : Add IAttendanceRepository
-    Task<PagedList<Attendance>> GetAttendancesAsync(Guid employeeId,
+    Task<PagedList<Attendance>> GetEmployeeAttendancesAsync(Guid employeeId,
         AttendanceParameters attendanceParameters, bool trackChanges);
     
     
     Task<Attendance> GetEmployeeAttendanceAsync(Guid employeeId, 
         Guid attendanceId, bool trackChanges);
 
-    void CreateAttendance(Guid employeeId, Attendance attendance);
+    void CreateAttendanceForEmployee(Guid employeeId, Attendance attendance);
 }
