@@ -10,10 +10,16 @@ public abstract record AttendanceForManipulationDto
     [DataType(DataType.Time)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
     public DateTimeOffset ClockIn { get; init; } = DateTimeOffset.Now;
-        
-    [Required(ErrorMessage = "Break Time is required")]
+
     [DataType(DataType.Time)]
-    [DisplayFormat(DataFormatString = @"{0:hh\:mm}", ApplyFormatInEditMode = true)]
-    [Range(typeof(TimeSpan), "0:00", "1:30")]
-    public TimeSpan BreakTime { get; init; } 
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
+    public DateTimeOffset ClockOut { get; init; } = DateTimeOffset.Now;
+        
+    [DataType(DataType.Time)]
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
+    public DateTimeOffset BreakTimeStart { get; init; } = DateTimeOffset.Now;
+
+    [DataType(DataType.Time)]
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
+    public DateTimeOffset BreakTimeEnd { get; init; } = DateTimeOffset.Now;
 }

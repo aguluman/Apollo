@@ -7,7 +7,8 @@ namespace Repository;
 public abstract class RepositoryBase<T> : IRepositoryBase<T> where T : class
 {
     protected RepositoryContext RepositoryContext;
-
+    
+//Todo use Update and Create for breaktime and clockin/clockout feature
     public RepositoryBase(RepositoryContext repositoryContext) =>
         RepositoryContext = repositoryContext;
 

@@ -9,7 +9,10 @@ public class AttendanceConfiguration : IEntityTypeConfiguration<Attendance>
     public void Configure(EntityTypeBuilder<Attendance> builder)
     {
         builder.HasKey(a => a.Id);
-
+        
+        builder.Property(a => a.Id)
+            .HasDefaultValueSql("newsequentialid()"); // Apply SequentialGuidValueGenerator
+        
         builder.Property(a => a.ClockIn)
             .IsRequired();
 

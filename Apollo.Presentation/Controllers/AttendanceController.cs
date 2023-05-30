@@ -1,12 +1,10 @@
 ﻿using Apollo.Presentation.ActionFilters;
 using System.Text.Json;
-using Microsoft.AspNetCore.JsonPatch;
 using Entities.LinkModels;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects;
 using Shared.RequestFeatures;
-using Swashbuckle.AspNetCore.Annotations;
 
 namespace Apollo.Presentation.Controllers;
 
@@ -52,17 +50,60 @@ public class AttendanceController : ControllerBase
     /// </summary>
     /// <param name="employeeId"></param>
     /// <param name="attendance"></param>
+    /// <param name="clockIn"></param>
     /// <returns>A newly created attendance record</returns>
     /// <response code="201">Returns the newly created item</response>
     /// <response code="400">If the item is null</response>
     /// <response code="422">If the model is invalid</response>
     [HttpPost]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
-    public async Task<IActionResult> CreateAttendanceForEmployee(Guid employeeId,
-        [FromBody] AttendanceForCreationDto attendance)
+    public async Task<IActionResult> CreateClockInForEmployee(Guid employeeId,
+        [FromBody] AttendanceForCreationDto attendance, DateTimeOffset clockIn)
     {
         var attendanceToReturn = await _serviceManager.AttendanceService
-            .CreateAttendanceForEmployeeAsync(employeeId, attendance);
+            .CreateClockInForAttendance(employeeId, attendance, clockIn);
+
+        return CreatedAtRoute(
+            "GetAttendanceForEmployee",
+            new { employeeId, attendanceId = attendanceToReturn.Id },
+            attendanceToReturn);
+    }
+    
+    [HttpPost]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
+    public async Task<IActionResult> CreateClockOutForEmployee(Guid employeeId,
+        [FromBody] AttendanceForCreationDto attendance, DateTimeOffset clockIn)
+    {
+        var attendanceToReturn = await _serviceManager.AttendanceService
+            .CreateClockOutForAttendance(employeeId, attendance, clockIn);
+
+        return CreatedAtRoute(
+            "GetAttendanceForEmployee",
+            new { employeeId, attendanceId = attendanceToReturn.Id },
+            attendanceToReturn);
+    }
+    
+    [HttpPost]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
+    public async Task<IActionResult> CreateBreakTimeClockInForEmployee(Guid employeeId,
+        [FromBody] AttendanceForCreationDto attendance, DateTimeOffset btClockIn)
+    {
+        var attendanceToReturn = await _serviceManager.AttendanceService
+            .CreateBreakTimeClockIn(employeeId, attendance, btClockIn);
+
+        return CreatedAtRoute(
+            "GetAttendanceForEmployee",
+            new { employeeId, attendanceId = attendanceToReturn.Id },
+            attendanceToReturn);
+    }
+    
+    [HttpPost]
+    [ServiceFilter(typeof(ValidationFilterAttribute))]
+    public async Task<IActionResult> CreateBreakTimeClockOutForEmployee(Guid employeeId,
+        [FromBody] AttendanceForCreationDto attendance, DateTimeOffset btClockOut)
+    {
+        var attendanceToReturn = await _serviceManager.AttendanceService
+            .CreateBreakTimeClockOut(employeeId, attendance, btClockOut);
 
         return CreatedAtRoute(
             "GetAttendanceForEmployee",
