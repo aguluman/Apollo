@@ -50,7 +50,6 @@ public class AttendanceController : ControllerBase
     /// </summary>
     /// <param name="employeeId"></param>
     /// <param name="attendance"></param>
-    /// <param name="clockIn"></param>
     /// <returns>A newly created attendance record</returns>
     /// <response code="201">Returns the newly created item</response>
     /// <response code="400">If the item is null</response>
@@ -58,10 +57,10 @@ public class AttendanceController : ControllerBase
     [HttpPost]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
     public async Task<IActionResult> CreateClockInForEmployee(Guid employeeId,
-        [FromBody] AttendanceForCreationDto attendance, DateTimeOffset clockIn)
+        [FromBody] AttendanceForClockInDto attendance)
     {
         var attendanceToReturn = await _serviceManager.AttendanceService
-            .CreateClockInForAttendance(employeeId, attendance, clockIn);
+            .CreateClockInForAttendance(employeeId, attendance);
 
         return CreatedAtRoute(
             "GetAttendanceForEmployee",
@@ -69,44 +68,44 @@ public class AttendanceController : ControllerBase
             attendanceToReturn);
     }
     
-    [HttpPost]
+    [HttpPost("{attendanceId:guid}/clock-out",  Name = "CreateClockOutForEmployee")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
-    public async Task<IActionResult> CreateClockOutForEmployee(Guid employeeId,
-        [FromBody] AttendanceForCreationDto attendance, DateTimeOffset clockIn)
+    public async Task<IActionResult> CreateClockOutForEmployee(Guid employeeId, Guid attendanceId,
+        [FromBody] AttendanceForClockOutDto attendance)
     {
         var attendanceToReturn = await _serviceManager.AttendanceService
-            .CreateClockOutForAttendance(employeeId, attendance, clockIn);
+            .CreateClockOutForAttendance(employeeId, attendance.AttendanceId = attendanceId, attendance);
 
-        return CreatedAtRoute(
-            "GetAttendanceForEmployee",
+        return  CreatedAtRoute(
+            "CreateClockOutForEmployee",
             new { employeeId, attendanceId = attendanceToReturn.Id },
             attendanceToReturn);
     }
     
-    [HttpPost]
+    [HttpPost("{attendanceId:guid}/break-time-clock-in",  Name = "CreateBreakTimeClockInForEmployee")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
-    public async Task<IActionResult> CreateBreakTimeClockInForEmployee(Guid employeeId,
-        [FromBody] AttendanceForCreationDto attendance, DateTimeOffset btClockIn)
+    public async Task<IActionResult> CreateBreakTimeClockInForEmployee(Guid employeeId, Guid attendanceId,
+        [FromBody] AttendanceForBtClockInDto attendance)
     {
         var attendanceToReturn = await _serviceManager.AttendanceService
-            .CreateBreakTimeClockIn(employeeId, attendance, btClockIn);
+            .CreateBreakTimeClockIn(employeeId, attendance.AttendanceId = attendanceId, attendance);
 
-        return CreatedAtRoute(
-            "GetAttendanceForEmployee",
+        return  CreatedAtRoute(
+            "CreateBreakTimeClockInForEmployee",
             new { employeeId, attendanceId = attendanceToReturn.Id },
             attendanceToReturn);
     }
     
-    [HttpPost]
+    [HttpPost("{attendanceId:guid}/break-time-clock-out",  Name = "CreateBreakTimeClockOutForEmployee")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
-    public async Task<IActionResult> CreateBreakTimeClockOutForEmployee(Guid employeeId,
-        [FromBody] AttendanceForCreationDto attendance, DateTimeOffset btClockOut)
+    public async Task<IActionResult> CreateBreakTimeClockOutForEmployee(Guid employeeId, Guid attendanceId,
+        [FromBody] AttendanceForBtClockOutDto attendance)
     {
         var attendanceToReturn = await _serviceManager.AttendanceService
-            .CreateBreakTimeClockOut(employeeId, attendance, btClockOut);
+            .CreateBreakTimeClockOut(employeeId, attendance.AttendanceId = attendanceId, attendance);
 
-        return CreatedAtRoute(
-            "GetAttendanceForEmployee",
+        return  CreatedAtRoute(
+            "CreateBreakTimeClockOutForEmployee",
             new { employeeId, attendanceId = attendanceToReturn.Id },
             attendanceToReturn);
     }

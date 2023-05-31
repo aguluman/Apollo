@@ -16,18 +16,18 @@ public class Attendance
     [Required(ErrorMessage = "Clock In is required")]
     [DataType(DataType.Time)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
-    public DateTimeOffset ClockIn { get; set; } /*= DateTimeOffset.Now; *///Todo: check if this is correct
+    public DateTimeOffset ClockIn { get; set; } 
 
 
     [Column("ClockOut")]
     [DataType(DataType.Time)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
-    public DateTimeOffset ClockOut { get; set; } /*= DateTimeOffset.Now;*/ //Todo: check if this is correct
+    public DateTimeOffset ClockOut { get; set; } 
     
     
     [DataType(DataType.Time)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
-    public TimeSpan? TimeOffWork { get; set; }
+    public TimeSpan TimeOffWork { get; set; }
     
     
     [DataType(DataType.Time)]
@@ -35,11 +35,11 @@ public class Attendance
     [Range(typeof(TimeSpan), "0:00", "1:30")]
     public TimeSpan BreakTime { get; set; }   
 
-    public DateTimeOffset BreakTimeStart { get; set; } /*= DateTimeOffset.Now;*/
+    public DateTimeOffset BreakTimeStart { get; set; } 
 
-    public DateTimeOffset BreakTimeEnd { get; set; } /*= DateTimeOffset.Now;*/
+    public DateTimeOffset BreakTimeEnd { get; set; } 
     
     [DataType(DataType.Time)]
     [DisplayFormat(DataFormatString = @"{0:hh\:mm}", ApplyFormatInEditMode = true)]
-    public TimeSpan? ActiveWorkTime { get; set; }
+    public TimeSpan ActiveWorkTime { get; set; }
 }

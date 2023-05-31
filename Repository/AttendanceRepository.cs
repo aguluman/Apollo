@@ -40,41 +40,45 @@ public class AttendanceRepository : RepositoryBase<Attendance>, IAttendanceRepos
 
    
 
-    public void SetClockInForAttendance(Guid employeeId, Attendance attendance, DateTimeOffset clockIn)
+    public void SetClockInForAttendance(Guid employeeId, Attendance attendance)
     {
-        attendance.ClockIn = clockIn;
+        attendance.ClockIn = DateTimeOffset.Now;
         attendance.EmployeeId = employeeId;
         Create(attendance);
     }
 
-    public void SetClockOutForAttendance(Guid employeeId, Attendance attendance, DateTimeOffset clockOut)
+    public void SetClockOutForAttendance(Guid employeeId, Guid attendanceId, Attendance attendance)
     {
-        attendance.ClockOut = clockOut;
+        attendance.ClockOut = DateTimeOffset.Now;
         attendance.EmployeeId = employeeId;
+        attendance.Id = attendanceId;
         Update(attendance);
         
-        // Calculate and set the TimeOffWork value
+        // Set the TimeOffWork value
         attendance.TimeOffWork = CalculateTimeOffWork(attendance);
+        Update(attendance);
         
-        // Calculate and set the ActiveWorkTime value
+        // Set the ActiveWorkTime value
         attendance.ActiveWorkTime = CalculateActiveWorkTime(attendance);
         Update(attendance);
     }
 
-    public void SetBreakTimeClockIn(Guid employeeId, Attendance attendance, DateTimeOffset btClockIn)
+    public void SetBreakTimeClockIn(Guid employeeId, Guid attendanceId, Attendance attendance)
     {
-        attendance.BreakTimeStart = btClockIn;
+        attendance.BreakTimeStart = DateTimeOffset.Now;
         attendance.EmployeeId = employeeId;
+        attendance.Id = attendanceId;
         Update(attendance);
     }
 
-    public void SetBreakTimeClockOut(Guid employeeId, Attendance attendance, DateTimeOffset btClockOut)
+    public void SetBreakTimeClockOut(Guid employeeId, Guid attendanceId, Attendance attendance)
     {
-        attendance.BreakTimeEnd = btClockOut;
+        attendance.BreakTimeEnd = DateTimeOffset.Now;
         attendance.EmployeeId = employeeId;
+        attendance.Id = attendanceId;
         Update(attendance);
         
-        // Calculate and set the BreakTime value
+        // Set the BreakTime value
         attendance.BreakTime = CalculateBreakTime(attendance);
         Update(attendance);
     }

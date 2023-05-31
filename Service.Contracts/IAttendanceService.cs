@@ -14,16 +14,16 @@ public interface IAttendanceService
         Guid attendanceId, bool trackChanges);
 
     Task<AttendanceDto> CreateClockInForAttendance(Guid employeeId,
-        AttendanceForCreationDto attendanceForCreation, DateTimeOffset clockIn);
+        AttendanceForClockInDto attendanceForClockIn);
 
-    Task<AttendanceDto> CreateClockOutForAttendance(Guid employeeId,
-        AttendanceForCreationDto attendanceForCreation, DateTimeOffset clockOut);
+    Task<AttendanceDto> CreateClockOutForAttendance(Guid employeeId, Guid id,
+        AttendanceForClockOutDto attendanceForClockIn);
 
-    Task<AttendanceDto> CreateBreakTimeClockIn(Guid employeeId, 
-        AttendanceForCreationDto attendanceForCreation, DateTimeOffset btClockIn);
+    Task<AttendanceDto> CreateBreakTimeClockIn(Guid employeeId, Guid id,
+        AttendanceForBtClockInDto attendanceForClockIn);
 
-    Task<AttendanceDto> CreateBreakTimeClockOut(Guid employeeId,
-        AttendanceForCreationDto attendanceForCreation, DateTimeOffset btClockOut);
+    Task<AttendanceDto> CreateBreakTimeClockOut(Guid employeeId, Guid id,
+        AttendanceForBtClockOutDto attendanceForClockIn);
     
 
 }

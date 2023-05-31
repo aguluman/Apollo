@@ -12,20 +12,6 @@ public class AttendanceConfiguration : IEntityTypeConfiguration<Attendance>
         
         builder.Property(a => a.Id)
             .HasDefaultValueSql("newsequentialid()"); // Apply SequentialGuidValueGenerator
-        
-        builder.Property(a => a.ClockIn)
-            .IsRequired();
-
-        builder.Property(a => a.ClockOut)
-            .IsRequired(false);
-        
-        builder.Property(a => a.TimeOffWork)
-            .IsRequired(false);
-        
-        builder.Property(a => a.ActiveWorkTime)
-            .IsRequired(false);
-        
-        
 
         builder.HasOne(a => a.Employee)
             .WithMany(e => e.Attendance)

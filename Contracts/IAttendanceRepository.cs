@@ -13,13 +13,13 @@ public interface IAttendanceRepository
     Task<Attendance> GetEmployeeAttendanceAsync(Guid employeeId, 
         Guid attendanceId, bool trackChanges);
 
-    void SetClockInForAttendance(Guid employeeId, Attendance attendance, DateTimeOffset clockIn);
+    void SetClockInForAttendance(Guid employeeId, Attendance attendance);
 
-    void SetClockOutForAttendance(Guid employeeId, Attendance attendance, DateTimeOffset clockOut);
+    void SetClockOutForAttendance(Guid employeeId, Guid attendanceId, Attendance attendance);
 
-    void SetBreakTimeClockIn(Guid employeeId, Attendance attendance, DateTimeOffset btClockIn);
+    void SetBreakTimeClockIn(Guid employeeId, Guid attendanceId, Attendance attendance);
 
-    void SetBreakTimeClockOut(Guid employeeId, Attendance attendance, DateTimeOffset btClockOut);
+    void SetBreakTimeClockOut(Guid employeeId, Guid attendanceId, Attendance attendance);
     
     TimeSpan CalculateTimeOffWork(Attendance attendance);
     

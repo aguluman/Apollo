@@ -50,47 +50,46 @@ internal sealed class AttendanceService : IAttendanceService
         return attendance;
     }
     
-    public async Task<AttendanceDto> CreateClockInForAttendance(Guid employeeId, AttendanceForCreationDto attendanceForCreation,
-        DateTimeOffset clockIn)
+    public async Task<AttendanceDto> CreateClockInForAttendance(Guid employeeId, AttendanceForClockInDto attendanceForClockIn)
     {
-        var attendanceEntity = _mapper.Map<Attendance>(attendanceForCreation);
+        var attendanceEntity = _mapper.Map<Attendance>(attendanceForClockIn);
         
-        _repositoryManager.Attendance.SetClockInForAttendance(employeeId, attendanceEntity, clockIn);
+        _repositoryManager.Attendance.SetClockInForAttendance(employeeId, attendanceEntity);
         await _repositoryManager.SaveAsync();
         
         var attendanceToReturn = _mapper.Map<AttendanceDto>(attendanceEntity);
         return attendanceToReturn;
     }
 
-    public async Task<AttendanceDto> CreateClockOutForAttendance(Guid employeeId, AttendanceForCreationDto attendanceForCreation,
-        DateTimeOffset clockOut)
+    public async Task<AttendanceDto> CreateClockOutForAttendance(Guid employeeId, Guid id,
+        AttendanceForClockOutDto attendanceForClockOut)
     {
-        var attendanceEntity = _mapper.Map<Attendance>(attendanceForCreation);
+        var attendanceEntity = _mapper.Map<Attendance>(attendanceForClockOut);
         
-        _repositoryManager.Attendance.SetClockOutForAttendance(employeeId, attendanceEntity, clockOut);
+        _repositoryManager.Attendance.SetClockOutForAttendance(employeeId, id, attendanceEntity);
         await _repositoryManager.SaveAsync();
         
         var attendanceToReturn = _mapper.Map<AttendanceDto>(attendanceEntity);
         return attendanceToReturn;
     }
 
-    public async Task<AttendanceDto> CreateBreakTimeClockIn(Guid employeeId, AttendanceForCreationDto attendanceForCreation, DateTimeOffset btClockIn)
+    public async Task<AttendanceDto> CreateBreakTimeClockIn(Guid employeeId, Guid id,
+        AttendanceForBtClockInDto attendanceForClockIn)
     {
-        var attendanceEntity = _mapper.Map<Attendance>(attendanceForCreation);
+        var attendanceEntity = _mapper.Map<Attendance>(attendanceForClockIn);
         
-        _repositoryManager.Attendance.SetBreakTimeClockIn(employeeId, attendanceEntity, btClockIn);
+        _repositoryManager.Attendance.SetBreakTimeClockIn(employeeId, id, attendanceEntity);
         await _repositoryManager.SaveAsync();
         
         var attendanceToReturn = _mapper.Map<AttendanceDto>(attendanceEntity);
         return attendanceToReturn;
     }
 
-    public async Task<AttendanceDto> CreateBreakTimeClockOut(Guid employeeId, AttendanceForCreationDto attendanceForCreation,
-        DateTimeOffset btClockOut)
+    public async Task<AttendanceDto> CreateBreakTimeClockOut(Guid employeeId, Guid id, AttendanceForBtClockOutDto attendanceForBtClockOut)
     {
-        var attendanceEntity = _mapper.Map<Attendance>(attendanceForCreation);
+        var attendanceEntity = _mapper.Map<Attendance>(attendanceForBtClockOut);
         
-        _repositoryManager.Attendance.SetBreakTimeClockOut(employeeId, attendanceEntity, btClockOut);
+        _repositoryManager.Attendance.SetBreakTimeClockOut(employeeId, id, attendanceEntity);
         await _repositoryManager.SaveAsync();
         
         var attendanceToReturn = _mapper.Map<AttendanceDto>(attendanceEntity);
