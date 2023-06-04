@@ -8,7 +8,6 @@ namespace Apollo.Utility;
 
 public class AttendanceLinks : IAttendanceLinks
 {
-    //Todo : Add AttendanceLinks
     
     private readonly LinkGenerator _linkGenerator;
     private readonly IDataShaper<AttendanceDto> _dataShaper;
@@ -75,7 +74,7 @@ public class AttendanceLinks : IAttendanceLinks
                 "self",
                 "GET")
         };
-
+        //Todo: I need to add the PATCH requests in the CONTROLLER CLASS.
         return links;
     }
     

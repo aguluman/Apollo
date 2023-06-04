@@ -6,8 +6,6 @@ namespace Repository.Extensions;
 
 public static class RepositoryAttendanceExtensions
 {
-    //Todo : Add RepositoryAttendanceExtensions
-    
     public static IQueryable<Attendance> FilterByClockIn(this IQueryable<Attendance> attendanceQuery,
         DateTimeOffset minClockIn, DateTimeOffset maxClockIn) =>
         attendanceQuery.Where(a => a.ClockIn >= minClockIn && a.ClockIn <= maxClockIn);

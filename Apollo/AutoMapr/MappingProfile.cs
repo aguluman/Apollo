@@ -45,50 +45,5 @@ public class MappingProfile : Profile
       CreateMap<AttendanceForUpdateDto, Attendance>();
       CreateMap<AttendanceForUpdateDto, Attendance>().ReverseMap();
 
-      /*CreateMap<AttendanceForClockInDto, Attendance>()
-         .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.EmployeeId))
-         .ForMember(dest => dest.ClockIn, opt => opt.MapFrom(src => DateTimeOffset.Now)).ReverseMap();
-            
-      //Add a mapping from AttendanceForClockInDto to  AttendanceDto
-      CreateMap<AttendanceForClockInDto, AttendanceDto>()
-         .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.EmployeeId))
-         .ForMember(dest => dest.ClockIn, opt => opt.MapFrom(src => DateTimeOffset.Now)).ReverseMap();
-      
-      CreateMap<AttendanceForClockOutDto, Attendance>()
-         .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.EmployeeId))
-         .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AttendanceId))
-         .ForMember(dest => dest.ClockOut, opt => opt.MapFrom(src => DateTimeOffset.Now)).ReverseMap();
-      
-      //Add a mapping from AttendanceForClockOutDto to  AttendanceDto
-      CreateMap<AttendanceForClockOutDto, AttendanceDto>()
-         .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.EmployeeId))
-         .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AttendanceId))
-         .ForMember(dest => dest.ClockOut, opt => opt.MapFrom(src => DateTimeOffset.Now)).ReverseMap();
-
-      CreateMap<AttendanceForBtClockInDto, Attendance>()
-         .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.EmployeeId))
-         .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AttendanceId))
-         .ForMember(dest => dest.BreakTimeStart, opt => opt.MapFrom(src => DateTimeOffset.Now)).ReverseMap();
-            
-      //Add a mapping from AttendanceForBtClockInDto to AttendanceDto
-      CreateMap<AttendanceForBtClockInDto, AttendanceDto>()
-         .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.EmployeeId))
-         .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AttendanceId))
-         .ForMember(dest => dest.BreakTimeStart, opt => opt.MapFrom(src => DateTimeOffset.Now)).ReverseMap();
-
-      CreateMap<AttendanceForBtClockOutDto, Attendance>()
-         .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.EmployeeId))
-         .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AttendanceId))
-         .ForMember(dest => dest.BreakTimeEnd, opt => opt.MapFrom(src => DateTimeOffset.Now)).ReverseMap();
-      
-      //Add a mapping from AttendanceForBtClockOutDto to AttendanceDto
-      CreateMap<AttendanceForBtClockOutDto, AttendanceDto>()
-         .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.EmployeeId))
-         .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AttendanceId))
-         .ForMember(dest => dest.BreakTimeEnd, opt => opt.MapFrom(src => DateTimeOffset.Now)).ReverseMap();
-         */
-
-
-      //Todo: Add Comeback here, in case any mapping logic breaks
    }
 }

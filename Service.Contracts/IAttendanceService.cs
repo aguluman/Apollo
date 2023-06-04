@@ -7,7 +7,6 @@ namespace Service.Contracts;
 
 public interface IAttendanceService 
 {
-    //Todo : Add IAttendanceService, more to be done.
     Task<(LinkResponse linkResponse, MetaData metaData)> GetEmployeeAttendancesAsync(
         Guid employeeId, AttendanceLinkParameters attendanceLinkParameters, bool trackChanges);
     

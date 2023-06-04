@@ -9,7 +9,6 @@ namespace Repository;
 
 public class AttendanceRepository : RepositoryBase<Attendance>, IAttendanceRepository
 {
-    //Todo : Add AttendanceRepository
     public AttendanceRepository(RepositoryContext repositoryContext) : base(repositoryContext)
     {
     }

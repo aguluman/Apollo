@@ -6,7 +6,6 @@ namespace Repository.Extensions.Utility
 {
     public static class AttendanceOrderQueryBuilder
     {
-        //Todo : Add AttendanceOrderQueryBuilder
         public static string CreateAttendanceOrderQuery<T>(string orderAttendanceByQueryString)
         {
             var orderAttendanceParams = orderAttendanceByQueryString.Trim().Split(',');
