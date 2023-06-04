@@ -12,8 +12,8 @@ using Repository;
 namespace Apollo.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20230525073538_addedAttendanceAndDateTimeOffsetEVERYWHERE")]
-    partial class addedAttendanceAndDateTimeOffsetEVERYWHERE
+    [Migration("20230604182841_AttendanceDB")]
+    partial class AttendanceDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,25 +28,32 @@ namespace Apollo.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("newsequentialid()");
 
-                    b.Property<TimeSpan?>("ActiveWorkTime")
+                    b.Property<TimeSpan>("ActiveWorkTime")
                         .HasColumnType("time");
 
                     b.Property<TimeSpan>("BreakTime")
                         .HasColumnType("time");
 
+                    b.Property<DateTimeOffset>("BreakTimeEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("BreakTimeStart")
+                        .HasColumnType("datetimeoffset");
+
                     b.Property<DateTimeOffset>("ClockIn")
                         .HasColumnType("datetimeoffset");
 
-                    b.Property<DateTimeOffset?>("ClockOut")
+                    b.Property<DateTimeOffset>("ClockOut")
                         .HasColumnType("datetimeoffset")
-                        .HasColumnName("DefaultClockOut");
+                        .HasColumnName("ClockOut");
 
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<TimeSpan?>("TimeOffWork")
+                    b.Property<TimeSpan>("WorkHours")
                         .HasColumnType("time");
 
                     b.HasKey("Id");
@@ -59,22 +66,26 @@ namespace Apollo.Migrations
                         new
                         {
                             Id = new Guid("1c15d6a9-6e63-4a2e-9b28-af2c6f18b6a5"),
-                            ActiveWorkTime = new TimeSpan(0, 0, 45, 0, 0),
+                            ActiveWorkTime = new TimeSpan(0, 7, 15, 0, 0),
                             BreakTime = new TimeSpan(0, 0, 45, 0, 0),
-                            ClockIn = new DateTimeOffset(new DateTime(2023, 5, 25, 0, 35, 37, 976, DateTimeKind.Unspecified).AddTicks(637), new TimeSpan(0, 1, 0, 0, 0)),
-                            ClockOut = new DateTimeOffset(new DateTime(2023, 5, 25, 8, 8, 37, 976, DateTimeKind.Unspecified).AddTicks(646), new TimeSpan(0, 1, 0, 0, 0)),
+                            BreakTimeEnd = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            BreakTimeStart = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            ClockIn = new DateTimeOffset(new DateTime(2023, 6, 4, 6, 28, 40, 910, DateTimeKind.Unspecified).AddTicks(8963), new TimeSpan(0, 1, 0, 0, 0)),
+                            ClockOut = new DateTimeOffset(new DateTime(2023, 6, 5, 1, 28, 40, 910, DateTimeKind.Unspecified).AddTicks(9107), new TimeSpan(0, 1, 0, 0, 0)),
                             EmployeeId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
-                            TimeOffWork = new TimeSpan(271800000009)
+                            WorkHours = new TimeSpan(0, 8, 0, 0, 0)
                         },
                         new
                         {
                             Id = new Guid("3a55d1d3-97f8-497a-8bf7-878c5910e378"),
-                            ActiveWorkTime = new TimeSpan(0, 1, 0, 0, 0),
+                            ActiveWorkTime = new TimeSpan(262800006866),
                             BreakTime = new TimeSpan(0, 1, 0, 0, 0),
-                            ClockIn = new DateTimeOffset(new DateTime(2023, 5, 24, 23, 35, 37, 976, DateTimeKind.Unspecified).AddTicks(656), new TimeSpan(0, 1, 0, 0, 0)),
-                            ClockOut = new DateTimeOffset(new DateTime(2023, 5, 25, 7, 35, 37, 976, DateTimeKind.Unspecified).AddTicks(657), new TimeSpan(0, 1, 0, 0, 0)),
+                            BreakTimeEnd = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            BreakTimeStart = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            ClockIn = new DateTimeOffset(new DateTime(2023, 6, 4, 7, 10, 40, 909, DateTimeKind.Unspecified).AddTicks(9115), new TimeSpan(0, 1, 0, 0, 0)),
+                            ClockOut = new DateTimeOffset(new DateTime(2023, 6, 5, 1, 28, 40, 910, DateTimeKind.Unspecified).AddTicks(9117), new TimeSpan(0, 1, 0, 0, 0)),
                             EmployeeId = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"),
-                            TimeOffWork = new TimeSpan(288000000001)
+                            WorkHours = new TimeSpan(0, 8, 0, 0, 0)
                         });
                 });
 
@@ -218,9 +229,9 @@ namespace Apollo.Migrations
                         new
                         {
                             Id = new Guid("69d59c4d-4c77-4d77-b52e-51b69118dbcc"),
-                            CreatedAt = new DateTimeOffset(new DateTime(2023, 5, 25, 8, 35, 37, 975, DateTimeKind.Unspecified).AddTicks(9219), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2023, 6, 4, 19, 28, 40, 910, DateTimeKind.Unspecified).AddTicks(7364), new TimeSpan(0, 1, 0, 0, 0)),
                             Description = "Complete all the remaining tasks for project A",
-                            DueAt = new DateTimeOffset(new DateTime(2023, 6, 8, 8, 35, 37, 975, DateTimeKind.Unspecified).AddTicks(9243), new TimeSpan(0, 1, 0, 0, 0)),
+                            DueAt = new DateTimeOffset(new DateTime(2023, 6, 18, 19, 28, 40, 910, DateTimeKind.Unspecified).AddTicks(7385), new TimeSpan(0, 1, 0, 0, 0)),
                             EmployeeId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
                             Priority = "High",
                             State = "InProgress",
@@ -229,9 +240,9 @@ namespace Apollo.Migrations
                         new
                         {
                             Id = new Guid("e7e86390-dcf5-4d63-af31-f6187fc7646e"),
-                            CreatedAt = new DateTimeOffset(new DateTime(2023, 5, 25, 8, 35, 37, 975, DateTimeKind.Unspecified).AddTicks(9259), new TimeSpan(0, 1, 0, 0, 0)),
+                            CreatedAt = new DateTimeOffset(new DateTime(2023, 6, 4, 19, 28, 40, 910, DateTimeKind.Unspecified).AddTicks(7398), new TimeSpan(0, 1, 0, 0, 0)),
                             Description = "Design and develop a new company website",
-                            DueAt = new DateTimeOffset(new DateTime(2023, 6, 24, 8, 35, 37, 975, DateTimeKind.Unspecified).AddTicks(9262), new TimeSpan(0, 1, 0, 0, 0)),
+                            DueAt = new DateTimeOffset(new DateTime(2023, 7, 4, 19, 28, 40, 910, DateTimeKind.Unspecified).AddTicks(7400), new TimeSpan(0, 1, 0, 0, 0)),
                             EmployeeId = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"),
                             Priority = "Normal",
                             State = "NotStarted",
@@ -347,15 +358,15 @@ namespace Apollo.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f2869e93-60a9-4a6f-bfbf-020f1995f7a6",
-                            ConcurrencyStamp = "52323716-a8ed-4468-87cb-c9a6937ad2c3",
+                            Id = "fb58b952-0a15-4b17-822f-bfe3fdd6329f",
+                            ConcurrencyStamp = "c3c26967-4e1f-4d73-94e2-5562688d1d06",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "160c2984-f3c3-4e6d-bc73-db969b04577a",
-                            ConcurrencyStamp = "8ea171e2-84a7-4c3f-88ee-299b24f665d4",
+                            Id = "57d1902e-d195-4a8a-9bb2-f3a3d6b41efb",
+                            ConcurrencyStamp = "b01732a7-c411-4888-8b63-96138fb9528d",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });

@@ -13,7 +13,6 @@ namespace Apollo.Presentation.Controllers;
 [ApiController]
 public class AttendanceController : ControllerBase
 {
-    //Todo : Add AttendanceController
     private readonly IServiceManager _serviceManager;
 
     public AttendanceController(IServiceManager serviceManager) =>
@@ -141,45 +140,5 @@ public class AttendanceController : ControllerBase
         return NoContent();
     }
 
-    /*[HttpPost("{attendanceId:guid}/clock-out",  Name = "CreateClockOutForEmployee")]
-    [ServiceFilter(typeof(ValidationFilterAttribute))]
-    public async Task<IActionResult> CreateClockOutForEmployee(Guid employeeId, Guid attendanceId,
-        [FromBody] AttendanceForClockOutDto attendance)
-    {
-        var attendanceToReturn = await _serviceManager.AttendanceService
-            .CreateClockOutForAttendance(employeeId, attendance.AttendanceId = attendanceId, attendance);
-
-        return  CreatedAtRoute(
-            "CreateClockOutForEmployee",
-            new { employeeId, attendanceId = attendanceToReturn.Id },
-            attendanceToReturn);
-    }
-    
-    [HttpPost("{attendanceId:guid}/break-time-clock-in",  Name = "CreateBreakTimeClockInForEmployee")]
-    [ServiceFilter(typeof(ValidationFilterAttribute))]
-    public async Task<IActionResult> CreateBreakTimeClockInForEmployee(Guid employeeId, Guid attendanceId,
-        [FromBody] AttendanceForBtClockInDto attendance)
-    {
-        var attendanceToReturn = await _serviceManager.AttendanceService
-            .CreateBreakTimeClockIn(employeeId, attendance.AttendanceId = attendanceId, attendance);
-
-        return  CreatedAtRoute(
-            "CreateBreakTimeClockInForEmployee",
-            new { employeeId, attendanceId = attendanceToReturn.Id },
-            attendanceToReturn);
-    }
-    
-    [HttpPost("{attendanceId:guid}/break-time-clock-out",  Name = "CreateBreakTimeClockOutForEmployee")]
-    [ServiceFilter(typeof(ValidationFilterAttribute))]
-    public async Task<IActionResult> CreateBreakTimeClockOutForEmployee(Guid employeeId, Guid attendanceId,
-        [FromBody] AttendanceForBtClockOutDto attendance)
-    {
-        var attendanceToReturn = await _serviceManager.AttendanceService
-            .CreateBreakTimeClockOut(employeeId, attendance.AttendanceId = attendanceId, attendance);
-
-        return  CreatedAtRoute(
-            "CreateBreakTimeClockOutForEmployee",
-            new { employeeId, attendanceId = attendanceToReturn.Id },
-            attendanceToReturn);
-    }*/
+   
 }

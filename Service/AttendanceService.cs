@@ -11,7 +11,6 @@ namespace Service;
 
 internal sealed class AttendanceService : IAttendanceService
 {
-    //Todo : Add AttendanceService
     private readonly IRepositoryManager _repositoryManager;
     private readonly ILoggerManager _loggerManager;
     private readonly IMapper _mapper;
@@ -97,14 +96,13 @@ internal sealed class AttendanceService : IAttendanceService
         await _repositoryManager.SaveAsync();
     }
 
-    //Todo: It worked.
     public async Task SaveChangesForCalculationsAsync(Attendance attendanceEntity)
     {
         // Set the BreakTime value
         attendanceEntity.BreakTime = CalculateBreakTime(attendanceEntity);
         
         // Set the TimeOffWork value
-        attendanceEntity.TimeAtWork = CalculateTimeAtWork(attendanceEntity);
+        attendanceEntity.WorkHours = CalculateTimeAtWork(attendanceEntity);
         
         // Set the ActiveWorkTime value
         attendanceEntity.ActiveWorkTime = CalculateActiveWorkTime(attendanceEntity);
@@ -129,7 +127,6 @@ internal sealed class AttendanceService : IAttendanceService
         // Calculate and return the ActiveWorkTime value based on the attendance properties
         return attendance.ClockOut - attendance.ClockIn - CalculateBreakTime(attendance);
     }
-    //Todo: Check the top for more info
 
     private async Task<Attendance> GetAttendanceFromEmployeeAndCheckIfItExists(Guid employeeId, Guid attendanceId,
         bool trackChanges)

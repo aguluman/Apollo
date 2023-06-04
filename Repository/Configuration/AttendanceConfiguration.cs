@@ -22,21 +22,21 @@ public class AttendanceConfiguration : IEntityTypeConfiguration<Attendance>
             new Attendance
             {
                 Id = new Guid("1c15d6a9-6e63-4a2e-9b28-af2c6f18b6a5"),
-                ClockIn = DateTimeOffset.Now.AddHours(-11),
-                ClockOut = DateTimeOffset.Now.AddHours(-0.45f),
-                TimeAtWork = TimeSpan.FromHours(8.15f),
+                ClockIn = DateTimeOffset.Now.AddHours(-13),
+                ClockOut = DateTimeOffset.Now.AddHours(6.00f),
+                WorkHours = TimeSpan.FromHours(8.00f),
                 BreakTime = TimeSpan.FromMinutes(45),
-                ActiveWorkTime = TimeSpan.FromHours(11.45f),
+                ActiveWorkTime = TimeSpan.FromHours(7.25f),
                 EmployeeId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
             },
             new Attendance
             {
                 Id = new Guid("3a55d1d3-97f8-497a-8bf7-878c5910e378"),
-                ClockIn = DateTimeOffset.Now.AddHours(-11),
-                ClockOut = DateTimeOffset.Now.AddHours(-1),
-                TimeAtWork = TimeSpan.FromHours(8.0f),
+                ClockIn = DateTimeOffset.Now.AddHours(-12.30f),
+                ClockOut = DateTimeOffset.Now.AddHours(6.00f),
+                WorkHours = TimeSpan.FromHours(8.0f),
                 BreakTime = TimeSpan.FromMinutes(60),
-                ActiveWorkTime = TimeSpan.FromHours(10.0f),
+                ActiveWorkTime = TimeSpan.FromHours(7.30f),
                 EmployeeId = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"),
             }
         );
