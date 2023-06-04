@@ -17,3 +17,4 @@ C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo.Presentation\bin\Debug\n
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo.Presentation\bin\Debug\net6.0\Shared.pdb
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo.Presentation\bin\Debug\net6.0\Entities.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo.Presentation\bin\Debug\net6.0\Entities.pdb
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo.Presentation\bin\Debug\net6.0\Apollo.Presentation.xml

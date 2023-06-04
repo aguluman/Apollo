@@ -24,5 +24,6 @@ public class RepositoryManager : IRepositoryManager
     public ITasksRepository Tasks => _tasksRepository.Value;
     public IAttendanceRepository Attendance => _attendanceRepository.Value;
 
+
     public async Task SaveAsync() => await _repositoryContext.SaveChangesAsync();
 }

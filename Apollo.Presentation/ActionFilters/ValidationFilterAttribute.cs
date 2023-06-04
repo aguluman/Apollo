@@ -1,21 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
 namespace Apollo.Presentation.ActionFilters;
 
 public class ValidationFilterAttribute : IActionFilter
 {
-    public ValidationFilterAttribute()
-    {
-        
-    }
     public void OnActionExecuting(ActionExecutingContext context)
     {
         var action = context.RouteData.Values["action"];
         var controller = context.RouteData.Values["controller"];
 
         var param = context.ActionArguments.SingleOrDefault(
-            x => x.Value.ToString().Contains("Dto")).Value;
+            x =>
+            {
+                Debug.Assert(x.Value != null, "x.Value != null");
+                return x.Value.ToString()!.Contains("Dto");
+            }).Value;
 
         if (param is null)
         {
@@ -28,5 +29,7 @@ public class ValidationFilterAttribute : IActionFilter
     }
 
     public void OnActionExecuted(ActionExecutedContext context)
-    { }
+    {
+        // throw new NotImplementedException();
+    }
 }

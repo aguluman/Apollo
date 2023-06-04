@@ -1,68 +1,89 @@
 ﻿using Contracts;
 using Entities.LinkModels;
 using Entities.Models;
-using Microsoft.Net.Http.Headers;
 using Shared.DataTransferObjects;
+using Microsoft.Net.Http.Headers;
 
 namespace Apollo.Utility;
 
 public class AttendanceLinks : IAttendanceLinks
 {
+    
     private readonly LinkGenerator _linkGenerator;
     private readonly IDataShaper<AttendanceDto> _dataShaper;
+    
+    public Dictionary<string, MediaTypeHeaderValue> AcceptHeader { get; set; } =
+        new Dictionary<string, MediaTypeHeaderValue>();
 
     public AttendanceLinks(LinkGenerator linkGenerator, IDataShaper<AttendanceDto> dataShaper)
     {
         _linkGenerator = linkGenerator;
         _dataShaper = dataShaper;
     }
-
-    public LinkResponse TryGenerateLinks(IEnumerable<AttendanceDto> attendancesDto, 
-        string? fields, Guid? employeeId,
-        Guid? companyId, HttpContext httpContext)
+    public LinkResponse TryGenerateLinks(IEnumerable<AttendanceDto> attendancesDto,
+        string fields, Guid employeeId, HttpContext httpContext)
     {
-        var attendanceDtos = attendancesDto.ToList();
-
-        var shapedAttendances = ShapeData(attendanceDtos, fields!);
+        var attendanceDtos = attendancesDto as AttendanceDto[] ?? attendancesDto.ToArray();
+        var shapedTasks = ShapeData(attendanceDtos, fields);
+        
         return ShouldGenerateLinks(httpContext)
-            ? ReturnLinkedAttendances(httpContext, shapedAttendances)
-            : ReturnShapedAttendances(shapedAttendances);
+            ? ReturnLinkedTasks(attendanceDtos, fields, employeeId, httpContext, shapedTasks)
+            : ReturnShapedTasks(shapedTasks);
     }
-
+    
     private List<Entity> ShapeData(IEnumerable<AttendanceDto> attendancesDto, string fields) =>
-        _dataShaper.ShapeData(attendancesDto, fields).Select(e => e.Entity).ToList();
-
+        _dataShaper.ShapeData(attendancesDto, fields)
+            .Select(e => e.Entity)
+            .ToList();
+    
     private static bool ShouldGenerateLinks(HttpContext httpContext)
     {
-        var items = httpContext.Items;
-        if (!items.TryGetValue("AcceptHeaderMediaType", out var value)) return false;
-        var mediaType = value as MediaTypeHeaderValue;
-        return mediaType != null && mediaType.SubTypeWithoutSuffix.EndsWith("hateoas", StringComparison.InvariantCultureIgnoreCase);
+        var mediaType = (MediaTypeHeaderValue)httpContext.Items["AcceptHeaderMediaType"];
+
+        return mediaType.SubTypeWithoutSuffix.EndsWith("hateoas", StringComparison.InvariantCultureIgnoreCase);
+    }
+    
+    private static LinkResponse ReturnShapedTasks(List<Entity> shapedTasks) =>
+        new() { ShapedEntities = shapedTasks };
+
+    private LinkResponse ReturnLinkedTasks(IEnumerable<AttendanceDto> attendancesDto,
+        string fields, Guid employeeId, HttpContext httpContext, List<Entity> shapedTasks)
+    {
+        var attendanceDtoList = attendancesDto.ToList();
+        
+        for (var index = 0; index < attendanceDtoList.Count; index++)
+        {
+            var attendanceLinks = CreateLinksForAttendance(httpContext, employeeId, attendanceDtoList[index].Id, fields);
+            shapedTasks[index].Add("Links", attendanceLinks);
+        }
+        
+        var attendanceCollection = new LinkCollectionWrapper<Entity>(shapedTasks);
+        
+        var linkedAttendances = CreateLinksForAttendances(httpContext, attendanceCollection);
+        
+        return new LinkResponse { HasLinks = true, LinkedEntities = linkedAttendances };
     }
 
-    private static LinkResponse ReturnShapedAttendances(List<Entity> shapedAttendances) =>
-        new() { ShapedEntities = shapedAttendances };
-
-    private LinkResponse ReturnLinkedAttendances( HttpContext httpContext, List<Entity> shapedAttendances)
+    private List<Link> CreateLinksForAttendance(HttpContext httpContext, Guid employeeId, Guid attendanceId,
+        string fields = "")
     {
-        var attendanceCollection = new LinkCollectionWrapper<Entity>(shapedAttendances);
-        var linkedAttendances = CreateLinksForAttendances(httpContext, attendanceCollection);
-
-        return new LinkResponse { HasLinks = true, LinkedEntities = linkedAttendances };
+        var links = new List<Link>
+        {
+            new Link(_linkGenerator.GetUriByAction(httpContext, "GetAttendanceForEmployee",
+                    values: new { employeeId, attendanceId, fields }),
+                "self",
+                "GET")
+        };
+        //Todo: I need to add the PATCH requests in the CONTROLLER CLASS.
+        return links;
     }
     
     private LinkCollectionWrapper<Entity> CreateLinksForAttendances(HttpContext httpContext,
         LinkCollectionWrapper<Entity> attendanceWrapper)
     {
         attendanceWrapper.Links.Add(new Link(_linkGenerator.GetUriByAction(httpContext,
-                "GetEmployeesAttendanceByCompanyId",
-                "Attendance", values: new { })!,
-            "self",
-            "GET"));
-        
-        attendanceWrapper.Links.Add(new Link(_linkGenerator.GetUriByAction(httpContext,
-                "GetEmployeeAttendances",
-                "Attendance", values: new { })!,
+                "GetAttendancesForEmployee",
+                values: new {  }),
             "self",
             "GET"));
 

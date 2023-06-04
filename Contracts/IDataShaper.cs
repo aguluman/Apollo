@@ -1,10 +1,11 @@
-﻿using Entities.Models;
+﻿using System.Dynamic;
+using Entities.Models;
 
 namespace Contracts;
 
-public interface IDataShaper<in T>
+public interface IDataShaper<T>
 {
-    IEnumerable<ShapedEntity> ShapeData(IEnumerable<T> entities, string fieldsString);
+    IEnumerable<ShapedEntity> ShapeData(IEnumerable<T> shapedEntities, string fieldsString);
 
-    ShapedEntity ShapeData(T entity, string fieldsString);
+    ShapedEntity ShapeData(T shapedEntity, string fieldsString);
 }

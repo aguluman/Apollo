@@ -11,34 +11,34 @@ public class AuthenticationController : ControllerBase
 {
     private readonly IServiceManager _service;
 
-    public AuthenticationController(IServiceManager service)
-    {
+    public AuthenticationController(IServiceManager service) =>
         _service = service;
-    }
 
-    [HttpPost]
+    [HttpPost("Register")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
     public async Task<IActionResult> RegisterUser([FromBody] UserForRegistrationDto userForRegistration)
     {
         var result = await _service.AuthenticationService.RegisterUser(userForRegistration);
+
         if (result.Succeeded) return StatusCode(201);
         foreach (var error in result.Errors)
         {
             ModelState.TryAddModelError(error.Code, error.Description);
         }
-            
+
         return BadRequest(ModelState);
 
     }
 
-    [HttpPost("login")]
+    [HttpPost("Login")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
-    public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto user)
+    public async Task<IActionResult> Authenticate([FromBody] UserForAuthenticationDto userForAuthentication)
     {
-        if (!await _service.AuthenticationService.ValidateUser(user))
+        if (!await _service.AuthenticationService.ValidateUser(userForAuthentication))
             return Unauthorized();
 
-        var tokenDto = await _service.AuthenticationService.CreateToken(true);
+        var tokenDto = await _service.AuthenticationService.CreateToken(populateExpiration: true);
+
         return Ok(tokenDto);
     }
 }

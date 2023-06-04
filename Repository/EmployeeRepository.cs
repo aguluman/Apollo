@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Entities.Exceptions;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Repository.Extensions;
@@ -10,6 +11,7 @@ public class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepository
 {
     public EmployeeRepository(RepositoryContext repositoryContext) : base(repositoryContext)
     {
+        
     }
 
     public async Task<PagedList<Employee>> GetEmployeesAsync(
@@ -18,15 +20,17 @@ public class EmployeeRepository : RepositoryBase<Employee>, IEmployeeRepository
         var employees = await FindByCondition(
                 e => e.CompanyId.Equals(companyId), trackChanges)
             .FilterEmployees(employeeParameters.MinAge, employeeParameters.MaxAge)
-            .Search(employeeParameters.SearchTerm ?? throw new InvalidOperationException())
-            .Sort(employeeParameters.OrderBy ?? throw new InvalidOperationException())
+            .Search(employeeParameters.SearchTerm)
+            .Sort(employeeParameters.OrderBy ?? throw new SortOrderByExceptionHandler())
             .Skip((employeeParameters.PageNumber - 1) * employeeParameters.PageSize)
             .Take(employeeParameters.PageSize)
             .ToListAsync();
 
+        var count = await FindByCondition(
+            e => e.CompanyId.Equals(companyId), trackChanges).CountAsync();
         
-        return PagedList<Employee>
-            .ToPagedList(employees, employeeParameters.PageNumber, employeeParameters.PageSize);
+        return new PagedList<Employee>
+            (employees, count, employeeParameters.PageNumber, employeeParameters.PageSize);
     }
 
     public async Task<Employee> GetEmployeeAsync(Guid companyId, Guid id, bool trackChanges) =>

@@ -26,49 +26,64 @@ namespace Apollo.Migrations
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("newsequentialid()");
 
-                    b.Property<DateTime>("ClockIn")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan>("ActiveWorkTime")
+                        .HasColumnType("time");
 
-                    b.Property<DateTime?>("ClockOut")
-                        .HasColumnType("datetime2");
+                    b.Property<TimeSpan>("BreakTime")
+                        .HasColumnType("time");
 
-                    b.Property<Guid>("CompanyId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<DateTimeOffset>("BreakTimeEnd")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("BreakTimeStart")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("ClockIn")
+                        .HasColumnType("datetimeoffset");
+
+                    b.Property<DateTimeOffset>("ClockOut")
+                        .HasColumnType("datetimeoffset")
+                        .HasColumnName("ClockOut");
 
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<TimeSpan?>("TimeOffWork")
+                    b.Property<TimeSpan>("WorkHours")
                         .HasColumnType("time");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
-
                     b.HasIndex("EmployeeId");
 
-                    b.ToTable("Attendances");
+                    b.ToTable("Attendance");
 
                     b.HasData(
                         new
                         {
                             Id = new Guid("1c15d6a9-6e63-4a2e-9b28-af2c6f18b6a5"),
-                            ClockIn = new DateTime(2023, 5, 1, 8, 38, 38, 857, DateTimeKind.Local).AddTicks(8348),
-                            ClockOut = new DateTime(2023, 5, 1, 16, 11, 38, 857, DateTimeKind.Local).AddTicks(8353),
-                            CompanyId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
+                            ActiveWorkTime = new TimeSpan(0, 7, 15, 0, 0),
+                            BreakTime = new TimeSpan(0, 0, 45, 0, 0),
+                            BreakTimeEnd = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            BreakTimeStart = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            ClockIn = new DateTimeOffset(new DateTime(2023, 6, 4, 6, 28, 40, 910, DateTimeKind.Unspecified).AddTicks(8963), new TimeSpan(0, 1, 0, 0, 0)),
+                            ClockOut = new DateTimeOffset(new DateTime(2023, 6, 5, 1, 28, 40, 910, DateTimeKind.Unspecified).AddTicks(9107), new TimeSpan(0, 1, 0, 0, 0)),
                             EmployeeId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
-                            TimeOffWork = new TimeSpan(0, 1, 0, 0, 0)
+                            WorkHours = new TimeSpan(0, 8, 0, 0, 0)
                         },
                         new
                         {
                             Id = new Guid("3a55d1d3-97f8-497a-8bf7-878c5910e378"),
-                            ClockIn = new DateTime(2023, 5, 1, 7, 38, 38, 857, DateTimeKind.Local).AddTicks(8363),
-                            ClockOut = new DateTime(2023, 5, 1, 15, 38, 38, 857, DateTimeKind.Local).AddTicks(8363),
-                            CompanyId = new Guid("aee67334-35ee-428a-b826-08db2ca52a22"),
+                            ActiveWorkTime = new TimeSpan(262800006866),
+                            BreakTime = new TimeSpan(0, 1, 0, 0, 0),
+                            BreakTimeEnd = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            BreakTimeStart = new DateTimeOffset(new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new TimeSpan(0, 0, 0, 0, 0)),
+                            ClockIn = new DateTimeOffset(new DateTime(2023, 6, 4, 7, 10, 40, 909, DateTimeKind.Unspecified).AddTicks(9115), new TimeSpan(0, 1, 0, 0, 0)),
+                            ClockOut = new DateTimeOffset(new DateTime(2023, 6, 5, 1, 28, 40, 910, DateTimeKind.Unspecified).AddTicks(9117), new TimeSpan(0, 1, 0, 0, 0)),
                             EmployeeId = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"),
-                            TimeOffWork = new TimeSpan(43200001716)
+                            WorkHours = new TimeSpan(0, 8, 0, 0, 0)
                         });
                 });
 
@@ -123,9 +138,6 @@ namespace Apollo.Migrations
                     b.Property<int>("Age")
                         .HasColumnType("int");
 
-                    b.Property<TimeSpan>("BreakTime")
-                        .HasColumnType("time");
-
                     b.Property<Guid>("CompanyId")
                         .HasColumnType("uniqueidentifier");
 
@@ -150,7 +162,6 @@ namespace Apollo.Migrations
                         {
                             Id = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
                             Age = 26,
-                            BreakTime = new TimeSpan(0, 0, 45, 0, 0),
                             CompanyId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
                             Name = "Sam Raiden",
                             Position = "Software developer"
@@ -159,7 +170,6 @@ namespace Apollo.Migrations
                         {
                             Id = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"),
                             Age = 30,
-                            BreakTime = new TimeSpan(0, 0, 40, 0, 0),
                             CompanyId = new Guid("c9d4c053-49b6-410c-bc78-2d54a9991870"),
                             Name = "Jana McLeaf",
                             Position = "Sales Employee"
@@ -168,7 +178,6 @@ namespace Apollo.Migrations
                         {
                             Id = new Guid("021ca3c1-0deb-4afd-ae94-2159a8479811"),
                             Age = 35,
-                            BreakTime = new TimeSpan(0, 1, 0, 0, 0),
                             CompanyId = new Guid("3d490a70-94ce-4d15-9494-5248280c2ce3"),
                             Name = "Kane Miller",
                             Position = "Administrator"
@@ -182,15 +191,15 @@ namespace Apollo.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasColumnName("TaskId");
 
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("CreatedAt")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("DueAt")
-                        .HasColumnType("datetime2");
+                    b.Property<DateTimeOffset>("DueAt")
+                        .HasColumnType("datetimeoffset");
 
                     b.Property<Guid>("EmployeeId")
                         .HasColumnType("uniqueidentifier");
@@ -218,9 +227,9 @@ namespace Apollo.Migrations
                         new
                         {
                             Id = new Guid("69d59c4d-4c77-4d77-b52e-51b69118dbcc"),
-                            CreatedAt = new DateTime(2023, 5, 1, 16, 38, 38, 857, DateTimeKind.Local).AddTicks(5978),
+                            CreatedAt = new DateTimeOffset(new DateTime(2023, 6, 4, 19, 28, 40, 910, DateTimeKind.Unspecified).AddTicks(7364), new TimeSpan(0, 1, 0, 0, 0)),
                             Description = "Complete all the remaining tasks for project A",
-                            DueAt = new DateTime(2023, 5, 15, 16, 38, 38, 857, DateTimeKind.Local).AddTicks(5997),
+                            DueAt = new DateTimeOffset(new DateTime(2023, 6, 18, 19, 28, 40, 910, DateTimeKind.Unspecified).AddTicks(7385), new TimeSpan(0, 1, 0, 0, 0)),
                             EmployeeId = new Guid("80abbca8-664d-4b20-b5de-024705497d4a"),
                             Priority = "High",
                             State = "InProgress",
@@ -229,9 +238,9 @@ namespace Apollo.Migrations
                         new
                         {
                             Id = new Guid("e7e86390-dcf5-4d63-af31-f6187fc7646e"),
-                            CreatedAt = new DateTime(2023, 5, 1, 16, 38, 38, 857, DateTimeKind.Local).AddTicks(6004),
+                            CreatedAt = new DateTimeOffset(new DateTime(2023, 6, 4, 19, 28, 40, 910, DateTimeKind.Unspecified).AddTicks(7398), new TimeSpan(0, 1, 0, 0, 0)),
                             Description = "Design and develop a new company website",
-                            DueAt = new DateTime(2023, 5, 31, 16, 38, 38, 857, DateTimeKind.Local).AddTicks(6006),
+                            DueAt = new DateTimeOffset(new DateTime(2023, 7, 4, 19, 28, 40, 910, DateTimeKind.Unspecified).AddTicks(7400), new TimeSpan(0, 1, 0, 0, 0)),
                             EmployeeId = new Guid("86dba8c0-d178-41e7-938c-ed49778fb52a"),
                             Priority = "Normal",
                             State = "NotStarted",
@@ -347,15 +356,15 @@ namespace Apollo.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "f21689f6-0782-4c25-ac3b-87899cb643c7",
-                            ConcurrencyStamp = "33a91164-9b91-4556-9c68-f63988b249f2",
+                            Id = "fb58b952-0a15-4b17-822f-bfe3fdd6329f",
+                            ConcurrencyStamp = "c3c26967-4e1f-4d73-94e2-5562688d1d06",
                             Name = "Manager",
                             NormalizedName = "MANAGER"
                         },
                         new
                         {
-                            Id = "31adf9e7-f243-4d2d-b851-898ffd00f644",
-                            ConcurrencyStamp = "62c3b09c-ffa2-4546-ad0d-69b1e75fddb1",
+                            Id = "57d1902e-d195-4a8a-9bb2-f3a3d6b41efb",
+                            ConcurrencyStamp = "b01732a7-c411-4888-8b63-96138fb9528d",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         });
@@ -469,19 +478,11 @@ namespace Apollo.Migrations
 
             modelBuilder.Entity("Entities.Models.Attendance", b =>
                 {
-                    b.HasOne("Entities.Models.Company", "Company")
-                        .WithMany("Attendance")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Entities.Models.Employee", "Employee")
                         .WithMany("Attendance")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
-
-                    b.Navigation("Company");
 
                     b.Navigation("Employee");
                 });
@@ -561,8 +562,6 @@ namespace Apollo.Migrations
 
             modelBuilder.Entity("Entities.Models.Company", b =>
                 {
-                    b.Navigation("Attendance");
-
                     b.Navigation("Employees");
                 });
 

@@ -2,8 +2,8 @@
 
 public class AttendanceNotFoundException : NotFoundException
 {
-    public AttendanceNotFoundException(Guid attendanceId) : 
-        base($"Attendance with id: {attendanceId} does not exist in the database.")
+    public AttendanceNotFoundException(Guid attendanceId) 
+        : base($"Attendance with {attendanceId} does not exist in the database.")
     {
     }
 }

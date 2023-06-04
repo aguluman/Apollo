@@ -1,14 +1,14 @@
 ﻿using Entities.Models;
-using Repository.Extensions.Utilities;
+using Repository.Extensions.Utility;
 
 namespace Repository.Extensions;
 
 public static class RepositoryTasksExtensions
 {
-    public static IQueryable<Tasks> FilterByDate(this IQueryable<Tasks> tasks, DateTime minTime, DateTime maxAge) =>
+    public static IQueryable<Tasks> FilterByDate(this IQueryable<Tasks> tasks, DateTimeOffset minTime, DateTimeOffset maxAge) =>
         tasks.Where(t => t.CreatedAt >= minTime && t.CreatedAt <= maxAge);
 
-    public static IQueryable<Tasks> Search(this IQueryable<Tasks> tasks, string? searchTerm)
+    public static IQueryable<Tasks> Search(this IQueryable<Tasks> tasks, string searchTerm)
     {
         if (string.IsNullOrWhiteSpace(searchTerm))
             return tasks;
@@ -18,7 +18,7 @@ public static class RepositoryTasksExtensions
         return tasks.Where(t => t.Title.ToLower().Contains(lowerCaseTerm));
     }
 
-    public static IQueryable<Tasks> Sort(this IQueryable<Tasks> tasks, string? orderByTaskQueryString)
+    public static IQueryable<Tasks> Sort(this IQueryable<Tasks> tasks, string orderByTaskQueryString)
     {
         if (string.IsNullOrWhiteSpace(orderByTaskQueryString))
             return tasks.OrderBy(t => t.Title);

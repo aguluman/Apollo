@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System.Dynamic;
+using System.Reflection;
 using Contracts;
 using Entities.Models;
 
@@ -13,31 +14,38 @@ public class DataShaper<T> : IDataShaper<T> where T : class
         Properties = typeof(T).GetProperties(BindingFlags.Public | BindingFlags.Instance);
     }
 
-    public IEnumerable<ShapedEntity> ShapeData(IEnumerable<T> entities, string fieldsString)
+    public IEnumerable<ShapedEntity> ShapeData(IEnumerable<T> shapedEntities, string fieldsString)
     {
         var requiredProperties = GetRequiredProperties(fieldsString);
-        return FetchData(entities, requiredProperties);
+        return FetchData(shapedEntities, requiredProperties);
     }
 
-    public ShapedEntity ShapeData(T entity, string fieldsString)
+    public ShapedEntity ShapeData(T shapedEntity, string fieldsString)
     {
         var requiredProperties = GetRequiredProperties(fieldsString);
-        return FetchDataForEntity(entity, requiredProperties);
+
+        return FetchDataForEntity(shapedEntity, requiredProperties);
     }
 
+    
     private IEnumerable<PropertyInfo> GetRequiredProperties(string fieldsString)
     {
         var requiredProperties = new List<PropertyInfo>();
+
         if (!string.IsNullOrWhiteSpace(fieldsString))
         {
             var fields = fieldsString.Split(',', StringSplitOptions.RemoveEmptyEntries);
 
-            requiredProperties.AddRange(
-                fields.Select(field => Properties
-                        .FirstOrDefault(pi => pi.Name.Equals(
-                        field.Trim(), StringComparison.InvariantCultureIgnoreCase))!)
-                    .Where(property => true));
-           
+            foreach (var field in fields)
+            {
+                var property = Properties.FirstOrDefault(pi => pi.Name.Equals(field.Trim(),
+                    StringComparison.InvariantCultureIgnoreCase));
+                
+                if(property is null)
+                    continue;
+                
+                requiredProperties.Add(property);
+            }
         }
         else
         {
@@ -47,21 +55,26 @@ public class DataShaper<T> : IDataShaper<T> where T : class
         return requiredProperties;
     }
 
-    private IEnumerable<ShapedEntity> FetchData(IEnumerable<T> entities, IEnumerable<PropertyInfo> requiredProperties)
+
+    private static IEnumerable<ShapedEntity> FetchData(IEnumerable<T> shapedEntities, IEnumerable<PropertyInfo> requiredProperties)
     {
-        return entities.Select(entity => FetchDataForEntity(entity, requiredProperties)).ToList();
+        return shapedEntities.Select(shapedEntity => FetchDataForEntity(shapedEntity, requiredProperties)).ToList();
     }
 
-    private static ShapedEntity FetchDataForEntity(T entity, IEnumerable<PropertyInfo> requiredProperties)
+    
+    private static ShapedEntity FetchDataForEntity(T shapedEntity, IEnumerable<PropertyInfo> requiredProperties)
     {
         var shapedObject = new ShapedEntity();
 
         foreach (var property in requiredProperties)
         {
-            var objectPropertyValue = property.GetValue(entity);
+            var objectPropertyValue = property.GetValue(shapedEntity);
             shapedObject.Entity.TryAdd(property.Name, objectPropertyValue);
         }
 
+        var objectProperty = shapedEntity.GetType().GetProperty("Id");
+        shapedObject.Id = (Guid)objectProperty.GetValue(shapedEntity);
+        
         return shapedObject;
     }
 }

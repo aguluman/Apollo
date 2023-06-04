@@ -1,4 +1,5 @@
 ﻿using Contracts;
+using Entities.Exceptions;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Repository.Extensions;
@@ -18,7 +19,7 @@ public class TasksRepository : RepositoryBase<Tasks>, ITasksRepository
         var tasks = await FindByCondition(t => t.EmployeeId.Equals(employeeId), trackChanges)
             .FilterByDate(tasksParameters.MinTime, tasksParameters.MaxTime)
             .Search(tasksParameters.SearchTerm)
-            .Sort(tasksParameters.OrderBy)
+            .Sort(tasksParameters.OrderBy ?? throw new SortOrderByExceptionHandler())
             .Skip((tasksParameters.PageNumber - 1) * tasksParameters.PageSize)
             .Take(tasksParameters.PageSize)
             .ToListAsync();

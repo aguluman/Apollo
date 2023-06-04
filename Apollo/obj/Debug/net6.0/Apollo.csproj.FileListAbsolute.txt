@@ -88,6 +88,7 @@ C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\AutoMap
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Microsoft.AspNetCore.JsonPatch.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Newtonsoft.Json.Bson.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Apollo.Presentation.xml
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\System.Linq.Dynamic.Core.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Microsoft.AspNetCore.Mvc.Versioning.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Marvin.Cache.Headers.dll
@@ -100,5 +101,7 @@ C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\apollo\bin\Debug\net6.0\Microso
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\apollo\bin\Debug\net6.0\Microsoft.Extensions.Identity.Stores.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
-C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Apollo.Presentation.xml
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Abstractions.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Microsoft.Extensions.Configuration.Binder.dll
+C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Microsoft.Extensions.Primitives.dll
 C:\Users\Chikosolu Akunyili\RiderProjects\Apollo\Apollo\bin\Debug\net6.0\Swashbuckle.AspNetCore.Annotations.dll

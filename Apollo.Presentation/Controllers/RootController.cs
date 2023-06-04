@@ -15,31 +15,32 @@ public class RootController : ControllerBase
     [HttpGet(Name = "GetRoot")]
     public IActionResult GetRoot([FromHeader(Name = "Accept")] string mediaType)
     {
-        if (!mediaType.Contains("application/vnd.codemaze.apiroot")) return NoContent();
-        var list = new List<Link>
+        if (mediaType.Contains("application/vnd.apollo.apiroot"))
         {
-            new Link
+            var list = new List<Link>
             {
-                Href = _linkGenerator.GetUriByName(HttpContext, nameof(GetRoot), new { }),
-                Rel = "self",
-                Method = "GET"
-            },
+                new()
+                {
+                    Href = _linkGenerator.GetUriByName(HttpContext, nameof(GetRoot), new { }),
+                    Rel = "self",
+                    Method = "GET"
+                },
+                new()
+                {
+                    Href = _linkGenerator.GetUriByName(HttpContext, "GetCompanies", new { }),
+                    Rel = "companies",
+                    Method = "GET"
+                },
+                new()
+                {
+                    Href = _linkGenerator.GetUriByName(HttpContext, "CreateCompany", new { }),
+                    Rel = "create_company",
+                    Method = "POST"
+                }
+            };
+            return Ok(list);
+        }
 
-            new Link
-            {
-                Href = _linkGenerator.GetUriByName(HttpContext, "GetCompanies", new { }),
-                Rel = "companies",
-                Method = "GET"
-            },
-
-            new Link
-            {
-                Href = _linkGenerator.GetUriByName(HttpContext, "CreateCompany", new { }),
-                Rel = "create_company",
-                Method = "POST"
-            }
-        };
-        return Ok(list);
+        return NoContent();
     }
 }
-

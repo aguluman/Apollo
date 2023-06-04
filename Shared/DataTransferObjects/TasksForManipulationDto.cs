@@ -11,10 +11,10 @@ public record TasksForManipulationDto
     [Required(ErrorMessage = "Description is required")]
     public string Description { get; init; } = "";
     
-    public DateTime CreatedAt { get; init; } = DateTime.Now;
+    public DateTimeOffset CreatedAt { get; init; } = DateTimeOffset.Now;
     
     [Required(ErrorMessage = "Expected Date of Completion is required")]
-    public DateTime DueAt { get; init; }
+    public DateTimeOffset DueAt { get; init; }
     
     [Required(ErrorMessage = "If no State is selected, default selection is NotStarted")]
     public string State { get; set; }

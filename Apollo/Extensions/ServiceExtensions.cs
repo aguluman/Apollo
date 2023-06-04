@@ -47,7 +47,8 @@ public static class ServiceExtensions
 
     public static void ConfigureSqlClient(this IServiceCollection services, IConfiguration configuration) =>
         services.AddDbContext<RepositoryContext>(opts =>
-            opts.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+            opts.UseSqlServer(configuration.GetConnectionString("DefaultConnection"),
+                b => b.MigrationsAssembly("Apollo")));
 
     public static IMvcBuilder AddCustomCsvFormatter(this IMvcBuilder builder) =>
         builder.AddMvcOptions(config => config.OutputFormatters.Add(new CsvOutputFormatter()));
@@ -57,57 +58,59 @@ public static class ServiceExtensions
         services.Configure<MvcOptions>(config =>
         {
             var systemTextJsonOutputFormatter = config.OutputFormatters
-                .OfType<SystemTextJsonOutputFormatter>().FirstOrDefault();
+                .OfType<SystemTextJsonOutputFormatter>()?.FirstOrDefault();
 
             systemTextJsonOutputFormatter?.SupportedMediaTypes
-                .Add("application/vnd.codemaze.hateoas+json");
+                .Add("application/vnd.apollo.hateoas+json");
+
             systemTextJsonOutputFormatter?.SupportedMediaTypes
-                .Add("application/vnd.codemaze.apiroot+json");
+                .Add("application/vnd.apollo.apiroot+json");
 
             var xmlOutputFormatter = config.OutputFormatters
-                .OfType<XmlDataContractSerializerOutputFormatter>().FirstOrDefault();
+                .OfType<XmlDataContractSerializerOutputFormatter>()?
+                .FirstOrDefault();
 
             xmlOutputFormatter?.SupportedMediaTypes
-                .Add("application/vnd.codemaze.hateoas+xml");
+                .Add("application/vnd.apollo.hateoas+xml");
+
             xmlOutputFormatter?.SupportedMediaTypes
-                .Add("application/vnd.codemaze.apiroot+xml");
+                .Add("application/vnd.apollo.apiroot+xml");
         });
     }
 
-    public static void ConfigureVersioning(this IServiceCollection services)
-    {
-        services.AddApiVersioning(options =>
+    public static void ConfigureVersioning(this IServiceCollection services) =>
+        services.AddApiVersioning(opt =>
         {
-            options.ReportApiVersions = true;
-            options.AssumeDefaultVersionWhenUnspecified = true;
-            options.DefaultApiVersion = new ApiVersion(1, 0);
-            //options.ApiVersionReader = new HeaderApiVersionReader("api-version");
-            options.ApiVersionReader = new QueryStringApiVersionReader("api-version");
-
-            options.Conventions.Controller<CompaniesController>()
+            opt.ReportApiVersions = true;
+            opt.AssumeDefaultVersionWhenUnspecified = true;
+            opt.DefaultApiVersion = new ApiVersion(1, 0);
+            opt.ApiVersionReader = new HeaderApiVersionReader("api-version");
+            opt.Conventions.Controller<CompaniesController>()
                 .HasApiVersion(new ApiVersion(1, 0));
-            options.Conventions.Controller<CompaniesV2Controller>()
-                .HasDeprecatedApiVersion(new ApiVersion(2, 0));
+            opt.Conventions.Controller<CompaniesV2Controller>().HasDeprecatedApiVersion(new ApiVersion(2, 0));
         });
-    }
 
-    public static void ConfigureResponseCaching(this IServiceCollection services) =>
-        services.AddResponseCaching();
+    public static void ConfigureResponseCaching(this IServiceCollection services)
+        => services.AddResponseCaching();
 
-    public static void ConfigureHttpCacheHeaders(this IServiceCollection services) =>
-        services.AddHttpCacheHeaders(
-            (expirationOptions) =>
+    public static void ConfigureHttpCacheHeaders(this IServiceCollection services)
+        => services.AddHttpCacheHeaders(
+            (expirationOpt) =>
             {
-                expirationOptions.MaxAge = 500;
-                expirationOptions.CacheLocation = CacheLocation.Private;
+                expirationOpt.MaxAge = 650;
+                expirationOpt.CacheLocation = CacheLocation.Private;
             },
-            (validationOptions) => { validationOptions.MustRevalidate = true; });
+            (validationOpt)
+                =>
+            {
+                validationOpt.MustRevalidate = true;
+            });
 
     public static void ConfigureRateLimitingOptions(this IServiceCollection services)
     {
         var rateLimitRules = new List<RateLimitRule>
         {
-            new RateLimitRule
+            new()
             {
                 Endpoint = "*",
                 Limit = 30,
@@ -137,16 +140,17 @@ public static class ServiceExtensions
             .AddDefaultTokenProviders();
     }
 
-    public static void ConfigureJWT(this IServiceCollection services, IConfiguration configuration)
+    public static void ConfigureJwt(this IServiceCollection services, IConfiguration configuration)
     {
         var jwtConfiguration = new JwtConfiguration();
         configuration.Bind(jwtConfiguration.Section, jwtConfiguration);
+
         var secretKey = Environment.GetEnvironmentVariable("SECRETKEY");
 
-        services.AddAuthentication(options =>
+        services.AddAuthentication(opt =>
             {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                opt.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(options =>
             {
@@ -164,8 +168,8 @@ public static class ServiceExtensions
             });
     }
 
-    public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration) =>
-        services.Configure<JwtConfiguration>(configuration.GetSection("JwtSettings"));
+    public static void AddJwtConfiguration(this IServiceCollection services, IConfiguration configuration)
+        => services.Configure<JwtConfiguration>(configuration.GetSection("JwtSetting"));
 
     public static void ConfigureSwagger(this IServiceCollection services)
     {
@@ -173,28 +177,27 @@ public static class ServiceExtensions
         {
             s.SwaggerDoc("v1", new OpenApiInfo
             {
-                Title = "Apollo API", 
+                Title = "Time-Tracking Management API",
                 Version = "v1",
-                Description = "CompanyEmployees API by Apollo",
+                Description = "Time-Tracking Management API by Chukwuma, Goodness and Kendrick",
                 TermsOfService = new Uri("https://example.com/terms"),
                 Contact = new OpenApiContact
                 {
-                    Name = "John Doe",
-                    Email = "John.Doe@gmail.com",
-                    Url = new Uri("https://twitter.com/johndoe")
+                    Name = "Chukwuma, Goodness and Kendrick",
+                    Email = "c.akunyili@geneystechhub.com",
+                    Url = new Uri("https://twitter.com/chukwuma_xx"),
                 },
                 License = new OpenApiLicense
                 {
-                    Name = "CompanyEmployee API LICX",
-                    Url = new Uri("https://example.com/license"),
+                    Name = "Apollo License",
                 }
-                
             });
-            s.SwaggerDoc("v2", new OpenApiInfo { Title = "Apollo API", Version = "v2" });
+            s.SwaggerDoc("v2", new OpenApiInfo { Title = "Time-Tracking Management API", Version = "v2" });
 
             var xmlFile = $"{typeof(Presentation.AssemblyReference).Assembly.GetName().Name}.xml";
-            var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
-            s.IncludeXmlComments(xmlPath);
+            var xmlpath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+            
+            s.IncludeXmlComments(xmlpath);
             
             s.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
@@ -213,7 +216,7 @@ public static class ServiceExtensions
                         Reference = new OpenApiReference
                         {
                             Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer",
+                            Id = "Bearer"
                         },
                         Name = "Bearer",
                     },

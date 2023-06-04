@@ -46,7 +46,7 @@
           "dependencies": {
             "Marvin.Cache.Headers": {
               "target": "Package",
-              "version": "[7.0.0-beta, )"
+              "version": "[6.1.0, )"
             },
             "Microsoft.AspNetCore.JsonPatch": {
               "target": "Package",
@@ -157,10 +157,6 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.15, )"
-            },
-            "Microsoft.Extensions.Configuration.Binder": {
-              "target": "Package",
-              "version": "[6.0.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -292,13 +288,13 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.AspNetCore.Http": {
-              "target": "Package",
-              "version": "[2.2.2, )"
-            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[6.0.15, )"
+            },
+            "Microsoft.AspNetCore.Mvc.Abstractions": {
+              "target": "Package",
+              "version": "[2.2.0, )"
             }
           },
           "imports": [
@@ -455,7 +451,7 @@
             },
             "System.Linq.Dynamic.Core": {
               "target": "Package",
-              "version": "[1.3.1, )"
+              "version": "[1.3.2, )"
             }
           },
           "imports": [
@@ -564,9 +560,6 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo.Presentation\\Apollo.Presentation.csproj": {
-                "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Apollo.Presentation\\Apollo.Presentation.csproj"
-              },
               "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Contracts\\Contracts.csproj": {
                 "projectPath": "C:\\Users\\Chikosolu Akunyili\\RiderProjects\\Apollo\\Contracts\\Contracts.csproj"
               },
@@ -590,9 +583,13 @@
               "target": "Package",
               "version": "[12.0.0, )"
             },
+            "Microsoft.Extensions.Configuration.Binder": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
             "System.IdentityModel.Tokens.Jwt": {
               "target": "Package",
-              "version": "[6.27.0, )"
+              "version": "[6.30.1, )"
             }
           },
           "imports": [

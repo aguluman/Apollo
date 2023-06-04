@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using AutoMapper;
+﻿using AutoMapper;
 using Contracts;
 using Entities.Exceptions;
 using Entities.LinkModels;
@@ -10,49 +9,50 @@ using Shared.RequestFeatures;
 
 namespace Service;
 
-internal sealed class TasksService : ITaskService
+internal sealed class TasksService : ITasksService
 {
     private readonly IRepositoryManager _repositoryManager;
     private readonly ILoggerManager _loggerManager;
     private readonly IMapper _mapper;
-    private readonly ITaskLinks _taskLinks;
-
-    public TasksService(IRepositoryManager repository, ILoggerManager logger, IMapper mapper, ITaskLinks taskLinks)
-    {
-        _repositoryManager = repository;
-        _loggerManager = logger;
-        _mapper = mapper;
-        _taskLinks = taskLinks;
-    }
+    private readonly ITasksLinks _tasksLinks;
     
-    public async Task<(LinkResponse linkResponse, MetaData metaData)> GetEmployeesTasksAsync
-        (Guid employeeId, LinkParameters linkParameters, bool trackChanges)
+    public TasksService(IRepositoryManager repositoryManager, ILoggerManager loggerManager, IMapper mapper, ITasksLinks tasksLinks)
     {
-        Debug.Assert(linkParameters.TasksParameters != null, "linkParameters.TasksParameters != null");
-        if (!linkParameters.TasksParameters.ValidTimeRange)
+        _repositoryManager = repositoryManager;
+        _loggerManager = loggerManager;
+        _mapper = mapper;
+        _tasksLinks = tasksLinks;
+    }
+
+
+    public async Task<(LinkResponse linkResponse, MetaData metaData)> GetEmployeeTasksAsync(
+        Guid employeeId, TasksLinkParameters tasksLinkParameters, bool trackChanges)
+    {
+        //This gets the lists of tasks for a specific employee
+        if(!tasksLinkParameters.TasksParameters.ValidTimeRange)
             throw new MaxTimeRangeBadRequestException();
-
+        
         var tasksWithMetaData = await _repositoryManager.Tasks
-            .GetEmployeesTasksAsync(employeeId, linkParameters.TasksParameters, trackChanges);
+            .GetEmployeesTasksAsync(employeeId, tasksLinkParameters.TasksParameters, trackChanges);
         
-        var taskDto = _mapper.Map<IEnumerable<TasksDto>>(tasksWithMetaData);
+        var tasksDto = _mapper.Map<IEnumerable<TasksDto>>(tasksWithMetaData);
         
-        var links = _taskLinks.TryGenerateLinks(taskDto, linkParameters.TasksParameters.Fields!, employeeId,
-            linkParameters.Context);
-
+        var links = _tasksLinks.TryGenerateLinks(tasksDto,
+            tasksLinkParameters.TasksParameters.Fields, employeeId, tasksLinkParameters.Context);
+        
         return (linkResponse: links, metaData: tasksWithMetaData.MetaData);
     }
 
     public async Task<TasksDto> GetEmployeeTaskAsync(Guid employeeId, Guid id, bool trackChanges)
     {
-        var taskDb = await GetTasksFromEmployeesAndCheckIfItExists(employeeId, id, trackChanges);
-
+        //This gets a specific task for a specific employee
+        var taskDb = await GetTasksByEmployeeAndCheckIfItExists(employeeId, id, trackChanges);
+        
         var task = _mapper.Map<TasksDto>(taskDb);
         return task;
     }
 
-    public async Task<TasksDto> CreateTaskForEmployeeAsync(Guid employeeId, 
-        TasksForCreationDto taskForCreation, bool trackChanges)
+    public async Task<TasksDto> CreateTaskForEmployeeAsync(Guid employeeId, TasksForCreationDto taskForCreation)
     {
         var taskEntity = _mapper.Map<Tasks>(taskForCreation);
         _repositoryManager.Tasks.CreateTaskForEmployee(employeeId, taskEntity);
@@ -64,25 +64,23 @@ internal sealed class TasksService : ITaskService
 
     public async Task DeleteTaskForEmployeeAsync(Guid employeeId, Guid id, bool trackChanges)
     {
-        var taskForEmployeeDb = await GetTasksFromEmployeesAndCheckIfItExists(employeeId, id, trackChanges);
-        _repositoryManager.Tasks.DeleteTask(taskForEmployeeDb);
+        var taskDb = await GetTasksByEmployeeAndCheckIfItExists(employeeId, id, trackChanges);
+        _repositoryManager.Tasks.DeleteTask(taskDb);
         await _repositoryManager.SaveAsync();
     }
 
-    public async Task UpdateTaskForEmployeeAsync(Guid employeeId, Guid id, 
-        TasksForUpdateDto taskForUpdate, bool taskTrackChanges)
+    public async Task UpdateTaskForEmployeeAsync(Guid employeeId, Guid id, TasksForUpdateDto taskForUpdate, bool taskTrackChanges)
     {
-        var taskForEmployeeDb = await GetTasksFromEmployeesAndCheckIfItExists(employeeId, id, taskTrackChanges);
-        _mapper.Map(taskForUpdate, taskForEmployeeDb);
+        var taskDb = await GetTasksByEmployeeAndCheckIfItExists(employeeId, id, taskTrackChanges);
+        _mapper.Map(taskForUpdate, taskDb);
         await _repositoryManager.SaveAsync();
     }
 
-    public async Task<(TasksForUpdateDto taskToPatch, Tasks taskEntity)> GetTaskForPatchAsync(
-        Guid employeeId, Guid id, bool taskTrackChanges)
+    public async Task<(TasksForUpdateDto taskToPatch, Tasks taskEntity)> GetTaskForPatchAsync(Guid employeeId, Guid id, bool taskTrackChanges)
     {
-        var taskForEmployeeDb = await GetTasksFromEmployeesAndCheckIfItExists(employeeId, id, taskTrackChanges);
-        var taskToPatch = _mapper.Map<TasksForUpdateDto>(taskForEmployeeDb);
-        return (taskToPatch, taskForEmployeeDb);
+        var taskDb = await GetTasksByEmployeeAndCheckIfItExists(employeeId, id, taskTrackChanges);
+        var taskToPatch = _mapper.Map<TasksForUpdateDto>(taskDb);
+        return (taskToPatch, taskDb);
     }
 
     public async Task SaveChangesForPatchAsync(TasksForUpdateDto taskToPatch, Tasks taskEntity)
@@ -91,11 +89,10 @@ internal sealed class TasksService : ITaskService
         await _repositoryManager.SaveAsync();
     }
 
-    
-    private async Task<Tasks> GetTasksFromEmployeesAndCheckIfItExists(Guid employeeId, Guid taskId, bool trackChanges)
+    private async Task<Tasks> GetTasksByEmployeeAndCheckIfItExists(Guid employeeId, Guid taskId, bool trackChanges)
     {
         var tasks = await _repositoryManager.Tasks.GetEmployeeTaskAsync(employeeId, taskId, trackChanges);
-        if (tasks is null)
+        if (tasks is null) 
             throw new TasksNotFoundException(taskId);
 
         return tasks;

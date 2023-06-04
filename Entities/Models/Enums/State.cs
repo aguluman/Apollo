@@ -8,13 +8,3 @@ public enum State
     Completed,
     TimeElapsedAndStillPending
 }
-
-/*public class StateDto
-{
-    public StateDto(string name)
-    {
-        Name = name;
-    }
-
-    public string Name { get; set; }
-}*/

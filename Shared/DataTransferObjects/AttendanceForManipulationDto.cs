@@ -2,31 +2,21 @@
 
 namespace Shared.DataTransferObjects;
 
-public record AttendanceManipulationDto
+public abstract record AttendanceForManipulationDto
 {
-    [Required(ErrorMessage = "Clock in is required")]
-    public DateTime ClockIn { get; init; }
+    [DataType(DataType.Time)]
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
+    public DateTimeOffset ClockIn { get; init; } = DateTimeOffset.Now;
 
-    [Required(ErrorMessage = "Clock out is required")]
-    [Range(typeof(TimeSpan), "0:00", "23:59", ErrorMessage = "Clock out must be after clock in")]
-    public DateTime ClockOut { get; init; }
+    [DataType(DataType.Time)]
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
+    public DateTimeOffset? ClockOut { get; init; } = null;
+        
+    [DataType(DataType.Time)]
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
+    public DateTimeOffset? BreakTimeStart { get; init; } = null;
 
-    [Range(typeof(TimeSpan), "0:00", "1:30")]
-    public TimeSpan? BreakTime { get; init; }
-
-    [Required(ErrorMessage = "Employee Id is required")]
-    public Guid EmployeeId { get; init; }
-    
-    public virtual void Validate()
-    {
-        if (ClockOut <= ClockIn)
-            throw new ArgumentException("Clock out time must be after clock in time");
-
-        if (!BreakTime.HasValue) return;
-        var timeWorked = ClockOut - ClockIn;
-        if (BreakTime > timeWorked)
-        {
-            throw new ArgumentException("Break time cannot be longer than time worked");
-        }
-    }
+    [DataType(DataType.Time)]
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
+    public DateTimeOffset? BreakTimeEnd { get; init; } = null;
 }

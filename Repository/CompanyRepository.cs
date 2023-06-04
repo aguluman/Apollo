@@ -16,7 +16,7 @@ public class CompanyRepository : RepositoryBase<Company>, ICompanyRepository
 
     public async Task<Company> GetCompanyAsync(Guid companyId, bool trackChanges) =>
         await FindByCondition(c => c.Id.Equals(companyId), trackChanges)
-            .SingleOrDefaultAsync();
+            .SingleOrDefaultAsync() ?? throw new InvalidOperationException();
 
     public void CreateCompany(Company company) => 
         Create(company);

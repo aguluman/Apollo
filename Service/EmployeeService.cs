@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+﻿using System.Dynamic;
 using AutoMapper;
 using Contracts;
 using Entities.Exceptions;
@@ -16,9 +16,8 @@ internal sealed class EmployeeService : IEmployeeService
     private readonly ILoggerManager _logger;
     private readonly IMapper _mapper;
     private readonly IEmployeeLinks _employeeLinks;
-
-    public EmployeeService(IRepositoryManager repository, ILoggerManager logger,
-        IMapper mapper, IEmployeeLinks employeeLinks)
+    public EmployeeService(IRepositoryManager repository, ILoggerManager logger, IMapper mapper, 
+        IEmployeeLinks employeeLinks)
     {
         _repository = repository;
         _logger = logger;
@@ -26,24 +25,23 @@ internal sealed class EmployeeService : IEmployeeService
         _employeeLinks = employeeLinks;
     }
 
-    public async Task<(LinkResponse linkResponse, MetaData metaData)> GetEmployeesAsync(
-        Guid companyId, LinkParameters linkParameters, bool trackChanges)
+    public async Task<(LinkResponse linkResponse, MetaData metaData)> GetEmployeesAsync
+        (Guid companyId, EmployeeLinkParameters employeeLinkParameters, bool trackChanges)
     {
-        Debug.Assert(linkParameters.EmployeeParameters != null, "linkParameters.EmployeeParameters != null");
-        if (!linkParameters.EmployeeParameters.ValidAgeRange)
+        if (!employeeLinkParameters.EmployeeParameters.ValidAgeRange)
             throw new MaxAgeRangeBadRequestException();
-        
+
         await CheckIfCompanyExists(companyId, trackChanges);
 
         var employeesWithMetaData = await _repository.Employee
-            .GetEmployeesAsync(companyId, linkParameters.EmployeeParameters, trackChanges);
-        
+            .GetEmployeesAsync(companyId, employeeLinkParameters.EmployeeParameters, trackChanges);
+
         var employeesDto = _mapper.Map<IEnumerable<EmployeeDto>>(employeesWithMetaData);
+        
+        var links = _employeeLinks.TryGenerateLinks(employeesDto,
+            employeeLinkParameters.EmployeeParameters.Fields, companyId, employeeLinkParameters.Context);
 
-        var links = _employeeLinks.TryGenerateLinks(employeesDto, linkParameters.EmployeeParameters.Fields!,
-            companyId, linkParameters.Context);
-
-        return (linkResponse: links,  metaData: employeesWithMetaData.MetaData);
+        return (linkResponse: links, metaData: employeesWithMetaData.MetaData);
     }
 
     public async Task<EmployeeDto> GetEmployeeAsync(Guid companyId, Guid id, bool trackChanges)
@@ -81,8 +79,8 @@ internal sealed class EmployeeService : IEmployeeService
         await _repository.SaveAsync();
     }
 
-    public async Task UpdateEmployeeForCompanyAsync(Guid companyId, Guid id, EmployeeForUpdateDto employeeForUpdate,
-        bool compTrackChanges, bool empTrackChanges)
+    public async Task UpdateEmployeeForCompanyAsync(Guid companyId, Guid id, EmployeeForUpdateDto employeeForUpdate, bool compTrackChanges,
+        bool empTrackChanges)
     {
         await CheckIfCompanyExists(companyId, compTrackChanges);
 

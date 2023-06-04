@@ -25,5 +25,5 @@ public class RepositoryContext : IdentityDbContext<User>
     public DbSet<Company>? Companies { get; set; }
     public DbSet<Employee>? Employees { get; set; }
     public DbSet<Tasks>? Tasks { get; set; }
-    public DbSet<Attendance>? Attendances { get; set; }
+    public DbSet<Attendance>? Attendance { get; set; }
 }

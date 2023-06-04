@@ -19,7 +19,7 @@ public class TasksConfiguration : IEntityTypeConfiguration<Tasks>
             .HasConversion(
                 p => p.ToString(),
                 p => (Priority)Enum.Parse(typeof(Priority), p)
-                );
+            );
        
         builder.HasData(
             new Tasks

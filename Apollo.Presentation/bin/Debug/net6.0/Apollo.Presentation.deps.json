@@ -8,7 +8,7 @@
     ".NETCoreApp,Version=v6.0": {
       "Apollo.Presentation/1.0.0": {
         "dependencies": {
-          "Marvin.Cache.Headers": "7.0.0-beta",
+          "Marvin.Cache.Headers": "6.1.0",
           "Microsoft.AspNetCore.JsonPatch": "6.0.15",
           "Microsoft.AspNetCore.Mvc.Core": "2.2.5",
           "Microsoft.AspNetCore.Mvc.NewtonsoftJson": "6.0.15",
@@ -20,11 +20,11 @@
           "Apollo.Presentation.dll": {}
         }
       },
-      "Marvin.Cache.Headers/7.0.0-beta": {
+      "Marvin.Cache.Headers/6.1.0": {
         "runtime": {
           "lib/net6.0/Marvin.Cache.Headers.dll": {
-            "assemblyVersion": "7.0.0.0",
-            "fileVersion": "7.0.0.0"
+            "assemblyVersion": "6.1.0.0",
+            "fileVersion": "6.1.0.0"
           }
         }
       },
@@ -38,7 +38,7 @@
       "Microsoft.AspNetCore.Authentication.Core/2.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.Abstractions": "2.2.0",
-          "Microsoft.AspNetCore.Http": "2.2.2",
+          "Microsoft.AspNetCore.Http": "2.2.0",
           "Microsoft.AspNetCore.Http.Extensions": "2.2.0"
         }
       },
@@ -86,7 +86,7 @@
           "Microsoft.Extensions.Configuration.Abstractions": "6.0.0"
         }
       },
-      "Microsoft.AspNetCore.Http/2.2.2": {
+      "Microsoft.AspNetCore.Http/2.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Http.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.WebUtilities": "2.2.0",
@@ -149,7 +149,7 @@
           "Microsoft.AspNetCore.Authentication.Core": "2.2.0",
           "Microsoft.AspNetCore.Authorization.Policy": "2.2.0",
           "Microsoft.AspNetCore.Hosting.Abstractions": "2.2.0",
-          "Microsoft.AspNetCore.Http": "2.2.2",
+          "Microsoft.AspNetCore.Http": "2.2.0",
           "Microsoft.AspNetCore.Http.Extensions": "2.2.0",
           "Microsoft.AspNetCore.Mvc.Abstractions": "2.2.0",
           "Microsoft.AspNetCore.ResponseCaching.Abstractions": "2.2.0",
@@ -710,8 +710,8 @@
       "System.Threading.Tasks.Extensions/4.5.1": {},
       "Entities/1.0.0": {
         "dependencies": {
-          "Microsoft.AspNetCore.Http": "2.2.2",
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "6.0.15",
+          "Microsoft.AspNetCore.Mvc.Abstractions": "2.2.0",
           "Shared": "1.0.0"
         },
         "runtime": {
@@ -740,12 +740,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Marvin.Cache.Headers/7.0.0-beta": {
+    "Marvin.Cache.Headers/6.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-LvDV6v0ZR3j72TiCrd2Ce/HicecmTBN+obcNAmzR1sZU0wnjkn7Bs3Hkc3KmkYyaKFTuoWv9rZAoh3dOWPSlew==",
-      "path": "marvin.cache.headers/7.0.0-beta",
-      "hashPath": "marvin.cache.headers.7.0.0-beta.nupkg.sha512"
+      "sha512": "sha512-XHUeOdMfZrtRHXsWiqRUrebBl4U2SGew8Cr7Y/tHaGfiY/fbajnq4vRt5ktlkUnMebcpfvl8RJjAglu1KxWwYQ==",
+      "path": "marvin.cache.headers/6.1.0",
+      "hashPath": "marvin.cache.headers.6.1.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Authentication.Abstractions/2.2.0": {
       "type": "package",
@@ -803,12 +803,12 @@
       "path": "microsoft.aspnetcore.hosting.server.abstractions/2.2.0",
       "hashPath": "microsoft.aspnetcore.hosting.server.abstractions.2.2.0.nupkg.sha512"
     },
-    "Microsoft.AspNetCore.Http/2.2.2": {
+    "Microsoft.AspNetCore.Http/2.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-BAibpoItxI5puk7YJbIGj95arZueM8B8M5xT1fXBn3hb3L2G3ucrZcYXv1gXdaroLbntUs8qeV8iuBrpjQsrKw==",
-      "path": "microsoft.aspnetcore.http/2.2.2",
-      "hashPath": "microsoft.aspnetcore.http.2.2.2.nupkg.sha512"
+      "sha512": "sha512-YogBSMotWPAS/X5967pZ+yyWPQkThxhmzAwyCHCSSldzYBkW5W5d6oPfBaPqQOnSHYTpSOSOkpZoAce0vwb6+A==",
+      "path": "microsoft.aspnetcore.http/2.2.0",
+      "hashPath": "microsoft.aspnetcore.http.2.2.0.nupkg.sha512"
     },
     "Microsoft.AspNetCore.Http.Abstractions/2.2.0": {
       "type": "package",

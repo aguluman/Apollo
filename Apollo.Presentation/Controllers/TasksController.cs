@@ -1,12 +1,12 @@
-﻿using System.Text.Json;
-using Apollo.Presentation.ActionFilters;
-using Entities.LinkModels;
+﻿using Apollo.Presentation.ActionFilters;
+using System.Text.Json;
 using Microsoft.AspNetCore.JsonPatch;
+using Entities.LinkModels;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
 using Shared.DataTransferObjects;
-using Swashbuckle.AspNetCore.Annotations;
 using Shared.RequestFeatures;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace Apollo.Presentation.Controllers;
 
@@ -15,65 +15,66 @@ namespace Apollo.Presentation.Controllers;
 public class TasksController : ControllerBase
 {
     private readonly IServiceManager _serviceManager;
-    
-    public TasksController(IServiceManager serviceManager) => 
+
+    public TasksController(IServiceManager serviceManager) =>
         _serviceManager = serviceManager;
-    
+
     [HttpGet]
     [HttpHead]
-    [ServiceFilter(typeof(ValidateMediaTypeAttributes))]
-    public async Task<IActionResult> GetTasksForEmployee(Guid employeeId, Guid taskId,
+    [ServiceFilter(typeof(ValidateMediaTypeAttribute))]
+    public async Task<IActionResult> GetTasksForEmployee(Guid employeeId,
         [FromQuery] TasksParameters taskParameters)
     {
-        var linkParams = new LinkParameters(null, taskParameters, null,  HttpContext);
-        
-        var result = await _serviceManager.TaskService.GetEmployeesTasksAsync(
-           employeeId, linkParams, false);
+        var tasksLinkParams = new TasksLinkParameters(taskParameters, HttpContext);
 
-            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(result.metaData));
+        var result = await _serviceManager.TasksService.GetEmployeeTasksAsync(employeeId,
+            tasksLinkParams, false);
+
+        Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(result.metaData));
 
         return result.linkResponse.HasLinks
             ? Ok(result.linkResponse.LinkedEntities)
             : Ok(result.linkResponse.ShapedEntities);
     }
-    
+
     [HttpGet("{taskId:guid}", Name = "GetTaskForEmployee")]
     public async Task<IActionResult> GetTaskForEmployee(Guid employeeId, Guid taskId)
     {
-        var task = await _serviceManager.TaskService.GetEmployeeTaskAsync(employeeId, taskId, false);
+        var task = await _serviceManager.TasksService.GetEmployeeTaskAsync(employeeId, taskId, false);
         return Ok(task);
     }
-    
+
     [HttpPost]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
-    public async Task<IActionResult> CreateTaskForEmployee(Guid employeeId, [FromBody] TasksForCreationDto task)
+    public async Task<IActionResult> CreateTaskForEmployee(Guid employeeId,
+        [FromBody] TasksForCreationDto task)
     {
-        var taskToReturn = await _serviceManager.TaskService.CreateTaskForEmployeeAsync(
-            employeeId, task, false);
+        var taskToReturn = await _serviceManager.TasksService.CreateTaskForEmployeeAsync(
+            employeeId, task);
 
         return CreatedAtRoute(
-            "GetTaskForEmployee", 
-            new { employeeId, taskId = taskToReturn.Id }, 
+            "GetTaskForEmployee",
+            new { employeeId, taskId = taskToReturn.Id },
             taskToReturn);
     }
-    
+
     [HttpDelete("{taskId:guid}")]
     public async Task<IActionResult> DeleteTaskForEmployee(Guid employeeId, Guid taskId)
     {
-        await _serviceManager.TaskService.DeleteTaskForEmployeeAsync(employeeId, taskId, false);
+        await _serviceManager.TasksService.DeleteTaskForEmployeeAsync(employeeId, taskId, false);
         return NoContent();
     }
-    
+
     [HttpPut("{taskId:guid}")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
     public async Task<IActionResult> UpdateTaskForEmployee(Guid employeeId, Guid taskId,
-        [FromBody] TasksForUpdateDto task)
+        [FromBody] TasksForUpdateDto tasksForUpdate)
     {
-        await _serviceManager.TaskService.UpdateTaskForEmployeeAsync(
-            employeeId, taskId, task, true);
+        await _serviceManager.TasksService.UpdateTaskForEmployeeAsync(
+            employeeId, taskId, tasksForUpdate, true);
         return NoContent();
     }
-    
+
     [HttpPatch("{taskId:guid}")]
     [SwaggerOperation(
         Summary = "Partially updates a task for an employee.",
@@ -86,21 +87,21 @@ public class TasksController : ControllerBase
     public async Task<IActionResult> PartiallyUpdateTaskForEmployee(Guid employeeId, Guid taskId,
         [FromBody] JsonPatchDocument<TasksForUpdateDto>? patchDoc)
     {
-       if (patchDoc is null)
-           return BadRequest("patch Document object sent from client is null");
-       
-       var result = await _serviceManager.TaskService.GetTaskForPatchAsync(
-           employeeId, taskId, true);
+        if (patchDoc is null)
+            return BadRequest("patch Document object sent from client is null");
 
-       patchDoc.ApplyTo(result.taskToPatch, ModelState);
+        var result = await _serviceManager.TasksService.GetTaskForPatchAsync(
+            employeeId, taskId, true);
 
-       TryValidateModel(result.taskToPatch);
-       
-       if(!ModelState.IsValid)
-           return UnprocessableEntity(ModelState);
+        patchDoc.ApplyTo(result.taskToPatch, ModelState);
 
-       await _serviceManager.TaskService.SaveChangesForPatchAsync(result.taskToPatch, result.taskEntity);
-       
-       return NoContent();
+        TryValidateModel(result.taskToPatch);
+
+        if (!ModelState.IsValid)
+            return UnprocessableEntity(ModelState);
+
+        await _serviceManager.TasksService.SaveChangesForPatchAsync(result.taskToPatch, result.taskEntity);
+
+        return NoContent();
     }
 }

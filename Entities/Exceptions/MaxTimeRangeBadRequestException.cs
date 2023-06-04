@@ -2,7 +2,9 @@
 
 public class MaxTimeRangeBadRequestException : BadRequestException
 {
-    public MaxTimeRangeBadRequestException() : base("MaxTime can not be less than MinTime")
+    public MaxTimeRangeBadRequestException() : base(
+        "MaxTime set for TasksParameters can not be less than MinTime TasksParameters")
     {
+        
     }
 }

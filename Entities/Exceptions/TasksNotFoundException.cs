@@ -2,8 +2,8 @@
 
 public class TasksNotFoundException : NotFoundException
 {
-    public TasksNotFoundException(Guid taskId)
-        : base($"Task with id: {taskId} does not exist in the database.")
+    public TasksNotFoundException(Guid taskId) 
+        : base($"Task with id: {taskId} doesn't exist in the database.")
     {
     }
 }

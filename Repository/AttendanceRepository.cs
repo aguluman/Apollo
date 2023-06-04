@@ -1,5 +1,5 @@
-﻿using System.Diagnostics;
-using Contracts;
+﻿using Contracts;
+using Entities.Exceptions;
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Repository.Extensions;
@@ -13,53 +13,37 @@ public class AttendanceRepository : RepositoryBase<Attendance>, IAttendanceRepos
     {
     }
 
-    public async Task<PagedList<Attendance>> GetEmployeesAttendancesByCompanyIdAsync(Guid companyId, 
-        AttendanceParameters attendanceParameters, bool trackChanges)
+    public async Task<PagedList<Attendance>> GetEmployeeAttendancesAsync(Guid employeeId, AttendanceParameters attendanceParameters, bool trackChanges)
     {
-        Debug.Assert(attendanceParameters.SearchTerm != null, "attendanceParameters.SearchTerm != null");
-        Debug.Assert(attendanceParameters.OrderBy != null, "attendanceParameters.OrderBy != null");
-        var attendanceFromOneCompany = await FindByCondition(
-                a => a.Employee.CompanyId.Equals(companyId), trackChanges)
-            .FilterAttendances(attendanceParameters.StartDate, attendanceParameters.EndDate)
-            .Search(attendanceParameters.SearchTerm)//search with position of employee
-            .Sort(attendanceParameters.OrderBy)//order by clock-in time
+        var attendances = await FindByCondition(a => a.EmployeeId.Equals(employeeId), trackChanges)
+            .FilterByClockIn(attendanceParameters.MinClockIn, attendanceParameters.MaxClockIn)
+            .FilterByClockOut(attendanceParameters.MinClockOut, attendanceParameters.MaxClockOut)
+            .FilterByEmployeeName(attendanceParameters.EmployeeName)
+            .FilterByCompanyName(attendanceParameters.CompanyName)
+            .Sort(attendanceParameters.OrderBy ?? throw new SortOrderByExceptionHandler())
             .Skip((attendanceParameters.PageNumber - 1) * attendanceParameters.PageSize)
             .Take(attendanceParameters.PageSize)
             .ToListAsync();
         
         return PagedList<Attendance>
-            .ToPagedList(attendanceFromOneCompany,
+            .ToPagedList(attendances,
                 attendanceParameters.PageNumber, attendanceParameters.PageSize);
     }
-    
-    public async Task<PagedList<Attendance>> GetEmployeeAttendancesAsync(Guid employeeId,AttendanceParameters attendanceParameters, bool trackChanges)
+
+    public async Task<Attendance> GetEmployeeAttendanceAsync(Guid employeeId, Guid attendanceId, bool trackChanges)
     {
-        Debug.Assert(attendanceParameters.SearchTerm != null, "attendanceParameters.SearchTerm != null");
-        Debug.Assert(attendanceParameters.OrderBy != null, "attendanceParameters.OrderBy != null");
-        var attendanceFromOnePosition = await FindByCondition(
-                a => a.Employee.Id.Equals(employeeId), trackChanges)
-            .FilterAttendances(attendanceParameters.StartDate, attendanceParameters.EndDate)
-            .Sort(attendanceParameters.OrderBy)
-            .Skip((attendanceParameters.PageNumber - 1) * attendanceParameters.PageSize)
-            .Take(attendanceParameters.PageSize)
-            .ToListAsync();
-        
-        return PagedList<Attendance>
-            .ToPagedList(attendanceFromOnePosition,
-                attendanceParameters.PageNumber, attendanceParameters.PageSize);
+        return await FindByCondition(a =>
+                a.EmployeeId.Equals(employeeId) && a.Id.Equals(attendanceId), trackChanges)
+            .SingleOrDefaultAsync() ?? throw new EmployeeAttendanceNotFoundException();
     }
 
-    
-    
-    public async Task<Attendance> GetAttendanceAsync(Guid employeeId, Guid attendanceId, bool trackChanges) 
-        => await FindByCondition(a => a.EmployeeId.Equals(employeeId) 
-                                      && a.Id.Equals(attendanceId), trackChanges)
-            .SingleOrDefaultAsync() ?? throw new InvalidOperationException();
-    
+   
 
-    public void CreateAttendanceForEmployeesAsync(Guid employeeId, Attendance attendance)
+    public void SetClockInForAttendance(Guid employeeId, Attendance attendance)
     {
         attendance.EmployeeId = employeeId;
         Create(attendance);
     }
+
+    
 }

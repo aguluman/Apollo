@@ -6,5 +6,6 @@ public interface IRepositoryManager
     IEmployeeRepository Employee { get; }
     ITasksRepository Tasks { get; }
     IAttendanceRepository Attendance { get; }
+
     Task SaveAsync();
 }

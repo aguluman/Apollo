@@ -2,7 +2,7 @@
 
 public sealed class MaxAgeRangeBadRequestException : BadRequestException
 {
-    public MaxAgeRangeBadRequestException() : base("MaxAge can not be less than MinAge")
+    public MaxAgeRangeBadRequestException() : base("Max age cannot be less than  min age.")
     {
         
     }

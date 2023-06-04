@@ -6,6 +6,6 @@ namespace Contracts;
 
 public interface IAttendanceLinks
 {
-    LinkResponse TryGenerateLinks(IEnumerable<AttendanceDto> attendancesDto,
-        string? fields, Guid? employeeId, Guid? companyId, HttpContext httpContext);
+    LinkResponse TryGenerateLinks(IEnumerable<AttendanceDto> attendancesDto, string fields,
+        Guid employeeId, HttpContext httpContext);
 }

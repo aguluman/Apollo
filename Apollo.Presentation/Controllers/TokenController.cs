@@ -11,7 +11,7 @@ public class TokenController : ControllerBase
 {
     private readonly IServiceManager _service;
 
-    public TokenController(IServiceManager service)
+    public TokenController(IServiceManager service) 
         => _service = service;
 
     [HttpPost("refresh")]
