@@ -1,4 +1,5 @@
 ﻿using Entities.LinkModels;
+using Entities.Models;
 using Shared.DataTransferObjects;
 using Shared.RequestFeatures;
 
@@ -14,16 +15,29 @@ public interface IAttendanceService
         Guid attendanceId, bool trackChanges);
 
     Task<AttendanceDto> CreateClockInForAttendance(Guid employeeId,
-        AttendanceForClockInDto attendanceForClockIn);
+        AttendanceForCreationDto attendanceForClockIn);
 
-    Task<AttendanceDto> CreateClockOutForAttendance(Guid employeeId, Guid id,
-        AttendanceForClockOutDto attendanceForClockIn);
-
-    Task<AttendanceDto> CreateBreakTimeClockIn(Guid employeeId, Guid id,
-        AttendanceForBtClockInDto attendanceForClockIn);
-
-    Task<AttendanceDto> CreateBreakTimeClockOut(Guid employeeId, Guid id,
-        AttendanceForBtClockOutDto attendanceForClockIn);
+    Task<(AttendanceForUpdateDto attendanceDataToPatch, Attendance attendanceEntity)>
+        SetClockOutForAttendance(Guid employeeId, Guid attendanceId,
+            bool trackChanges);
     
+    Task<(AttendanceForUpdateDto attendanceDataToPatch, Attendance attendanceEntity)>
+        SetBreakTimeClockIn(Guid employeeId, Guid attendanceId,
+        bool trackChanges);
+
+    Task<(AttendanceForUpdateDto attendanceDataToPatch, Attendance attendanceEntity)>
+        SetBreakTimeClockOut(Guid employeeId, Guid attendanceId,
+            bool trackChanges);
+    
+    Task SaveChangesForPatchAsync(AttendanceForUpdateDto attendanceDataToPatch,
+        Attendance attendanceEntity);
+
+    Task SaveChangesForCalculationsAsync(Attendance attendanceEntity);
+    
+    TimeSpan CalculateTimeAtWork(Attendance attendance);
+    
+    TimeSpan CalculateBreakTime(Attendance attendance);
+    
+    TimeSpan CalculateActiveWorkTime(Attendance attendance);
 
 }

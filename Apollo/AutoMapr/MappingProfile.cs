@@ -41,8 +41,11 @@ public class MappingProfile : Profile
       
       
       CreateMap<Attendance, AttendanceDto>();
-      
-      CreateMap<AttendanceForClockInDto, Attendance>()
+      CreateMap<AttendanceForCreationDto, Attendance>();
+      CreateMap<AttendanceForUpdateDto, Attendance>();
+      CreateMap<AttendanceForUpdateDto, Attendance>().ReverseMap();
+
+      /*CreateMap<AttendanceForClockInDto, Attendance>()
          .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.EmployeeId))
          .ForMember(dest => dest.ClockIn, opt => opt.MapFrom(src => DateTimeOffset.Now)).ReverseMap();
             
@@ -83,6 +86,7 @@ public class MappingProfile : Profile
          .ForMember(dest => dest.EmployeeId, opt => opt.MapFrom(src => src.EmployeeId))
          .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.AttendanceId))
          .ForMember(dest => dest.BreakTimeEnd, opt => opt.MapFrom(src => DateTimeOffset.Now)).ReverseMap();
+         */
 
 
       //Todo: Add Comeback here, in case any mapping logic breaks

@@ -1,5 +1,6 @@
 ﻿using Apollo.Presentation.ActionFilters;
 using System.Text.Json;
+using Microsoft.AspNetCore.JsonPatch;
 using Entities.LinkModels;
 using Microsoft.AspNetCore.Mvc;
 using Service.Contracts;
@@ -57,7 +58,7 @@ public class AttendanceController : ControllerBase
     [HttpPost]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
     public async Task<IActionResult> CreateClockInForEmployee(Guid employeeId,
-        [FromBody] AttendanceForClockInDto attendance)
+        [FromBody] AttendanceForCreationDto attendance)
     {
         var attendanceToReturn = await _serviceManager.AttendanceService
             .CreateClockInForAttendance(employeeId, attendance);
@@ -68,7 +69,79 @@ public class AttendanceController : ControllerBase
             attendanceToReturn);
     }
     
-    [HttpPost("{attendanceId:guid}/clock-out",  Name = "CreateClockOutForEmployee")]
+    [HttpPatch("{attendanceId:guid}/clock-out", Name = "UpdateClockOutForEmployee")]
+    public async Task<IActionResult> UpdateClockOutForEmployee(Guid employeeId, Guid attendanceId,
+        [FromBody] JsonPatchDocument<AttendanceForUpdateDto> patchDoc)
+    {
+        if (patchDoc is null)
+            return BadRequest("patch Document object sent from client is null");
+
+        var result = await _serviceManager.AttendanceService
+            .SetClockOutForAttendance(employeeId, attendanceId, true);
+        
+        patchDoc.ApplyTo(result.attendanceDataToPatch, ModelState);
+
+        TryValidateModel(result.attendanceDataToPatch);
+        
+        if(!ModelState.IsValid)
+            return UnprocessableEntity(ModelState);
+        
+        await _serviceManager.AttendanceService
+            .SaveChangesForPatchAsync(result.attendanceDataToPatch, result.attendanceEntity);
+        
+        await _serviceManager.AttendanceService
+            .SaveChangesForCalculationsAsync(result.attendanceEntity);
+        return NoContent();
+    }
+    
+    [HttpPatch("{attendanceId:guid}/break-time-clock-in", Name = "UpdateBreakTimeClockInForEmployee")]
+    public async Task<IActionResult> UpdateBreakTimeClockInForEmployee(Guid employeeId, Guid attendanceId,
+        [FromBody] JsonPatchDocument<AttendanceForUpdateDto> patchDoc)
+    {
+        if (patchDoc is null)
+            return BadRequest("patch Document object sent from client is null");
+
+        var result = await _serviceManager.AttendanceService
+            .SetBreakTimeClockIn(employeeId, attendanceId, true);
+        
+        patchDoc.ApplyTo(result.attendanceDataToPatch, ModelState);
+
+        TryValidateModel(result.attendanceDataToPatch);
+        
+        if(!ModelState.IsValid)
+            return UnprocessableEntity(ModelState);
+        
+        await _serviceManager.AttendanceService
+            .SaveChangesForPatchAsync(result.attendanceDataToPatch, result.attendanceEntity);
+        return NoContent();
+    }
+    
+    [HttpPatch("{attendanceId:guid}/break-time-clock-out", Name = "UpdateBreakTimeClockOutForEmployee")]
+    public async Task<IActionResult> UpdateBreakTimeClockOutForEmployee(Guid employeeId, Guid attendanceId,
+        [FromBody] JsonPatchDocument<AttendanceForUpdateDto> patchDoc)
+    {
+        if (patchDoc is null)
+            return BadRequest("patch Document object sent from client is null");
+
+        var result = await _serviceManager.AttendanceService
+            .SetBreakTimeClockOut(employeeId, attendanceId, true);
+        
+        patchDoc.ApplyTo(result.attendanceDataToPatch, ModelState);
+
+        TryValidateModel(result.attendanceDataToPatch);
+        
+        if(!ModelState.IsValid)
+            return UnprocessableEntity(ModelState);
+
+        await _serviceManager.AttendanceService
+            .SaveChangesForPatchAsync(result.attendanceDataToPatch, result.attendanceEntity);
+        await _serviceManager.AttendanceService
+            .SaveChangesForCalculationsAsync(result.attendanceEntity);
+
+        return NoContent();
+    }
+
+    /*[HttpPost("{attendanceId:guid}/clock-out",  Name = "CreateClockOutForEmployee")]
     [ServiceFilter(typeof(ValidationFilterAttribute))]
     public async Task<IActionResult> CreateClockOutForEmployee(Guid employeeId, Guid attendanceId,
         [FromBody] AttendanceForClockOutDto attendance)
@@ -108,5 +181,5 @@ public class AttendanceController : ControllerBase
             "CreateBreakTimeClockOutForEmployee",
             new { employeeId, attendanceId = attendanceToReturn.Id },
             attendanceToReturn);
-    }
+    }*/
 }

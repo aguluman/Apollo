@@ -15,15 +15,5 @@ public interface IAttendanceRepository
 
     void SetClockInForAttendance(Guid employeeId, Attendance attendance);
 
-    void SetClockOutForAttendance(Guid employeeId, Guid attendanceId, Attendance attendance);
-
-    void SetBreakTimeClockIn(Guid employeeId, Guid attendanceId, Attendance attendance);
-
-    void SetBreakTimeClockOut(Guid employeeId, Guid attendanceId, Attendance attendance);
     
-    TimeSpan CalculateTimeOffWork(Attendance attendance);
-    
-    TimeSpan CalculateBreakTime(Attendance attendance);
-    
-    TimeSpan CalculateActiveWorkTime(Attendance attendance);
 }

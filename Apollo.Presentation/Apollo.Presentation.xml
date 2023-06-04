@@ -4,7 +4,7 @@
         <name>Apollo.Presentation</name>
     </assembly>
     <members>
-        <member name="M:Apollo.Presentation.Controllers.AttendanceController.CreateClockInForEmployee(System.Guid,Shared.DataTransferObjects.AttendanceForClockInDto)">
+        <member name="M:Apollo.Presentation.Controllers.AttendanceController.CreateClockInForEmployee(System.Guid,Shared.DataTransferObjects.AttendanceForCreationDto)">
             <summary>
             Creates a new attendance record for an employee
             </summary>

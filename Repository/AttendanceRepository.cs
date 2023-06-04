@@ -42,62 +42,9 @@ public class AttendanceRepository : RepositoryBase<Attendance>, IAttendanceRepos
 
     public void SetClockInForAttendance(Guid employeeId, Attendance attendance)
     {
-        attendance.ClockIn = DateTimeOffset.Now;
         attendance.EmployeeId = employeeId;
         Create(attendance);
     }
 
-    public void SetClockOutForAttendance(Guid employeeId, Guid attendanceId, Attendance attendance)
-    {
-        attendance.ClockOut = DateTimeOffset.Now;
-        attendance.EmployeeId = employeeId;
-        attendance.Id = attendanceId;
-        Update(attendance);
-        
-        // Set the TimeOffWork value
-        attendance.TimeOffWork = CalculateTimeOffWork(attendance);
-        Update(attendance);
-        
-        // Set the ActiveWorkTime value
-        attendance.ActiveWorkTime = CalculateActiveWorkTime(attendance);
-        Update(attendance);
-    }
-
-    public void SetBreakTimeClockIn(Guid employeeId, Guid attendanceId, Attendance attendance)
-    {
-        attendance.BreakTimeStart = DateTimeOffset.Now;
-        attendance.EmployeeId = employeeId;
-        attendance.Id = attendanceId;
-        Update(attendance);
-    }
-
-    public void SetBreakTimeClockOut(Guid employeeId, Guid attendanceId, Attendance attendance)
-    {
-        attendance.BreakTimeEnd = DateTimeOffset.Now;
-        attendance.EmployeeId = employeeId;
-        attendance.Id = attendanceId;
-        Update(attendance);
-        
-        // Set the BreakTime value
-        attendance.BreakTime = CalculateBreakTime(attendance);
-        Update(attendance);
-    }
-
-    public TimeSpan CalculateTimeOffWork(Attendance attendance)
-    {
-        // Calculate and return the TimeOffWork value based on the attendance properties
-        return attendance.ClockOut - attendance.ClockIn;
-    }
-
-    public TimeSpan CalculateBreakTime(Attendance attendance)
-    {
-        // Calculate and return the BreakTime value based on the attendance properties
-        return attendance.BreakTimeEnd - attendance.BreakTimeStart;
-    }
-
-    public TimeSpan CalculateActiveWorkTime(Attendance attendance)
-    {
-        // Calculate and return the ActiveWorkTime value based on the attendance properties
-        return attendance.ClockOut - attendance.ClockIn - CalculateBreakTime(attendance);
-    }
+    
 }

@@ -27,7 +27,7 @@ public class Attendance
     
     [DataType(DataType.Time)]
     [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd HH:mm:ss}", ApplyFormatInEditMode = true)]
-    public TimeSpan TimeOffWork { get; set; }
+    public TimeSpan TimeAtWork { get; set; }
     
     
     [DataType(DataType.Time)]
